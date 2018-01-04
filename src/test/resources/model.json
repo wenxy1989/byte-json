@@ -1,0 +1,20 @@
+{
+  "models": [
+    {
+      "glucose": [
+        {
+          "copy": "userId"
+        },
+        {
+          "copy": "datetime"
+        },
+        {
+          "copy": "current"
+        },
+        {
+          "copy": "glucose"
+        }
+      ]
+    }
+  ]
+}

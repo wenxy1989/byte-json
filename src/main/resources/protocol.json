@@ -1,0 +1,116 @@
+{
+  "address": "yun.sanmeditech.com",
+  "port": 30007,
+  "version": "4.x",
+  "parameters": [
+    {
+      "code": "string",
+      "javaType": "string",
+      "byteType": "string",
+      "byteLength": 0,
+      "defaultValue": ""
+    },
+    {
+      "name": "登录名",
+      "code": "loginId",
+      "javaType": "string",
+      "byteType": "string",
+      "byteLength": 40,
+      "defaultValue": "wenxy"
+    },
+    {
+      "name": "密码",
+      "code": "password",
+      "javaType": "string",
+      "byteType": "string",
+      "byteLength": 32,
+      "defaultValue": "123456"
+    },
+    {
+      "name": "用户ID",
+      "code": "userId",
+      "javaType": "long",
+      "byteType": "string",
+      "byteLength": 11,
+      "defaultValue": "123456"
+    },
+    {
+      "name": "手机号",
+      "code": "mobile",
+      "javaType": "string",
+      "byteType": "bcd",
+      "byteLength": 32,
+      "defaultValue": "123456"
+    },
+    {
+      "name": "时间",
+      "code": "datetime",
+      "javaType": "datetime",
+      "byteType": "bcd",
+      "byteLength": 6,
+      "defaultValue": "2017-12-25 17:41:22"
+    }
+  ],
+  "commands": [
+    {
+      "code": "0201",
+      "name": "检查客户端版本",
+      "type": "byte",
+      "parameters": [
+        {
+          "copy": "string",
+          "name": "客户端版本",
+          "code": "version",
+          "defaultValue": "3.0v20171225"
+        }
+      ]
+    },
+    {
+      "code": "9201",
+      "type": "byte",
+      "parameters": [
+        {
+          "copy": "string",
+          "name": "最新客户端下载地址",
+          "code": "url",
+          "defaultValue": "http://yun.sanmeditech.com/download/cgm.apk"
+        }
+      ]
+    },
+    {
+      "code": "0202",
+      "name": "用户登录名注册",
+      "type": "byte",
+      "parameters": [
+        {
+          "copy": "loginId"
+        },
+        {
+          "copy": "password"
+        }
+      ]
+    },
+    {
+      "code": "9202",
+      "type": "json",
+      "parameters": [
+        {
+          "name": "结果代码",
+          "code": "errcode",
+          "javaType": "int",
+          "defaultValue": 0
+        },
+        {
+          "name": "用户ID",
+          "code": "uid",
+          "javaType": "long",
+          "defaultValue": 123456
+        }
+      ]
+    }
+  ],
+  "interfaces": {
+    "0201": "9201",
+    "0202": "9202"
+  }
+}
