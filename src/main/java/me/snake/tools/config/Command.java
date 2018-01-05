@@ -1,4 +1,4 @@
-package me.snake.mina.config;
+package me.snake.tools.config;
 
 import java.util.List;
 

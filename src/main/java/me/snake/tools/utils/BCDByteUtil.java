@@ -1,4 +1,4 @@
-package me.snake.mina.utils;
+package me.snake.tools.utils;
 
 /**
  * Created by wenxy on 2018/1/1.

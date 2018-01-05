@@ -1,21 +1,17 @@
-package me.snake.mina;
+package me.snake.tools;
 
 import com.alibaba.fastjson.JSONObject;
-import me.snake.mina.config.Action;
-import me.snake.mina.config.Server;
-import me.snake.mina.inter.ConfigTools;
-import me.snake.mina.protocol.Attribute;
-import me.snake.mina.protocol.Content;
-import me.snake.mina.utils.BCDByteUtil;
+import me.snake.tools.config.Action;
+import me.snake.tools.config.Server;
+import me.snake.tools.inter.ConfigTools;
+import me.snake.tools.protocol.Attribute;
+import me.snake.tools.protocol.Content;
+import me.snake.tools.utils.BCDByteUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 /**

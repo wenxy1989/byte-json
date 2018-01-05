@@ -1,4 +1,4 @@
-package me.snake.mina;
+package me.snake.tools;
 
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;

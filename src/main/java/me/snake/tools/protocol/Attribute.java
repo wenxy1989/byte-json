@@ -1,10 +1,10 @@
-package me.snake.mina.protocol;
+package me.snake.tools.protocol;
 
 
-import me.snake.mina.Constants;
-import me.snake.mina.config.Parameter;
-import me.snake.mina.utils.BCDByteUtil;
-import me.snake.mina.utils.ByteUtil;
+import me.snake.tools.Constants;
+import me.snake.tools.config.Parameter;
+import me.snake.tools.utils.BCDByteUtil;
+import me.snake.tools.utils.ByteUtil;
 
 import java.io.UnsupportedEncodingException;
 

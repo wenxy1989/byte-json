@@ -1,8 +1,7 @@
-package me.snake.mina;
+package me.snake.tools;
 
-import me.snake.mina.Constants;
-import me.snake.mina.config.Parameter;
-import me.snake.mina.protocol.Attribute;
+import me.snake.tools.config.Parameter;
+import me.snake.tools.protocol.Attribute;
 import org.apache.mina.core.buffer.IoBuffer;
 
 import java.nio.charset.CharacterCodingException;

@@ -1,7 +1,7 @@
-package me.snake.mina.protocol;
+package me.snake.tools.protocol;
 
 
-import me.snake.mina.utils.ByteUtil;
+import me.snake.tools.utils.ByteUtil;
 
 import java.io.UnsupportedEncodingException;
 

@@ -1,9 +1,9 @@
-package me.snake.mina.inter;
+package me.snake.tools.inter;
 
 import com.alibaba.fastjson.JSONObject;
-import me.snake.mina.config.Command;
-import me.snake.mina.protocol.Attribute;
-import me.snake.mina.protocol.Content;
+import me.snake.tools.config.Command;
+import me.snake.tools.protocol.Attribute;
+import me.snake.tools.protocol.Content;
 
 import java.io.IOException;
 

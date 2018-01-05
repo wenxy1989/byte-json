@@ -1,4 +1,4 @@
-package me.snake.mina.protocol;
+package me.snake.tools.protocol;
 
 /**
  * Created by wenxy on 2017/12/31.

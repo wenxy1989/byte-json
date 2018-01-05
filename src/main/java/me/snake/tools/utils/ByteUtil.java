@@ -1,4 +1,4 @@
-package me.snake.mina.utils;
+package me.snake.tools.utils;
 
 /**
  * <p>

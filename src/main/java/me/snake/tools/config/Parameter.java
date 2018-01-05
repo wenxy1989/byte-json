@@ -1,4 +1,4 @@
-package me.snake.mina.config;
+package me.snake.tools.config;
 
 /**
  * Created by HP on 2017/12/27.

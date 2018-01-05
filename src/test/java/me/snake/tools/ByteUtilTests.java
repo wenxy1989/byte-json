@@ -1,6 +1,6 @@
-package me.snake.mina;
+package me.snake.tools;
 
-import me.snake.mina.utils.BCDByteUtil;
+import me.snake.tools.utils.BCDByteUtil;
 import org.junit.Test;
 
 /**
