@@ -28,14 +28,8 @@ public class Json2ConfigTests {
 
     @BeforeClass
     public static void setConfig() throws IOException {
-        String classpath = System.class.getResource("/").getPath();
-        String fileName = "protocol.json";
-        File file = new File(classpath, fileName);
-//        Path path = Paths.get(classpath, );
-        List<String> list = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
-        String text = String.join("", list);
-        JSONObject instance = JSONObject.parseObject(text);
-        config = Server.build(instance).buildParameters().buildCommands().buildInterfaces();
+        String fileName = "protocol";
+        config = Server.build(fileName).buildParameters().buildCommands().buildInterfaces();
     }
 
     @Test

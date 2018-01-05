@@ -1,5 +1,5 @@
 {
-  "parameters": [
+  "parameter": [
     {
       "code": "string",
       "javaType": "string",
@@ -32,7 +32,7 @@
       "defaultValue": "00000123456"
     },
     {
-      "copy":"id",
+      "copy": "id",
       "name": "用户ID",
       "code": "userId",
       "defaultValue": "00000123456"

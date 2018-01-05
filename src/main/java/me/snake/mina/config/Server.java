@@ -1,17 +1,13 @@
 package me.snake.mina.config;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import me.snake.mina.json.JsonArray;
-import me.snake.mina.json.JsonObject;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by HP on 2017/12/27.
@@ -25,21 +21,79 @@ public class Server {
     private Map<String, Command> commandMap;
     private Map<String, Action> interfaceMap;
 
-    private JsonObject jsonConfig;
+    private JSONObject jsonConfig;
 
-    private Server(Map<String, Object> config) {
-        jsonConfig = new JsonObject(config);
+    public static String readFile(String fileName) throws IOException {
+        String classpath = System.class.getResource("/").getPath();
+        File file = new File(classpath, fileName);
+        List<String> list = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
+        return String.join("", list);
+    }
+
+    public static JSONObject buildJSONObject(String jsonName) throws IOException {
+        return JSONObject.parseObject(readFile(jsonName + ".json"));
+    }
+
+    public static JSONArray buildJSONArray(String jsonName) throws IOException {
+        return JSONArray.parseArray(readFile(jsonName + ".json"));
+    }
+
+    private Server(String jsonName) throws IOException {
+        jsonConfig = buildJSONObject(jsonName);
         if (!jsonConfig.isEmpty()) {
             address = jsonConfig.getString("address");
             port = jsonConfig.getInteger("port");
             version = jsonConfig.getString("version");
+            buildJSONObjectImports(jsonConfig, jsonConfig.getJSONArray("import"));
         } else {
 
         }
     }
 
-    public Server buildParameters() {
-        List<Parameter> list = buildParameters(jsonConfig.getJsonArray("parameters"), this.parameterMap);
+    public static void buildJSONObjectImports(JSONObject json, JSONArray jsonList) throws IOException {
+        if (jsonList != null && jsonList.size() > 0) {
+            for (int i = 0; i < jsonList.size(); i++) {
+                String name = (String) jsonList.get(i);
+                buildJSONObjectImport(json, name);
+            }
+        }
+    }
+
+    public static void buildJSONObjectImport(JSONObject source, String jsonName) throws IOException {
+        JSONObject importJSON = buildJSONObject(jsonName);
+        if (!importJSON.isEmpty()) {
+            Iterator<String> iterator = importJSON.keySet().iterator();
+            while (iterator.hasNext()) {
+                String key = iterator.next();
+                source.put(key, importJSON.get(key));
+            }
+        }
+    }
+
+    public static void buildJSONArrayImports(JSONArray source, JSONArray jsonList) throws IOException {
+        if (jsonList != null && jsonList.size() > 0) {
+            for (int i = 0; i < jsonList.size(); i++) {
+                String name = (String) jsonList.get(i);
+                buildJSONArrayImport(source, name);
+            }
+        }
+    }
+
+    public static void buildJSONArrayImport(JSONArray source, String jsonName) throws IOException {
+        source.addAll(buildJSONArray(jsonName));
+    }
+
+    public static Server build(String jsonName) throws IOException {
+        Server server = new Server(jsonName);
+//            buildParameters(json.getJSONArray("parameters"));
+//            buildInterfaces(json.getJSONObject("interfaces"));
+        return server;
+    }
+
+    public Server buildParameters() throws IOException {
+        JSONArray parameterArray = jsonConfig.getJSONArray("parameter");
+        buildJSONArrayImports(parameterArray, jsonConfig.getJSONArray("parameter-import"));
+        List<Parameter> list = buildParameters(parameterArray, this.parameterMap);
         if (null != list && list.size() > 0) {
             this.parameterMap = new HashMap<String, Parameter>();
             for (Parameter each : list) {
@@ -49,8 +103,10 @@ public class Server {
         return this;
     }
 
-    public Server buildCommands() {
-        List<Command> list = buildCommands(jsonConfig.getJsonArray("commands"), this.commandMap, this.parameterMap);
+    public Server buildCommands() throws IOException {
+        JSONArray commandArray = jsonConfig.getJSONArray("command");
+        buildJSONArrayImports(commandArray, jsonConfig.getJSONArray("command-import"));
+        List<Command> list = buildCommands(commandArray, this.commandMap, this.parameterMap);
         if (null != list && list.size() > 0) {
             this.commandMap = new HashMap<String, Command>();
             for (Command each : list) {
@@ -61,7 +117,7 @@ public class Server {
     }
 
     public Server buildInterfaces() {
-        this.interfaceMap = buildInterfaces(jsonConfig.getJsonObject("interfaces"), this.commandMap);
+        this.interfaceMap = buildInterfaces(jsonConfig.getJSONObject("interface"), this.commandMap);
         return this;
     }
 
@@ -113,19 +169,12 @@ public class Server {
         this.commandMap = commandMap;
     }
 
-    public static Server build(Map<String, Object> config) {
-        Server server = new Server(config);
-//            buildParameters(json.getJsonArray("parameters"));
-//            buildInterfaces(json.getJsonObject("interfaces"));
-        return server;
-    }
-
-    public static List<Command> buildCommands(JsonArray array, Map<String, Command> commandMap, Map<String, Parameter> parameterMap) {
+    public static List<Command> buildCommands(JSONArray array, Map<String, Command> commandMap, Map<String, Parameter> parameterMap) {
         List<Command> commands = null;
         if (null != array && !array.isEmpty()) {
             commands = new ArrayList<Command>();
             for (int i = 0; i < array.size(); i++) {
-                JsonObject each = array.getJsonObject(i);
+                JSONObject each = array.getJSONObject(i);
                 Command parameter = buildCommand(each, commandMap, parameterMap);
                 commands.add(parameter);
             }
@@ -133,12 +182,12 @@ public class Server {
         return commands;
     }
 
-    public static List<Parameter> buildParameters(JsonArray array, Map<String, Parameter> parameterMap) {
+    public static List<Parameter> buildParameters(JSONArray array, Map<String, Parameter> parameterMap) {
         List<Parameter> parameters = null;
         if (null != array && !array.isEmpty()) {
             parameters = new ArrayList<Parameter>();
             for (int i = 0; i < array.size(); i++) {
-                JsonObject each = array.getJsonObject(i);
+                JSONObject each = array.getJSONObject(i);
                 Parameter parameter = buildParameter(each, parameterMap);
                 parameters.add(parameter);
             }
@@ -146,7 +195,7 @@ public class Server {
         return parameters;
     }
 
-    public static Parameter buildParameter(JsonObject json, Map<String, Parameter> parameterMap) {
+    public static Parameter buildParameter(JSONObject json, Map<String, Parameter> parameterMap) {
         Parameter parameter = null;
         String key = json.getString("copy");
         if (null != key && null != parameterMap && !parameterMap.isEmpty()) {
@@ -164,7 +213,7 @@ public class Server {
         return parameter;
     }
 
-    public static Command buildCommand(JsonObject json, Map<String, Command> commandMap, Map<String, Parameter> parameterMap) {
+    public static Command buildCommand(JSONObject json, Map<String, Command> commandMap, Map<String, Parameter> parameterMap) {
         Command command = null;
         String key = json.getString("parameter");
         if (null != key && null != commandMap && !commandMap.isEmpty()) {
@@ -176,12 +225,12 @@ public class Server {
         command.setCode(json.getString("code"));
         command.setName(json.getString("name"));
         command.setType(json.getString("type"));
-        List<Parameter> parameters = buildParameters(json.getJsonArray("parameters"), parameterMap);
+        List<Parameter> parameters = buildParameters(json.getJSONArray("parameter"), parameterMap);
         command.setParameters(parameters);
         return command;
     }
 
-    public static Map<String, Action> buildInterfaces(JsonObject json, Map<String, Command> commandMap) {
+    public static Map<String, Action> buildInterfaces(JSONObject json, Map<String, Command> commandMap) {
         Map<String, Action> interfaces = null;
         if (null != json && !json.isEmpty()) {
             interfaces = new HashMap<String, Action>();
@@ -195,7 +244,7 @@ public class Server {
         return interfaces;
     }
 
-    private static String configFileName = "protocol.json";
+    private static String configFileName = "protocol";
 
     public static void setConfigFileName(String fileName) {
         configFileName = fileName;
@@ -205,11 +254,7 @@ public class Server {
 
     public static Server getInstance() throws IOException {
         if (null == server) {
-            File file = new File(System.class.getResource("/").getPath(), configFileName);
-            List<String> list = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
-            String text = String.join("", list);
-            JSONObject instance = JSONObject.parseObject(text);
-            server = Server.build(instance).buildParameters().buildCommands().buildInterfaces();
+            server = Server.build(configFileName).buildParameters().buildCommands().buildInterfaces();
         }
         return server;
     }

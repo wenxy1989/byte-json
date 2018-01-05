@@ -1,4 +1,4 @@
-package me.snake.mina.utils;
+package me.snake.mina;
 
 import me.snake.mina.Constants;
 import me.snake.mina.config.Parameter;

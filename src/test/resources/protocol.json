@@ -1,87 +1,18 @@
 {
+  "import": ["parameter"],
   "address": "yun.sanmeditech.com",
   "port": 30007,
   "version": "4.x",
-  "parameters": [
-    {
-      "code": "string",
-      "javaType": "string",
-      "byteType": "string",
-      "byteLength": 0,
-      "defaultValue": ""
-    },
-    {
-      "name": "登录名",
-      "code": "loginId",
-      "javaType": "string",
-      "byteType": "string",
-      "byteLength": 40,
-      "defaultValue": "wenxy"
-    },
-    {
-      "name": "密码",
-      "code": "password",
-      "javaType": "string",
-      "byteType": "string",
-      "byteLength": 32,
-      "defaultValue": "123456"
-    },
-    {
-      "name": "验证码",
-      "code": "validCode",
-      "javaType": "string",
-      "byteType": "byte",
-      "byteLength": 6,
-      "defaultValue": "123456"
-    },
-    {
-      "name": "Long类型id",
-      "code": "id",
-      "javaType": "string",
-      "byteType": "byte",
-      "byteLength": 11,
-      "defaultValue": "123456"
-    },
-    {
-      "copy": "id",
-      "name": "用户ID",
-      "code": "userId",
-      "javaType": "string",
-      "byteType": "byte",
-      "byteLength": 11,
-      "defaultValue": "123456"
-    },
-    {
-      "name": "手机号",
-      "code": "mobile",
-      "javaType": "string",
-      "byteType": "bcd",
-      "byteLength": 6,
-      "defaultValue": "12345678901"
-    },
-    {
-      "name": "邮箱",
-      "code": "email",
-      "javaType": "string",
-      "byteType": "string",
-      "byteLength": 50,
-      "defaultValue": "12345678901@email.com"
-    },
-    {
-      "name": "时间",
-      "code": "datetime",
-      "javaType": "datetime",
-      "byteType": "bcd",
-      "byteLength": 6,
-      "defaultValue": "2017-12-25 17:41:22"
-    }
+  "command-import": [
+    "command-hospital",
+    "command-mobile"
   ],
-  "commands": [
+  "command": [
     {
       "code": "0201",
       "name": "检查客户端版本",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "string",
           "name": "客户端版本",
@@ -94,7 +25,7 @@
       "code": "0202",
       "name": "用户登录名注册",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "loginId"
         },
@@ -107,7 +38,7 @@
       "code": "0203",
       "name": "手机号注册",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "mobile"
         },
@@ -123,7 +54,7 @@
       "code": "0204",
       "name": "邮箱注册",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "email"
         },
@@ -139,7 +70,7 @@
       "code": "0205",
       "name": "获取(手机注册/手机绑定)验证码",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "mobile"
         }
@@ -149,7 +80,7 @@
       "code": "0206",
       "name": "获取(邮箱注册/邮箱绑定)验证码",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "email"
         }
@@ -159,7 +90,7 @@
       "code": "0207",
       "name": "重置密码(手机)",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "mobile"
         },
@@ -175,7 +106,7 @@
       "code": "0208",
       "name": "重置密码(邮箱)",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "mobile"
         },
@@ -191,7 +122,7 @@
       "code": "0209",
       "name": "获取验证码(手机重置密码)",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "mobile"
         }
@@ -201,7 +132,7 @@
       "code": "0210",
       "name": "获取验证码(邮箱重置密码)",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "email"
         }
@@ -211,7 +142,7 @@
       "code": "0211",
       "name": "修改密码",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "userId"
         },
@@ -229,7 +160,7 @@
       "code": "0212",
       "name": "用户登录",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "loginId"
         },
@@ -242,7 +173,7 @@
       "code": "0213",
       "name": "获取用户信息",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "loginId"
         },
@@ -255,7 +186,7 @@
       "code": "0214",
       "name": "绑定手机号",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "userId"
         },
@@ -271,7 +202,7 @@
       "code": "0215",
       "name": "绑定邮箱",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "userId"
         },
@@ -287,7 +218,7 @@
       "code": "0216",
       "name": "上传用户信息",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "userId"
         },
@@ -359,7 +290,7 @@
       "code": "0301",
       "name": "上传血糖",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "userId"
         },
@@ -378,7 +309,7 @@
       "code": "0315",
       "name": "上传血糖(包括电压)",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "userId"
         },
@@ -403,7 +334,7 @@
       "code": "0302",
       "name": "上传GPS",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "userId"
         },
@@ -464,7 +395,7 @@
       "code": "0303",
       "name": "上传指血",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "userId"
         },
@@ -480,7 +411,7 @@
       "code": "0304",
       "name": "上传饮食",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "userId"
         },
@@ -521,7 +452,7 @@
       "code": "0305",
       "name": "上传胰岛素",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "userId"
         },
@@ -557,7 +488,7 @@
       "code": "0306",
       "name": "上传用药",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "userId"
         },
@@ -593,7 +524,7 @@
       "code": "0307",
       "name": "上传锻炼",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "userId"
         },
@@ -621,7 +552,7 @@
       "code": "0309",
       "name": "获取血糖",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "loginId"
         },
@@ -652,7 +583,7 @@
       "code": "0310",
       "name": "获取指血",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "loginId"
         },
@@ -678,47 +609,11 @@
       "code": "0311",
       "name": "获取指血"
     },
-    /*{
-      "code": "0312",
-      "name": "获取关注告警（待处理）",
-      "type": "byte",
-      "parameters": [
-        {
-          "copy": "loginId"
-        },
-        {
-          "copy": "password"
-        },
-        {
-          "copy": "datetime",
-          "name": "最后告警时间",
-          "defaultValue": "170101010101"
-        }
-      ]
-    },
-    {
-      "code": "0313",
-      "name": "关注告警（待处理）",
-      "type": "byte",
-      "parameters": [
-        {
-          "copy": "loginId"
-        },
-        {
-          "copy": "password"
-        },
-        {
-          "copy": "datetime",
-          "name": "最后告警时间",
-          "defaultValue": "170101010101"
-        }
-      ]
-    },*/
     {
       "code": "0401",
       "name": "上传发射器状态",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "loginId"
         },
@@ -743,7 +638,7 @@
       "code": "0402",
       "name": "上传佩戴记录",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "loginId"
         },
@@ -791,7 +686,7 @@
       "code": "0403",
       "name": "获取佩戴记录",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "loginId"
         },
@@ -804,7 +699,7 @@
       "code": "0403",
       "name": "获取佩戴记录",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "loginId"
         },
@@ -817,7 +712,7 @@
       "code": "0217",
       "name": "UUID登录",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "code": "uuid",
           "javaType": "string",
@@ -830,7 +725,7 @@
       "code": "9201",
       "name": "客户端下载地址",
       "type": "byte",
-      "parameters": [
+      "parameter": [
         {
           "copy": "string",
           "name": "最新客户端下载地址",
@@ -842,7 +737,7 @@
     {
       "code": "9202",
       "type": "json",
-      "parameters": [
+      "parameter": [
         {
           "name": "结果代码",
           "code": "errcode",
@@ -858,7 +753,7 @@
       ]
     }
   ],
-  "interfaces": {
+  "interface": {
     "0201": "9201",
     "0202": "9202",
     "0203": "9202",
