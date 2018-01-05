@@ -1,6 +1,7 @@
 package me.snake.tools.protocol;
 
 
+import com.alibaba.fastjson.JSONObject;
 import me.snake.tools.inter.ConfigTools;
 import me.snake.tools.utils.ByteUtil;
 import me.snake.tools.utils.CodeParser;
@@ -55,6 +56,20 @@ public class Content {
 
     public byte check(byte[] info) {
         return flag = CodeParser.check(info);
+    }
+
+    public byte[] encode(JSONObject json) throws UnsupportedEncodingException {
+        if (null != head && null != body) {
+            bodyBytes = body.encode(json);
+            head.setLength(bodyBytes.length);
+            headBytes = head.encode();
+            infoBytes = ByteUtil.concat(bodyBytes,headBytes);
+            decodeBytes = ByteUtil.concat(infoBytes, check(infoBytes));
+            encodeBytes = CodeParser.encode(decodeBytes);
+            return bytes = ByteUtil.concat(new byte[]{start()}, encodeBytes, new byte[]{end()});
+        } else {
+            return null;
+        }
     }
 
     public byte[] encode() throws UnsupportedEncodingException {

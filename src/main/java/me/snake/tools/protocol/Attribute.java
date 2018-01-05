@@ -41,6 +41,10 @@ public class Attribute {
         return value;
     }
 
+    public void setValue(Object value) {
+        this.value = value;
+    }
+
     public void setBytes(byte[] bytes) {
         this.bytes = bytes;
     }

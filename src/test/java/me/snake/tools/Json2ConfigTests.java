@@ -2,12 +2,14 @@ package me.snake.tools;
 
 import com.alibaba.fastjson.JSONObject;
 import me.snake.tools.config.Action;
+import me.snake.tools.config.Command;
 import me.snake.tools.config.Server;
 import me.snake.tools.inter.ConfigTools;
 import me.snake.tools.protocol.Attribute;
 import me.snake.tools.protocol.Content;
 import me.snake.tools.utils.BCDByteUtil;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -28,6 +30,7 @@ public class Json2ConfigTests {
         config = Server.build(fileName).buildParameters().buildCommands().buildInterfaces();
     }
 
+    @Ignore
     @Test
     public void showInterface() {
         Map<String, Action> interfaceMap = config.getInterfaceMap();
@@ -43,9 +46,11 @@ public class Json2ConfigTests {
 
     @Test
     public void checkVersionTest() throws IOException {
-        Action checkVersionInter = config.getInterfaceMap().get("0201");
-        Content content = ConfigTools.buildContent(checkVersionInter.getRequest());
-        byte[] bytes = content.encode();
+        Command checkVersionInter = config.getCommandMap().get("0201");
+        Content content = ConfigTools.buildContent(checkVersionInter);
+        JSONObject json = new JSONObject();
+        json.put("version","0.2v20180105");
+        byte[] bytes = content.encode(json);
         System.out.println(BCDByteUtil.hexString(bytes));
         if (content.decode()) {
             Attribute[] attributes = content.getBody().getAttributes();
