@@ -9,7 +9,7 @@ public class Parameter {
     public static final String java_type_datetime = "datetime";
 
     public static final String java_type_long = "long";
-    public static final String java_type_integer = "integer";
+    public static final String java_type_integer = "int";
     public static final String java_type_short = "short";
     public static final String java_type_char = "char";
     public static final String java_type_byte = "byte";

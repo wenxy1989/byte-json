@@ -2,6 +2,7 @@ package me.snake.tools.protocol;
 
 
 import com.alibaba.fastjson.JSONObject;
+import me.snake.tools.config.Command;
 import me.snake.tools.inter.ConfigTools;
 import me.snake.tools.utils.ByteUtil;
 import me.snake.tools.utils.CodeParser;
@@ -13,6 +14,8 @@ import java.io.UnsupportedEncodingException;
  * Created by wenxy on 2017/12/31.
  */
 public class Content {
+
+    JSONObject json;
 
     Head head;
     Body body;
@@ -58,26 +61,16 @@ public class Content {
         return flag = CodeParser.check(info);
     }
 
+    public byte[] encode() throws UnsupportedEncodingException {
+        return encode(null);
+    }
     public byte[] encode(JSONObject json) throws UnsupportedEncodingException {
         if (null != head && null != body) {
-            bodyBytes = body.encode(json);
-            head.setLength(bodyBytes.length);
-            headBytes = head.encode();
-            infoBytes = ByteUtil.concat(bodyBytes,headBytes);
-            decodeBytes = ByteUtil.concat(infoBytes, check(infoBytes));
-            encodeBytes = CodeParser.encode(decodeBytes);
-            return bytes = ByteUtil.concat(new byte[]{start()}, encodeBytes, new byte[]{end()});
-        } else {
-            return null;
-        }
-    }
-
-    public byte[] encode() throws UnsupportedEncodingException {
-        if (null != head && null != body) {
+            body.setJson(json);
             bodyBytes = body.encode();
             head.setLength(bodyBytes.length);
             headBytes = head.encode();
-            infoBytes = ByteUtil.concat(bodyBytes,headBytes);
+            infoBytes = ByteUtil.concat(headBytes,bodyBytes);
             decodeBytes = ByteUtil.concat(infoBytes, check(infoBytes));
             encodeBytes = CodeParser.encode(decodeBytes);
             return bytes = ByteUtil.concat(new byte[]{start()}, encodeBytes, new byte[]{end()});
@@ -98,7 +91,8 @@ public class Content {
                 System.arraycopy(infoBytes, 0, headBytes, 0, headBytes.length);
                 head = new Head(headBytes);
                 head.decode();
-                Body body = new Body(ConfigTools.buildAttributes(head.getCommand()),bodyBytes);
+                body = ConfigTools.buildBody(head.getCommand());
+                body.setBytes(bodyBytes);
                 body.decode();
                 return true;
             }

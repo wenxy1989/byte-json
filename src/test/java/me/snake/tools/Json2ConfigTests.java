@@ -45,46 +45,24 @@ public class Json2ConfigTests {
     }
 
     @Test
-    public void checkVersionTest() throws IOException {
-        Command checkVersionInter = config.getCommandMap().get("0201");
-        Content content = ConfigTools.buildContent(checkVersionInter);
-        JSONObject json = new JSONObject();
-        json.put("version","0.2v20180105");
-        byte[] bytes = content.encode(json);
-        System.out.println(BCDByteUtil.hexString(bytes));
-        if (content.decode()) {
-            Attribute[] attributes = content.getBody().getAttributes();
-            for(Attribute attribute :attributes) {
-                System.out.println(attribute);
+    public void checkCommands() throws IOException {
+        Iterator<String> iterator = config.getCommandMap().keySet().iterator();
+        while(iterator.hasNext()){
+            String code = iterator.next();
+            Command command = config.getCommandMap().get(code);
+            Content content = ConfigTools.buildContent(command);
+            if(null != content) {
+                System.out.println(String.format("code:%s ,name:%s",command.getCode(),command.getName()));
+//            JSONObject json = new JSONObject();
+//            json.put("version","0.2v20180105");
+                System.out.println("default json : "+content.getBody().getDefaultJson());
+                byte[] bytes = content.encode();
+                System.out.println(BCDByteUtil.hexString(bytes));
+                if (content.decode()) {
+                    System.out.println("json value : "+content.getBody().getJson());
+                }
             }
-        }
-    }
 
-    @Test
-    public void nameRegisterTest() throws IOException {
-        Action checkVersionInter = config.getInterfaceMap().get("0202");
-        Content content = ConfigTools.buildContent(checkVersionInter.getRequest());
-        byte[] bytes = content.encode();
-        System.out.println(BCDByteUtil.hexString(bytes));
-        if (content.decode()) {
-            Attribute[] attributes = content.getBody().getAttributes();
-            for(Attribute attribute :attributes) {
-                System.out.println(attribute);
-            }
-        }
-    }
-
-    @Test
-    public void mobileRegisterTest() throws IOException {
-        Action checkVersionInter = config.getInterfaceMap().get("0203");
-        Content content = ConfigTools.buildContent(checkVersionInter.getRequest());
-        byte[] bytes = content.encode();
-        System.out.println(BCDByteUtil.hexString(bytes));
-        if (content.decode()) {
-            Attribute[] attributes = content.getBody().getAttributes();
-            for(Attribute attribute :attributes) {
-                System.out.println(attribute);
-            }
         }
     }
 

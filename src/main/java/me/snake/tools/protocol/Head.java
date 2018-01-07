@@ -49,10 +49,10 @@ public class Head {
         bytes = new byte[head_length];
         bytes[0] = (byte) (version >> byte_bit_length);
         bytes[1] = (byte) (version & 0x00FF);
-        bytes[4] = (byte) (serial >> byte_bit_length);
-        bytes[5] = (byte) (serial & 0x00FF);
-        bytes[2] = (byte) (command >> byte_bit_length);
-        bytes[3] = (byte) (command & 0x00FF);
+        bytes[2] = (byte) (serial >> byte_bit_length);
+        bytes[3] = (byte) (serial & 0x00FF);
+        bytes[4] = (byte) (command >> byte_bit_length);
+        bytes[5] = (byte) (command & 0x00FF);
         bytes[6] = (byte) (length >> byte_bit_length);
         bytes[7] = (byte) (length & 0x00FF);
         return bytes;
@@ -60,10 +60,10 @@ public class Head {
 
     public boolean decode() {
         if (null != bytes && bytes.length == head_length) {
-            version = bytes[0] << byte_bit_length | bytes[1];
-            version = bytes[2] << byte_bit_length | bytes[3];
-            version = bytes[4] << byte_bit_length | bytes[5];
-            version = bytes[6] << byte_bit_length | bytes[7];
+            version = (bytes[0] << byte_bit_length) | bytes[1];
+            serial = (bytes[2] << byte_bit_length) | bytes[3];
+            command = (bytes[4] << byte_bit_length) | bytes[5];
+            length = (bytes[6] << byte_bit_length) | bytes[7];
             return true;
         }
         return false;

@@ -250,7 +250,7 @@
           "code": "gender",
           "name": "性别",
           "javaType": "byte",
-          "default": 1
+          "defaultValue": 1
         },
         {
           "code": "nation",
@@ -671,13 +671,13 @@
         {
           "code": "count",
           "name": "血糖数量",
-          "type": "int",
+          "javaType": "int",
           "defaultValue": 20
         },
         {
           "code": "status",
           "name": "状态",
-          "type": "byte",
+          "javaType": "byte",
           "defaultValue": 1
         }
       ]

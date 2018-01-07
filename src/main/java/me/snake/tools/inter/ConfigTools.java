@@ -42,13 +42,29 @@ public class ConfigTools {
     }
 
     public static Attribute[] buildAttributes(List<Parameter> parameters) {
-        Attribute[] attributes = new Attribute[parameters.size()];
-        for (int i = 0; i < attributes.length; i++) {
-            Parameter parameter = parameters.get(i);
-            attributes[i] = new Attribute(parameter.getCode(), parameter.getJavaType(), parameter.getByteType(), parameter.getByteLength(), parameter.getDefaultValue());
+        if(null != parameters) {
+            Attribute[] attributes = new Attribute[parameters.size()];
+            for (int i = 0; i < attributes.length; i++) {
+                Parameter parameter = parameters.get(i);
+                attributes[i] = new Attribute(parameter.getCode(), parameter.getJavaType(), parameter.getByteType(), parameter.getByteLength(), parameter.getDefaultValue());
+            }
+            return attributes;
         }
-        return attributes;
+        return null;
     }
+
+    public static Body buildBody(Integer number) throws IOException {
+        return buildBody(int2Code(number));
+    }
+    public static Body buildBody(String code) throws IOException {
+        Command command = getCommand(code);
+        if (null != command) {
+            return new Body(buildAttributes(command.getParameters()),command.getType());
+        }
+        return null;
+
+    }
+
 
     public static Attribute[] buildAttributes(String code) throws IOException {
         Command command = getCommand(code);
@@ -64,7 +80,7 @@ public class ConfigTools {
 
     public static Content buildContent(Command command) {
         if (null != command) {
-            Body body = new Body(buildAttributes(command.getParameters()));
+            Body body = new Body(buildAttributes(command.getParameters()),command.getType());
             int code = code2Int(command.getCode());
             Head head = new Head(0x0400, 0, code);
             return new Content(head, body);

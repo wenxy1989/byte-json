@@ -1,5 +1,9 @@
 package me.snake.tools.utils;
 
+import me.snake.tools.Constants;
+
+import java.io.UnsupportedEncodingException;
+
 /**
  * <p>
  * Title:整型与长度为4的字节数组的互换
@@ -34,12 +38,13 @@ public class ByteUtil {
         return byteArray;
     }
 
-    public static byte[] short2byte(short number) {
-        return new byte[]{(byte) ((number >> 8) & 0xFF), (byte) (0x00ff & number)};
+    public static byte[] short2byte(short value) {
+        assert (value >= Short.MIN_VALUE & value <= Short.MAX_VALUE);
+        return new byte[]{(byte) ((value >> 8) & 0xFF), (byte) (0x00ff & value)};
     }
 
     public static byte[] long2byte(long value) {
-        assert (value >= 0 & value <= 0xffffffff);
+        assert (value >= Long.MIN_VALUE & value <= Long.MAX_VALUE);
         byte[] bytes = new byte[4];
         value = value & 0x00000000ffffffff;
         bytes[0] = (byte) (value >> (8 * 3));
@@ -50,7 +55,7 @@ public class ByteUtil {
     }
 
     public static byte[] int2byte(int value) {
-        assert (value >= 0 & value <= 0xffff);
+        assert (value > Integer.MIN_VALUE & value <= Integer.MAX_VALUE);
         byte[] bytes = new byte[2];
         value = value & 0x0000ffff;
         bytes[0] = (byte) (value >> 8);
@@ -71,4 +76,20 @@ public class ByteUtil {
         }
         return intValue;
     }
+
+    public static String byte2string(byte[] bytes) throws UnsupportedEncodingException {
+        if (null != bytes && bytes.length > 0) {
+            int length = 0;
+            for (; length < bytes.length; length++) {
+                if (bytes[length] == 0) {
+                    break;
+                }
+            }
+            byte[] validBytes = new byte[length];
+            System.arraycopy(bytes, 0, validBytes, 0, length);
+            return new String(validBytes, Constants.CHARTSET_CODE_GBK);
+        }
+        return null;
+    }
+
 }

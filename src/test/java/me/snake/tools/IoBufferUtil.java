@@ -3,6 +3,7 @@ package me.snake.tools;
 import me.snake.tools.config.Parameter;
 import me.snake.tools.protocol.Attribute;
 import org.apache.mina.core.buffer.IoBuffer;
+import org.junit.Test;
 
 import java.nio.charset.CharacterCodingException;
 import java.util.HashMap;
@@ -72,4 +73,12 @@ public class IoBufferUtil {
         }
         return value;
     }
+
+
+    @Test
+    public void IoBufferGetStringTest() throws CharacterCodingException {
+        IoBuffer io = IoBuffer.allocate(10);
+        io.getString(Constants.CHARTSET_GBK_DECODER);
+    }
+
 }

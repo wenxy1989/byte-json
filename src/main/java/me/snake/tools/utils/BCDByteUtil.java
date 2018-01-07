@@ -38,7 +38,7 @@ public class BCDByteUtil {
     }
 
     public static long bcd2long(byte[] bcd) {
-        assert null != bcd && bcd.length <= 8;
+        assert null != bcd && bcd.length > 0;
         long number = 0;
         for (int i = 0; i < bcd.length; i++) {
             number = (number * 100) + (bcd[i] >> 4) * 10 + (0x0F & bcd[i]);

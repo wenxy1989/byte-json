@@ -58,21 +58,25 @@ public class Attribute {
         this.code = code;
         this.javaType = javaType;
         this.byteType = byteType;
-        this.byteLength = byteLength;
+        this.byteLength = byteLength == null ? 0 : byteLength;
         this.value = value;
     }
 
+    public static byte[] string2byte(String value, int length) {
+        byte[] data = value.getBytes(Constants.CHARTSET_GBK);
+        if (length > 0) {
+            byte[] bytes = new byte[length];
+            System.arraycopy(data, 0, bytes, 0, data.length > length ? length : data.length);
+            return bytes;
+        } else {
+            return data;
+        }
+    }
+
     public static byte[] parseByteArray(String value, String byteType, int byteLength) throws UnsupportedEncodingException {
-        if (byteType.equals(Parameter.byte_type_string)) {
-            byte[] data = value.getBytes(Constants.CHARTSET_GBK);
-            if (byteLength > 0) {
-                byte[] bytes = new byte[byteLength];
-                System.arraycopy(data, 0, bytes, 0, data.length > byteLength ? byteLength : data.length);
-                return bytes;
-            } else {
-                return data;
-            }
-        } else if (byteType.equals(Parameter.byte_type_byte) && byteLength > 0) {
+        if (Parameter.byte_type_string.equals(byteType)) {
+            return string2byte(value, byteLength);
+        } else if (Parameter.byte_type_byte.equals(byteType) && byteLength > 0) {
             byte[] bytes = new byte[byteLength];
             for (int i = 0; i < value.length(); i++) {
                 char c = value.charAt(i);
@@ -80,51 +84,75 @@ public class Attribute {
             }
             return bytes;
             //todo special for id and validCode at yun.sanmeditech.com:30007
-        } else if (byteType.equals(Parameter.byte_type_bcd) && byteLength > 0) {
+        } else if (Parameter.byte_type_bcd.equals(byteType) && byteLength > 0) {
             return BCDByteUtil.number2bcd(Long.parseLong(value), (byte) byteLength);
+        } else {
+            return string2byte(value, byteLength);
         }
-        return null;
     }
 
-    public static byte[] long2byte(long value, String byteType, int byteLength) throws UnsupportedEncodingException {
+    public static byte[] long2byte(long value, int byteLength) throws UnsupportedEncodingException {
         return BCDByteUtil.number2bcd(value, (byte) byteLength);
     }
 
     public byte[] encode() throws UnsupportedEncodingException {
-        if (javaType.equals(Parameter.java_type_string)) {
+//        if ("birth".equals(code)) {
+//            System.out.println(" error is coming");
+//        }
+        if (Parameter.java_type_string.equals(javaType)) {
             String value = (String) this.value;
             bytes = parseByteArray(value, byteType, byteLength);
-        } else if (javaType.equals(Parameter.java_type_date)) {
+        } else if (Parameter.java_type_date.equals(javaType)) {
             String value = (String) this.value;
-            bytes = parseByteArray(value.replaceAll("-", ""), Parameter.byte_type_bcd, byteLength);
-        } else if (javaType.equals(Parameter.java_type_datetime)) {
+            value = value.replaceAll("-", "");
+            bytes = parseByteArray(value, Parameter.byte_type_bcd, byteLength);
+        } else if (Parameter.java_type_datetime.equals(javaType)) {
             String value = (String) this.value;
-            bytes = parseByteArray(value.replaceAll("-", "").replaceAll(":", "").replaceAll(" ", ""), Parameter.byte_type_bcd, byteLength);
-        } else if (javaType.equals(Parameter.java_type_long)) {
+            value = value.replaceAll("-", "");
+            value = value.replaceAll(":", "");
+            value = value.replaceAll(" ", "");
+            bytes = parseByteArray(value, Parameter.byte_type_bcd, byteLength);
+        } else if (Parameter.java_type_double.equals(javaType)) {
+            double value = ((Double) this.value).doubleValue();
+            bytes = long2byte((long) (value * 100), 4);
+        } else if (Parameter.java_type_float.equals(javaType)) {
+            float value = ((Float) this.value).floatValue();
+            bytes = long2byte((long) (value * 100), 2);
+        } else if (Parameter.java_type_long.equals(javaType)) {
             long value = ((Long) this.value).longValue();
-            bytes = long2byte(value, byteType, byteLength);
-        } else if (javaType.equals(Parameter.java_type_integer)) {
+            bytes = long2byte(value, 4);
+        } else if (Parameter.java_type_integer.equals(javaType)) {
             int value = ((Integer) this.value).intValue();
             bytes = ByteUtil.int2byte(value);
-        } else if (javaType.equals(Parameter.java_type_double)) {
-            double value = (long) ((Double) this.value).doubleValue();
-            bytes = long2byte((long) (value * 100), byteType, byteLength);
-        } else if (javaType.equals(Parameter.java_type_boolean)) {
+        } else if (Parameter.java_type_short.equals(javaType)) {
+            short value = ((Short) this.value).shortValue();
+            bytes = ByteUtil.short2byte(value);
+        } else if (Parameter.java_type_char.equals(javaType)) {
+            char value = ((String) this.value).charAt(0);
+            bytes = ByteUtil.short2byte((short) value);
+        } else if (Parameter.java_type_byte.equals(javaType)) {
+            byte value = ((Byte) this.value).byteValue();
+            bytes = new byte[1];
+            bytes[0] = value;
+        } else if (Parameter.java_type_boolean.equals(javaType)) {
             boolean value = ((Boolean) this.value).booleanValue();
             bytes = new byte[1];
             bytes[0] = (byte) (value ? 1 : 0);
+        } else {
+            String value = (String) this.value;
+            bytes = parseByteArray(value, byteType, byteLength);
         }
         return bytes;
     }
 
     public boolean decode() throws UnsupportedEncodingException {
         if (null != bytes && bytes.length > 0) {
-            if (javaType.equals(Parameter.java_type_string)) {
-                if (byteType.equals(Parameter.byte_type_bcd)) {
-                    value = String.format("%l", BCDByteUtil.bcd2long(bytes));
-                } else if (byteType.equals(Parameter.byte_type_string)) {
-                    value = new String(bytes, Constants.CHARTSET_CODE_GBK);
-                } else if (byteType.equals(Parameter.byte_type_byte)) {
+            if (Parameter.java_type_string.equals(javaType)) {
+                if (Parameter.byte_type_bcd.equals(byteType)) {
+                    value = String.format("%d", BCDByteUtil.bcd2long(bytes));
+                } else if (Parameter.byte_type_string.equals(byteType)) {
+                    value = ByteUtil.byte2string(bytes);
+                } else if (Parameter.byte_type_byte.equals(byteType)) {
                     //todo special for id and validCode at yun.sanmeditech.com:30007
                     StringBuffer sb = new StringBuffer();
                     for (byte b : bytes) {
@@ -132,15 +160,15 @@ public class Attribute {
                     }
                     value = sb.toString();
                 }
-            } else if (javaType.equals(Parameter.java_type_integer)) {
+            } else if (Parameter.java_type_integer.equals(javaType)) {
                 value = ByteUtil.byte2int(bytes);
-            } else if (javaType.equals(Parameter.java_type_long)) {
+            } else if (Parameter.java_type_long.equals(javaType)) {
                 value = ByteUtil.byte2long(bytes);
-            } else if (javaType.equals(Parameter.java_type_double)) {
+            } else if (Parameter.java_type_double.equals(javaType)) {
                 value = ((double) ByteUtil.byte2long(bytes)) / 100;
-            } else if (javaType.equals(Parameter.java_type_date)) {
+            } else if (Parameter.java_type_date.equals(javaType)) {
                 value = BCDByteUtil.hexString(bytes);
-            } else if (javaType.equals(Parameter.java_type_datetime)) {
+            } else if (Parameter.java_type_datetime.equals(javaType)) {
                 value = BCDByteUtil.hexString(bytes);
             }
             return true;

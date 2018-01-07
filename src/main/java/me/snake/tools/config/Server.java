@@ -45,6 +45,9 @@ public class Server {
             port = jsonConfig.getInteger("port");
             version = jsonConfig.getString("version");
             buildJSONObjectImports(jsonConfig, jsonConfig.getJSONArray("import"));
+            parameterMap = new HashMap<String, Parameter>();
+            commandMap = new HashMap<String, Command>();
+            interfaceMap = new HashMap<String, Action>();
         } else {
 
         }
@@ -94,12 +97,11 @@ public class Server {
         JSONArray parameterArray = jsonConfig.getJSONArray("parameter");
         buildJSONArrayImports(parameterArray, jsonConfig.getJSONArray("parameter-import"));
         List<Parameter> list = buildParameters(parameterArray, this.parameterMap);
-        if (null != list && list.size() > 0) {
-            this.parameterMap = new HashMap<String, Parameter>();
+        /*if (null != list && list.size() > 0) {
             for (Parameter each : list) {
                 this.parameterMap.put(each.getCode(), each);
             }
-        }
+        }*/
         return this;
     }
 
@@ -107,12 +109,12 @@ public class Server {
         JSONArray commandArray = jsonConfig.getJSONArray("command");
         buildJSONArrayImports(commandArray, jsonConfig.getJSONArray("command-import"));
         List<Command> list = buildCommands(commandArray, this.commandMap, this.parameterMap);
-        if (null != list && list.size() > 0) {
+        /*if (null != list && list.size() > 0) {
             this.commandMap = new HashMap<String, Command>();
             for (Command each : list) {
                 this.commandMap.put(each.getCode(), each);
             }
-        }
+        }*/
         return this;
     }
 
@@ -209,13 +211,42 @@ public class Server {
         parameter.setJavaType(json.getString("javaType"));
         parameter.setByteType(json.getString("byteType"));
         parameter.setByteLength(json.getInteger("byteLength"));
-        parameter.setDefaultValue(json.getString("defaultValue"));
+        String javaType = parameter.getJavaType();
+        if (Parameter.java_type_string.equals(javaType)) {
+            parameter.setDefaultValue(json.getString("defaultValue"));
+        } else if (Parameter.java_type_date.equals(javaType)) {
+            parameter.setDefaultValue(json.getString("defaultValue"));
+        } else if (Parameter.java_type_datetime.equals(javaType)) {
+            parameter.setDefaultValue(json.getString("defaultValue"));
+        } else if (Parameter.java_type_long.equals(javaType)) {
+            parameter.setDefaultValue(json.getLong("defaultValue"));
+        } else if (Parameter.java_type_integer.equals(javaType)) {
+            parameter.setDefaultValue(json.getInteger("defaultValue"));
+        } else if (Parameter.java_type_short.equals(javaType)) {
+            parameter.setDefaultValue(json.getShort("defaultValue"));
+        } else if (Parameter.java_type_byte.equals(javaType)) {
+            parameter.setDefaultValue(json.getByte("defaultValue"));
+        } else if (Parameter.java_type_double.equals(javaType)) {
+            parameter.setDefaultValue(json.getDouble("defaultValue"));
+        } else if (Parameter.java_type_float.equals(javaType)) {
+            parameter.setDefaultValue(json.getFloat("defaultValue"));
+        } else if (Parameter.java_type_char.equals(javaType)) {
+            parameter.setDefaultValue(json.getString("defaultValue"));
+        } else if (Parameter.java_type_boolean.equals(javaType)) {
+            parameter.setDefaultValue(json.getBoolean("defaultValue"));
+        } else {
+            System.out.println(String.format("javaType : %s not define", parameter.getJavaType()));
+        }
+        if (null == parameter.getJavaType()) {
+            System.out.println(String.format("parameter name:%s code:%s have no javaType", parameter.getName(), parameter.getCode()));
+        }
+        parameterMap.put(parameter.getCode(), parameter);
         return parameter;
     }
 
     public static Command buildCommand(JSONObject json, Map<String, Command> commandMap, Map<String, Parameter> parameterMap) {
         Command command = null;
-        String key = json.getString("parameter");
+        String key = json.getString("copy");
         if (null != key && null != commandMap && !commandMap.isEmpty()) {
             command = commandMap.get(key) == null ? null : commandMap.get(key).copy();
         }
@@ -227,21 +258,23 @@ public class Server {
         command.setType(json.getString("type"));
         List<Parameter> parameters = buildParameters(json.getJSONArray("parameter"), parameterMap);
         command.setParameters(parameters);
+        commandMap.put(command.getCode(), command);
         return command;
     }
 
     public static Map<String, Action> buildInterfaces(JSONObject json, Map<String, Command> commandMap) {
-        Map<String, Action> interfaces = null;
+
         if (null != json && !json.isEmpty()) {
-            interfaces = new HashMap<String, Action>();
+            Map<String, Action> interfaces = new HashMap<String, Action>();
             for (String key : json.keySet()) {
                 Action inter = new Action();
                 inter.setRequest(commandMap.get(key));
                 inter.setResponse(commandMap.get(json.getString(key)));
                 interfaces.put(key, inter);
             }
+            return interfaces;
         }
-        return interfaces;
+        return null;
     }
 
     private static String configFileName = "protocol";

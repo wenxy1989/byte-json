@@ -6,6 +6,9 @@ import java.util.List;
  * Created by wenxy on 2017/12/31.
  */
 public class Command {
+
+    public static final String command_type_json = "json";
+    public static final String command_type_byte = "byte";
     private String code;
     private String name;
     private String type;

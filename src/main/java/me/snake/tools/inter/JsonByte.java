@@ -19,7 +19,7 @@ public class JsonByte {
                 Command command = ConfigTools.getCommand(code);
                 Content content = ConfigTools.buildContent(command);
                 if (null != content) {
-                    return content.encode();
+                    return content.encode(json);
                 } else {
                     System.out.println(" build content from command error");
                 }
