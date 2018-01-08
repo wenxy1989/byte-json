@@ -14,11 +14,9 @@ import java.io.UnsupportedEncodingException;
  */
 public class Body {
 
-    JSONObject json;
-    String commandType;
-
-    Attribute[] attributes;
-    byte[] bytes;
+    private Attribute[] attributes;
+    private String commandType;
+    private JSONObject json;
 
     public JSONObject getJson() {
         return json;
@@ -28,16 +26,12 @@ public class Body {
         this.json = json;
     }
 
-    public void setBytes(byte[] bytes) {
-        this.bytes = bytes;
-    }
-
-    public JSONObject getDefaultJson(){
+    public JSONObject getDefaultJson() {
         if (null != attributes && attributes.length > 0) {
             JSONObject json = new JSONObject();
             for (int i = 0; i < attributes.length; i++) {
                 Attribute each = attributes[i];
-                    json.put(each.getCode(),each.getValue());
+                json.put(each.getCode(), each.getValue());
             }
             return json;
         }
@@ -48,42 +42,42 @@ public class Body {
         this(attributes, Command.command_type_byte);
     }
 
-    public Body(Attribute[] attributes,String commandType) {
+    public Body(Attribute[] attributes, String commandType) {
         this.attributes = attributes;
         this.commandType = commandType;
     }
 
-
-    public Attribute[] getAttributes() {
-        return attributes;
+    public byte[] encode() throws UnsupportedEncodingException {
+        return encode(attributes, commandType, getDefaultJson());
     }
 
-    public byte[] encode() throws UnsupportedEncodingException {
+    public boolean decode(byte[] bytes) throws UnsupportedEncodingException {
+        return null != (json = decode(attributes, commandType, bytes));
+    }
+
+    public static byte[] encode(Attribute[] attributes, String commandType, JSONObject json) throws UnsupportedEncodingException {
         if (null != attributes && attributes.length > 0) {
-            if(Command.command_type_json.equals(commandType)){
-                bytes = Attribute.parseByteArray(getDefaultJson().toJSONString(), Parameter.byte_type_string,0);
-            }else{
-                bytes = new byte[0];
+            if (Command.command_type_json.equals(commandType)) {
+                return Attribute.parseByteArray(json.toJSONString(), Parameter.byte_type_string, 0);
+            } else {
+                byte[] bytes = new byte[0];
                 for (int i = 0; i < attributes.length; i++) {
                     Attribute attribute = attributes[i];
-                    if(null != json) {
-                        attribute.setValue(json.get(attribute.getCode()));
-                    }
+                    attribute.setValue(json.get(attribute.getCode()));
                     bytes = ByteUtil.concat(bytes, attribute.encode());
                 }
-
+                return bytes;
             }
-            return bytes;
         }
         return null;
     }
 
-    public boolean decode() throws UnsupportedEncodingException {
+    public static JSONObject decode(Attribute[] attributes, String commandType, byte[] bytes) throws UnsupportedEncodingException {
         if (null != bytes && bytes.length > 0 && null != attributes && attributes.length > 0) {
-            if(Command.command_type_json.equals(commandType)){
-                json = JSONObject.parseObject(ByteUtil.byte2string(bytes));
-            }else {
-                json = new JSONObject();
+            if (Command.command_type_json.equals(commandType)) {
+                return JSONObject.parseObject(ByteUtil.byte2string(bytes));
+            } else {
+                JSONObject json = new JSONObject();
                 int offset = 0;
                 for (int i = 0; i < attributes.length; i++) {
                     Attribute attribute = attributes[i];
@@ -98,9 +92,10 @@ public class Body {
                     attribute.decode();
                     json.put(attribute.getCode(), attribute.getValue());
                 }
+                return json;
             }
         }
-        return false;
+        return null;
     }
 
 }

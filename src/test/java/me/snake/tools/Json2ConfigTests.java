@@ -5,7 +5,6 @@ import me.snake.tools.config.Action;
 import me.snake.tools.config.Command;
 import me.snake.tools.config.Server;
 import me.snake.tools.inter.ConfigTools;
-import me.snake.tools.protocol.Attribute;
 import me.snake.tools.protocol.Content;
 import me.snake.tools.utils.BCDByteUtil;
 import org.junit.BeforeClass;
@@ -13,8 +12,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * [{version,serial,command,[length,{body:parameterList}]}check] //todo
@@ -27,19 +25,18 @@ public class Json2ConfigTests {
     @BeforeClass
     public static void setConfig() throws IOException {
         String fileName = "protocol";
-        config = Server.build(fileName).buildParameters().buildCommands().buildInterfaces();
+        config = Server.build(fileName).buildParameters().buildCommands().buildActions();
     }
 
     @Ignore
     @Test
     public void showInterface() {
-        Map<String, Action> interfaceMap = config.getInterfaceMap();
-        Iterator<String> iterator = interfaceMap.keySet().iterator();
+        List<Action> interfaceList = config.getActionList();
+        Iterator<Action> iterator = interfaceList.iterator();
         while (iterator.hasNext()) {
-            String code = iterator.next();
-            Action action = interfaceMap.get(code);
+            Action action = iterator.next();
             Object interfaceJson = JSONObject.toJSON(action);
-            System.out.println(code);
+            System.out.println(action.getRequest().getCode());
             System.out.println(interfaceJson);
         }
     }
@@ -47,22 +44,59 @@ public class Json2ConfigTests {
     @Test
     public void checkCommands() throws IOException {
         Iterator<String> iterator = config.getCommandMap().keySet().iterator();
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             String code = iterator.next();
             Command command = config.getCommandMap().get(code);
             Content content = ConfigTools.buildContent(command);
-            if(null != content) {
-                System.out.println(String.format("code:%s ,name:%s",command.getCode(),command.getName()));
+            if (null != content) {
+                System.out.println(String.format("code:%s ,name:%s", command.getCode(), command.getName()));
 //            JSONObject json = new JSONObject();
 //            json.put("version","0.2v20180105");
-                System.out.println("default json : "+content.getBody().getDefaultJson());
+                System.out.println("default json : " + content.getBody().getDefaultJson());
                 byte[] bytes = content.encode();
                 System.out.println(BCDByteUtil.hexString(bytes));
-                if (content.decode()) {
-                    System.out.println("json value : "+content.getBody().getJson());
+                if (null != (content = Content.decode(bytes))) {
+                    System.out.println("json value : " + content.getBody().getJson());
                 }
             }
+        }
+    }
 
+    @Test
+    public void checkIntefaces() throws IOException {
+        List<Action> actions = config.getActionList();
+        Action[] actionArray = new Action[actions.size()];
+        actions.toArray(actionArray);
+        Arrays.sort(actionArray);
+        Long userId = 0l;
+        for (int i = 0; i < actionArray.length; i++) {
+            Command command = actionArray[i].getRequest();
+            Content content = ConfigTools.buildContent(command);
+            if (null != content) {
+                System.out.println(String.format("code:%s ,name:%s", command.getCode(), command.getName()));
+//            JSONObject json = new JSONObject();
+//            json.put("version","0.2v20180105");
+                JSONObject defaultJson = content.getBody().getDefaultJson();
+                System.out.println("request default json : " + defaultJson);
+                defaultJson.put("userId", userId);
+                byte[] bytes = content.encode(defaultJson);
+                System.out.println("request byte : " + BCDByteUtil.hexString(bytes));
+                byte[] responseBytes = SocketTool.request(bytes);
+                System.out.println("response byte : " + BCDByteUtil.hexString(responseBytes));
+                assert null != (content = Content.decode(responseBytes));
+                if (null != content.getBody()) {
+                    JSONObject json = content.getBody().getJson();
+                    System.out.println("response json value : " + json);
+                    if (null != json.get("code")) {
+                        assert json.getIntValue("code") == 0;
+                    } else if (null != json.get("errcode")) {
+                        assert json.getIntValue("errcode") == 0;
+                        userId = json.getLong("uid");
+                    }
+                } else {
+                    System.out.println("error happened !!");
+                }
+            }
         }
     }
 

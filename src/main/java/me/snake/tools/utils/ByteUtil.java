@@ -63,6 +63,12 @@ public class ByteUtil {
         return bytes;
     }
 
+    public static int byte2short(byte[] b) {
+        int intValue = b[0] << 8;
+        intValue += b[1];
+        return intValue;
+    }
+
     public static int byte2int(byte[] b) {
         int intValue = b[0] << 8;
         intValue += b[1];
@@ -79,6 +85,13 @@ public class ByteUtil {
 
     public static String byte2string(byte[] bytes) throws UnsupportedEncodingException {
         if (null != bytes && bytes.length > 0) {
+            return new String(bytes, Constants.CHARTSET_CODE_GBK);
+        }
+        return null;
+    }
+
+    public static String fixedByte2string(byte[] bytes) throws UnsupportedEncodingException {
+        if (null != bytes && bytes.length > 0) {
             int length = 0;
             for (; length < bytes.length; length++) {
                 if (bytes[length] == 0) {
@@ -87,7 +100,7 @@ public class ByteUtil {
             }
             byte[] validBytes = new byte[length];
             System.arraycopy(bytes, 0, validBytes, 0, length);
-            return new String(validBytes, Constants.CHARTSET_CODE_GBK);
+            return byte2string(validBytes);
         }
         return null;
     }

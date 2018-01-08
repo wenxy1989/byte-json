@@ -43,7 +43,7 @@
       "javaType": "string",
       "byteType": "byte",
       "byteLength": 6,
-      "defaultValue": "123456"
+      "defaultValue": "985632"
     },
     {
       "name": "手机号",

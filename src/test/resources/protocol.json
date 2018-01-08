@@ -1,11 +1,12 @@
 {
-  "import": ["parameter"],
+  "import": ["parameter","action"],
   "address": "yun.sanmeditech.com",
   "port": 30007,
   "version": "4.x",
   "command-import": [
     "command-hospital",
-    "command-mobile"
+    "command-mobile",
+    "command-response"
   ],
   "command": [
     {
@@ -720,44 +721,6 @@
           "defaultValue": "sdfklasdfkidjfkalsd"
         }
       ]
-    },
-    {
-      "code": "9201",
-      "name": "客户端下载地址",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "string",
-          "name": "最新客户端下载地址",
-          "code": "url",
-          "defaultValue": "http://yun.sanmeditech.com/download/cgm.apk"
-        }
-      ]
-    },
-    {
-      "code": "9202",
-      "type": "json",
-      "parameter": [
-        {
-          "name": "结果代码",
-          "code": "errcode",
-          "javaType": "int",
-          "defaultValue": 0
-        },
-        {
-          "name": "用户ID",
-          "code": "uid",
-          "javaType": "long",
-          "defaultValue": 123456
-        }
-      ]
     }
-  ],
-  "interface": {
-    "0201": "9201",
-    "0202": "9202",
-    "0203": "9202",
-    "0204": "9202",
-    "0205": "9202"
-  }
+  ]
 }

@@ -1,0 +1,106 @@
+[
+  {
+    "code": "9201",
+    "name": "客户端下载地址",
+    "type": "byte",
+    "parameter": [
+      {
+        "copy": "string",
+        "name": "最新客户端下载地址",
+        "code": "url",
+        "defaultValue": "http://yun.sanmeditech.com/download/cgm.apk"
+      }
+    ]
+  },
+  {
+    "code": "9202",
+    "type": "json",
+    "parameter": [
+      {
+        "name": "结果代码",
+        "code": "errcode",
+        "javaType": "int",
+        "defaultValue": 0
+      },
+      {
+        "name": "用户ID",
+        "code": "uid",
+        "javaType": "long",
+        "defaultValue": 123456
+      }
+    ]
+  },
+  {
+    "code": "9001",
+    "type": "byte",
+    "parameter": [
+      {
+        "name": "结果代码",
+        "code": "code",
+        "javaType": "byte",
+        "byteLength": 1,
+        "defaultValue": 0
+      }
+    ]
+  },
+  {
+    "copy": "9202",
+    "code": "9203"
+  },
+  {
+    "copy": "9202",
+    "code": "9204"
+  },
+  {
+    "copy": "9001",
+    "code": "9205"
+  },
+  {
+    "copy": "9001",
+    "code": "9206"
+  },
+  {
+    "copy": "9001",
+    "code": "9207"
+  },
+  {
+    "copy": "9001",
+    "code": "9208"
+  },
+  {
+    "copy": "9001",
+    "code": "9209"
+  },
+  {
+    "copy": "9001",
+    "code": "9210"
+  },
+  {
+    "copy": "9001",
+    "code": "9211"
+  },
+  {
+    "copy": "9001",
+    "code": "9212"
+  },
+  {
+    "copy": "9001",
+    "code": "9213"
+  },
+  {
+    "copy": "9001",
+    "code": "9214"
+  },
+  {
+    "copy": "9001",
+    "code": "9215"
+  },
+  {
+    "copy": "9001",
+    "code": "9216"
+  },
+  {
+    "copy": "9001",
+    "code": "9217"
+  }
+]

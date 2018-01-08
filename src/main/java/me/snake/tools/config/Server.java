@@ -19,7 +19,7 @@ public class Server {
     private String version;
     private Map<String, Parameter> parameterMap;
     private Map<String, Command> commandMap;
-    private Map<String, Action> interfaceMap;
+    private List<Action> actionList;
 
     private JSONObject jsonConfig;
 
@@ -47,7 +47,6 @@ public class Server {
             buildJSONObjectImports(jsonConfig, jsonConfig.getJSONArray("import"));
             parameterMap = new HashMap<String, Parameter>();
             commandMap = new HashMap<String, Command>();
-            interfaceMap = new HashMap<String, Action>();
         } else {
 
         }
@@ -118,8 +117,8 @@ public class Server {
         return this;
     }
 
-    public Server buildInterfaces() {
-        this.interfaceMap = buildInterfaces(jsonConfig.getJSONObject("interface"), this.commandMap);
+    public Server buildActions() {
+        actionList = buildActions(jsonConfig.getJSONArray("action"), this.commandMap);
         return this;
     }
 
@@ -147,28 +146,16 @@ public class Server {
         this.version = version;
     }
 
-    public Map<String, Action> getInterfaceMap() {
-        return interfaceMap;
-    }
-
-    public void setInterfaceMap(Map<String, Action> interfaceMap) {
-        this.interfaceMap = interfaceMap;
+    public List<Action> getActionList() {
+        return actionList;
     }
 
     public Map<String, Parameter> getParameterMap() {
         return parameterMap;
     }
 
-    public void setParameterMap(Map<String, Parameter> parameterMap) {
-        this.parameterMap = parameterMap;
-    }
-
     public Map<String, Command> getCommandMap() {
         return commandMap;
-    }
-
-    public void setCommandMap(Map<String, Command> commandMap) {
-        this.commandMap = commandMap;
     }
 
     public static List<Command> buildCommands(JSONArray array, Map<String, Command> commandMap, Map<String, Parameter> parameterMap) {
@@ -256,21 +243,24 @@ public class Server {
         command.setCode(json.getString("code"));
         command.setName(json.getString("name"));
         command.setType(json.getString("type"));
+        command.setType(json.getString("type"));
         List<Parameter> parameters = buildParameters(json.getJSONArray("parameter"), parameterMap);
         command.setParameters(parameters);
         commandMap.put(command.getCode(), command);
         return command;
     }
 
-    public static Map<String, Action> buildInterfaces(JSONObject json, Map<String, Command> commandMap) {
+    public static List<Action> buildActions(JSONArray array, Map<String, Command> commandMap) {
 
-        if (null != json && !json.isEmpty()) {
-            Map<String, Action> interfaces = new HashMap<String, Action>();
-            for (String key : json.keySet()) {
+        if (null != array && !array.isEmpty()) {
+            List<Action> interfaces = new ArrayList<Action>();
+            for (int i = 0; i < array.size(); i++) {
+                JSONObject actionJson = array.getJSONObject(i);
                 Action inter = new Action();
-                inter.setRequest(commandMap.get(key));
-                inter.setResponse(commandMap.get(json.getString(key)));
-                interfaces.put(key, inter);
+                inter.setIndex(actionJson.getIntValue("index"));
+                inter.setRequest(commandMap.get(actionJson.getString("request")));
+                inter.setResponse(commandMap.get(actionJson.getString("response")));
+                interfaces.add(inter);
             }
             return interfaces;
         }
@@ -287,7 +277,7 @@ public class Server {
 
     public static Server getInstance() throws IOException {
         if (null == server) {
-            server = Server.build(configFileName).buildParameters().buildCommands().buildInterfaces();
+            server = Server.build(configFileName).buildParameters().buildCommands().buildActions();
         }
         return server;
     }

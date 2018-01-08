@@ -80,7 +80,7 @@ public class Attribute {
             byte[] bytes = new byte[byteLength];
             for (int i = 0; i < value.length(); i++) {
                 char c = value.charAt(i);
-                bytes[i] = (byte) c;
+                bytes[i] = (byte) Integer.parseInt(String.valueOf(c));
             }
             return bytes;
             //todo special for id and validCode at yun.sanmeditech.com:30007
@@ -151,7 +151,7 @@ public class Attribute {
                 if (Parameter.byte_type_bcd.equals(byteType)) {
                     value = String.format("%d", BCDByteUtil.bcd2long(bytes));
                 } else if (Parameter.byte_type_string.equals(byteType)) {
-                    value = ByteUtil.byte2string(bytes);
+                    value = ByteUtil.fixedByte2string(bytes);
                 } else if (Parameter.byte_type_byte.equals(byteType)) {
                     //todo special for id and validCode at yun.sanmeditech.com:30007
                     StringBuffer sb = new StringBuffer();
@@ -160,6 +160,10 @@ public class Attribute {
                     }
                     value = sb.toString();
                 }
+            } else if (Parameter.java_type_byte.equals(javaType)) {
+                value = bytes[0];
+            } else if (Parameter.java_type_short.equals(javaType)) {
+                value = ByteUtil.byte2int(bytes);
             } else if (Parameter.java_type_integer.equals(javaType)) {
                 value = ByteUtil.byte2int(bytes);
             } else if (Parameter.java_type_long.equals(javaType)) {
@@ -170,6 +174,8 @@ public class Attribute {
                 value = BCDByteUtil.hexString(bytes);
             } else if (Parameter.java_type_datetime.equals(javaType)) {
                 value = BCDByteUtil.hexString(bytes);
+            } else {
+                value = ByteUtil.byte2string(bytes);
             }
             return true;
         }

@@ -33,14 +33,9 @@ public class JsonByte {
     public JSONObject byte2Json(byte[] bytes) {
         if (null != bytes && bytes.length > 0) {
             try {
-                Content content = new Content(bytes);
-                if (content.decode()) {
-                    JSONObject json = new JSONObject();
-                    for (int i = 0; i < content.getBody().getAttributes().length; i++) {
-                        Attribute attribute = content.getBody().getAttributes()[i];
-                        json.put(attribute.getCode(), attribute.getValue());
-                    }
-                    return json;
+                Content content = null;
+                if (null != (content = Content.decode(bytes))) {
+                    return content.getBody().getJson();
                 } else {
                     System.out.println("decode byte[] head error ");
                 }
