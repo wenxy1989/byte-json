@@ -26,7 +26,7 @@ public class ConfigTools {
 
     public static int code2Int(String code) {
         short command = Short.parseShort(code);
-        return ByteUtil.byte2int(BCDByteUtil.short2bcd(command));
+        return ByteUtil.byte2int(BCDByteUtil.number2bcd(command, (byte) 2));
     }
 
     public static void setConfigFileName(String fileName) {
@@ -42,7 +42,7 @@ public class ConfigTools {
     }
 
     public static Attribute[] buildAttributes(List<Parameter> parameters) {
-        if(null != parameters) {
+        if (null != parameters) {
             Attribute[] attributes = new Attribute[parameters.size()];
             for (int i = 0; i < attributes.length; i++) {
                 Parameter parameter = parameters.get(i);
@@ -56,10 +56,11 @@ public class ConfigTools {
     public static Body buildBody(Integer number) throws IOException {
         return buildBody(int2Code(number));
     }
+
     public static Body buildBody(String code) throws IOException {
         Command command = getCommand(code);
         if (null != command) {
-            return new Body(buildAttributes(command.getParameters()),command.getType());
+            return new Body(buildAttributes(command.getParameters()), command.getType());
         }
         return null;
 
@@ -80,7 +81,7 @@ public class ConfigTools {
 
     public static Content buildContent(Command command) {
         if (null != command) {
-            Body body = new Body(buildAttributes(command.getParameters()),command.getType());
+            Body body = new Body(buildAttributes(command.getParameters()), command.getType());
             int code = code2Int(command.getCode());
             Head head = new Head(0x0400, 0, code);
             return new Content(head, body);

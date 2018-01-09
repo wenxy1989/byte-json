@@ -35,6 +35,6 @@ public class Action implements Comparable<Action> {
 
     @Override
     public int compareTo(Action o) {
-        return o.getIndex() - getIndex();
+        return getIndex() - o.getIndex();
     }
 }

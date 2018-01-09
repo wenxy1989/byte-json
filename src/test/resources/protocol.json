@@ -1,5 +1,8 @@
 {
-  "import": ["parameter","action"],
+  "import": [
+    "parameter",
+    "action"
+  ],
   "address": "yun.sanmeditech.com",
   "port": 30007,
   "version": "4.x",
@@ -28,7 +31,7 @@
       "type": "byte",
       "parameter": [
         {
-          "copy": "loginId"
+          "copy": "loginName"
         },
         {
           "copy": "password"
@@ -109,7 +112,7 @@
       "type": "byte",
       "parameter": [
         {
-          "copy": "mobile"
+          "copy": "email"
         },
         {
           "copy": "validCode"
@@ -179,7 +182,8 @@
           "copy": "loginId"
         },
         {
-          "copy": "password"
+          "copy": "password",
+          "byteType": "md5"
         }
       ]
     },
@@ -225,14 +229,14 @@
         },
         {
           "code": "name",
-          "name": "name",
+          "name": "姓名",
           "javaType": "string",
           "byteType": "string",
           "byteLength": 20,
           "defaultValue": "张三"
         },
         {
-          "code": "idcard",
+          "code": "idCard",
           "name": "身份证号",
           "javaType": "string",
           "byteType": "string",
@@ -345,8 +349,8 @@
         {
           "name": "东经/西经",
           "code": "lat",
-          "javaType": "char",
-          "byteType": "byte",
+          "javaType": "string",
+          "byteType": "string",
           "byteLength": 1,
           "defaultValue": "E"
         },
@@ -361,8 +365,8 @@
         {
           "name": "东经/西经",
           "code": "lon",
-          "javaType": "char",
-          "byteType": "byte",
+          "javaType": "string",
+          "byteType": "string",
           "byteLength": 1,
           "defaultValue": "N"
         },
@@ -404,7 +408,11 @@
           "copy": "datetime"
         },
         {
-          "copy": "glucose"
+          "copy": "glucose",
+          "code": "refer",
+          "javaType": "float",
+          "byteLength": 2,
+          "defaultValue":5.7
         }
       ]
     },
@@ -558,7 +566,8 @@
           "copy": "loginId"
         },
         {
-          "copy": "password"
+          "copy": "password",
+          "byteType": "md5"
         },
         {
           "copy": "datetime",
@@ -589,7 +598,8 @@
           "copy": "loginId"
         },
         {
-          "copy": "password"
+          "copy": "password",
+          "byteType": "md5"
         },
         {
           "copy": "datetime",
@@ -608,7 +618,7 @@
     {
       "copy": "0310",
       "code": "0311",
-      "name": "获取指血"
+      "name": "获取事件信息"
     },
     {
       "code": "0401",
@@ -616,7 +626,7 @@
       "type": "byte",
       "parameter": [
         {
-          "copy": "loginId"
+          "copy": "userId"
         },
         {
           "copy": "emitter"
@@ -641,7 +651,7 @@
       "type": "byte",
       "parameter": [
         {
-          "copy": "loginId"
+          "copy": "userId"
         },
         {
           "copy": "datetime",
@@ -680,6 +690,12 @@
           "name": "状态",
           "javaType": "byte",
           "defaultValue": 1
+        },
+        {
+          "code": "unit",
+          "name": "血糖单位",
+          "javaType": "byte",
+          "defaultValue": 1
         }
       ]
     },
@@ -692,20 +708,8 @@
           "copy": "loginId"
         },
         {
-          "copy": "password"
-        }
-      ]
-    },
-    {
-      "code": "0403",
-      "name": "获取佩戴记录",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "loginId"
-        },
-        {
-          "copy": "password"
+          "copy": "password",
+          "byteType": "md5"
         }
       ]
     },

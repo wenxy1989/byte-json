@@ -68,8 +68,11 @@ public class Json2ConfigTests {
         Action[] actionArray = new Action[actions.size()];
         actions.toArray(actionArray);
         Arrays.sort(actionArray);
-        Long userId = 0l;
+        String userId = "00000000000";
         for (int i = 0; i < actionArray.length; i++) {
+            if (actionArray[i].getIndex() < 0) {
+                continue;
+            }
             Command command = actionArray[i].getRequest();
             Content content = ConfigTools.buildContent(command);
             if (null != content) {
@@ -86,18 +89,36 @@ public class Json2ConfigTests {
                 assert null != (content = Content.decode(responseBytes));
                 if (null != content.getBody()) {
                     JSONObject json = content.getBody().getJson();
-                    System.out.println("response json value : " + json);
-                    if (null != json.get("code")) {
-                        assert json.getIntValue("code") == 0;
-                    } else if (null != json.get("errcode")) {
-                        assert json.getIntValue("errcode") == 0;
-                        userId = json.getLong("uid");
+                    if (null != json) {
+                        System.out.println("response json value : " + json);
+                        if (null != json.get("code")) {
+                            assert json.getIntValue("code") == 0;
+                        } else if (null != json.get("errcode")) {
+                            assert json.getIntValue("errcode") == 0;
+                            if (null != json.get("uid")) {
+                                userId = formatNumber(json.getLong("uid").toString(), 11);
+                            }
+                        }
+                    } else {
+                        System.out.println("no data return !!!");
                     }
                 } else {
-                    System.out.println("error happened !!");
+                    System.out.println("error happened !!!");
                 }
             }
         }
+    }
+
+    private String formatNumber(String number, int length) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < length; i++) {
+            if (i >= length - number.length()) {
+                sb.append(number.charAt(i - length + number.length()));
+            } else {
+                sb.append("0");
+            }
+        }
+        return sb.toString();
     }
 
 }

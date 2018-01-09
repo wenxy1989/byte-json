@@ -1,6 +1,7 @@
 package me.snake.tools.protocol;
 
 
+import com.sanmeditech.utils.MD5Util;
 import me.snake.tools.Constants;
 import me.snake.tools.config.Parameter;
 import me.snake.tools.utils.BCDByteUtil;
@@ -86,12 +87,14 @@ public class Attribute {
             //todo special for id and validCode at yun.sanmeditech.com:30007
         } else if (Parameter.byte_type_bcd.equals(byteType) && byteLength > 0) {
             return BCDByteUtil.number2bcd(Long.parseLong(value), (byte) byteLength);
+        } else if (Parameter.byte_type_md5.equals(byteType) && byteLength > 0) {
+            return string2byte(MD5Util.encode(value), byteLength);
         } else {
             return string2byte(value, byteLength);
         }
     }
 
-    public static byte[] long2byte(long value, int byteLength) throws UnsupportedEncodingException {
+    public static byte[] long2BCDbyte(long value, int byteLength) throws UnsupportedEncodingException {
         return BCDByteUtil.number2bcd(value, (byte) byteLength);
     }
 
@@ -114,13 +117,13 @@ public class Attribute {
             bytes = parseByteArray(value, Parameter.byte_type_bcd, byteLength);
         } else if (Parameter.java_type_double.equals(javaType)) {
             double value = ((Double) this.value).doubleValue();
-            bytes = long2byte((long) (value * 100), 4);
+            bytes = ByteUtil.long2byte((long) (value * 100));
         } else if (Parameter.java_type_float.equals(javaType)) {
             float value = ((Float) this.value).floatValue();
-            bytes = long2byte((long) (value * 100), 2);
+            bytes = ByteUtil.int2byte((int) (value * 10));
         } else if (Parameter.java_type_long.equals(javaType)) {
             long value = ((Long) this.value).longValue();
-            bytes = long2byte(value, 4);
+            bytes = ByteUtil.long2byte(value);
         } else if (Parameter.java_type_integer.equals(javaType)) {
             int value = ((Integer) this.value).intValue();
             bytes = ByteUtil.int2byte(value);

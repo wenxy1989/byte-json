@@ -9,10 +9,18 @@
     },
     {
       "name": "登录名",
-      "code": "loginId",
+      "code": "loginName",
       "javaType": "string",
       "byteType": "string",
       "byteLength": 40,
+      "defaultValue": "wenxy"
+    },
+    {
+      "copy": "loginName",
+      "code": "loginId",
+      "javaType": "string",
+      "byteType": "string",
+      "byteLength": 50,
       "defaultValue": "wenxy"
     },
     {

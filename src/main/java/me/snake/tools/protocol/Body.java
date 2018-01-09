@@ -1,6 +1,7 @@
 package me.snake.tools.protocol;
 
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import me.snake.tools.Constants;
 import me.snake.tools.config.Command;
@@ -16,10 +17,19 @@ public class Body {
 
     private Attribute[] attributes;
     private String commandType;
+    private JSONArray jsonArray;
     private JSONObject json;
 
+    public JSONArray getJsonArray() {
+        return jsonArray;
+    }
+
+    public void setJsonArray(JSONArray jsonArray) {
+        this.jsonArray = jsonArray;
+    }
+
     public JSONObject getJson() {
-        return json;
+        return null != json ? json : null != jsonArray && jsonArray.size() > 0 ? jsonArray.getJSONObject(0) : null;
     }
 
     public void setJson(JSONObject json) {
@@ -38,6 +48,15 @@ public class Body {
         return null;
     }
 
+    public JSONArray getDefaultJsonArray() {
+        if (null != attributes && attributes.length > 0) {
+            JSONArray array = new JSONArray();
+            array.add(getDefaultJson());
+            return array;
+        }
+        return null;
+    }
+
     public Body(Attribute[] attributes) {
         this(attributes, Command.command_type_byte);
     }
@@ -48,11 +67,11 @@ public class Body {
     }
 
     public byte[] encode() throws UnsupportedEncodingException {
-        return encode(attributes, commandType, getDefaultJson());
+        return encode(attributes, commandType, json == null ? getDefaultJson() : json);
     }
 
     public boolean decode(byte[] bytes) throws UnsupportedEncodingException {
-        return null != (json = decode(attributes, commandType, bytes));
+        return null != (jsonArray = decode(attributes, commandType, bytes));
     }
 
     public static byte[] encode(Attribute[] attributes, String commandType, JSONObject json) throws UnsupportedEncodingException {
@@ -72,11 +91,19 @@ public class Body {
         return null;
     }
 
-    public static JSONObject decode(Attribute[] attributes, String commandType, byte[] bytes) throws UnsupportedEncodingException {
-        if (null != bytes && bytes.length > 0 && null != attributes && attributes.length > 0) {
+    public static JSONArray decode(Attribute[] attributes, String commandType, byte[] bytes) throws UnsupportedEncodingException {
+        if (null != bytes && bytes.length > 0) {
             if (Command.command_type_json.equals(commandType)) {
-                return JSONObject.parseObject(ByteUtil.byte2string(bytes));
-            } else {
+                String jsonString = ByteUtil.byte2string(bytes);
+                if (jsonString.startsWith("[") && jsonString.endsWith("]")) {
+                    return JSONArray.parseArray(jsonString);
+                } else {
+                    JSONObject json = JSONObject.parseObject(jsonString);
+                    JSONArray array = new JSONArray();
+                    array.add(json);
+                    return array;
+                }
+            } else if (null != attributes && attributes.length > 0) {
                 JSONObject json = new JSONObject();
                 int offset = 0;
                 for (int i = 0; i < attributes.length; i++) {
@@ -92,7 +119,9 @@ public class Body {
                     attribute.decode();
                     json.put(attribute.getCode(), attribute.getValue());
                 }
-                return json;
+                JSONArray array = new JSONArray();
+                array.add(json);
+                return array;
             }
         }
         return null;

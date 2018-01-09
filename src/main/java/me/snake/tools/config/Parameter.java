@@ -21,6 +21,7 @@ public class Parameter {
 
     public static final String byte_type_number = "number";
     public static final String byte_type_bcd = "bcd";
+    public static final String byte_type_md5 = "md5";
     public static final String byte_type_byte = "byte";
     public static final String byte_type_string = "string";
 

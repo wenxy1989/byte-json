@@ -31,6 +31,104 @@
     ]
   },
   {
+    "code": "9213",
+    "type": "json",
+    "parameter": [
+      {
+        "name": "结果代码",
+        "code": "code",
+        "javaType": "int",
+        "defaultValue": 0
+      },
+      {
+        "name": "用户ID",
+        "code": "id",
+        "javaType": "long",
+        "defaultValue": 123456
+      },
+      {
+        "copy": "name",
+        "code": "userName"
+      },
+      {
+        "copy": "loginId",
+        "code": "loginName"
+      },
+      {
+        "copy": "password",
+        "code": "loginPwd"
+      },
+      {
+        "copy": "gender",
+        "code": "sex"
+      },
+      {
+        "copy": "birth",
+        "code": "birth"
+      },
+      {
+        "copy": "mobile",
+        "code": "mobile"
+      },
+      {
+        "copy": "mobile",
+        "code": "phone"
+      },
+      {
+        "copy": "email",
+        "code": "email"
+      },
+      {
+        "copy": "idCard",
+        "code": "idCard"
+      },
+      {
+        "name": "status",
+        "code": "status",
+        "javaType": "byte",
+        "defaultValue": 1
+      },
+      {
+        "name": "民族",
+        "code": "nation",
+        "javaType": "string",
+        "defaultValue": "汉"
+      },
+      {
+        "name": "学历",
+        "code": "cultureLevel",
+        "javaType": "string",
+        "defaultValue": "大专"
+      },
+      {
+        "name": "出生地",
+        "code": "birthPlace",
+        "javaType": "string",
+        "defaultValue": "山东省无棣县小泊头镇"
+      },
+      {
+        "name": "居住地",
+        "code": "nowPlace",
+        "javaType": "string",
+        "defaultValue": "北京市大兴区"
+      },
+      {
+        "name": "社保卡号",
+        "code": "insuranceId",
+        "javaType": "string",
+        "defaultValue": "13293019890117"
+      },
+      {
+        "copy": "datetime",
+        "code": "createdTime"
+      }
+    ]
+  },
+  {
+    "copy": "9213",
+    "code": "9217"
+  },
+  {
     "code": "9001",
     "type": "byte",
     "parameter": [
@@ -85,10 +183,6 @@
   },
   {
     "copy": "9001",
-    "code": "9213"
-  },
-  {
-    "copy": "9001",
     "code": "9214"
   },
   {
@@ -100,7 +194,23 @@
     "code": "9216"
   },
   {
-    "copy": "9001",
-    "code": "9217"
+    "code": "9302",
+    "name": "血糖信息",
+    "type":"json"
+  },
+  {
+    "code": "9303",
+    "name": "指血信息",
+    "type":"json"
+  },
+  {
+    "code": "9304",
+    "name": "事件信息",
+    "type":"json"
+  },
+  {
+    "code": "9308",
+    "name": "佩戴信息",
+    "type":"json"
   }
 ]

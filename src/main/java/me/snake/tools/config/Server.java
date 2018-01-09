@@ -243,7 +243,6 @@ public class Server {
         command.setCode(json.getString("code"));
         command.setName(json.getString("name"));
         command.setType(json.getString("type"));
-        command.setType(json.getString("type"));
         List<Parameter> parameters = buildParameters(json.getJSONArray("parameter"), parameterMap);
         command.setParameters(parameters);
         commandMap.put(command.getCode(), command);
