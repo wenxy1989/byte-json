@@ -1,7 +1,8 @@
-package me.snake.tools;
+package me.snake.collector;
 
 import com.alibaba.fastjson.JSONObject;
 import me.snake.base.Utils;
+import me.snake.tools.SocketTool;
 import me.snake.tools.config.Action;
 import me.snake.tools.config.Command;
 import me.snake.tools.config.Server;
@@ -9,17 +10,19 @@ import me.snake.tools.inter.ConfigTools;
 import me.snake.tools.protocol.Content;
 import me.snake.tools.utils.BCDByteUtil;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 /**
- * [{version,serial,command,[length,{body:parameterList}]}check] //todo
- * Created by HP on 2017/12/27.
+ * Created by HP on 2018/3/28.
  */
-public class Json2ConfigTests {
+public class SamCollectorTest {
+
+    private static final String ERROR_CODE_KEY = "errcode";
+    private static final String CODE_KEY = "code";
 
     public static Server config = null;
 
@@ -28,43 +31,6 @@ public class Json2ConfigTests {
         String fileName = "protocol";
         config = Server.build(fileName).buildParameters().buildCommands().buildActions();
     }
-
-    @Ignore
-    @Test
-    public void showInterface() {
-        List<Action> interfaceList = config.getActionList();
-        Iterator<Action> iterator = interfaceList.iterator();
-        while (iterator.hasNext()) {
-            Action action = iterator.next();
-            Object interfaceJson = JSONObject.toJSON(action);
-            System.out.println(action.getRequest().getCode());
-            System.out.println(interfaceJson);
-        }
-    }
-
-    @Test
-    public void checkCommands() throws IOException {
-        Iterator<String> iterator = config.getCommandMap().keySet().iterator();
-        while (iterator.hasNext()) {
-            String code = iterator.next();
-            Command command = config.getCommandMap().get(code);
-            Content content = ConfigTools.buildContent(command);
-            if (null != content) {
-                System.out.println(String.format("code:%s ,name:%s", command.getCode(), command.getName()));
-//            JSONObject json = new JSONObject();
-//            json.put("version","0.2v20180105");
-                System.out.println("default json : " + content.getBody().getDefaultJson());
-                byte[] bytes = content.encode();
-                System.out.println(BCDByteUtil.hexString(bytes));
-                if (null != (content = Content.decode(bytes))) {
-                    System.out.println("json value : " + content.getBody().getJson());
-                }
-            }
-        }
-    }
-
-    private static final String ERROR_CODE_KEY = "errcode";
-    private static final String CODE_KEY = "code";
 
     @Test
     public void checkInterfaces() throws IOException {
@@ -112,5 +78,4 @@ public class Json2ConfigTests {
             }
         }
     }
-
 }
