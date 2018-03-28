@@ -1,4 +1,4 @@
-package me.snake.tools;
+package me.snake.base;
 
 import java.io.IOException;
 import java.io.InputStream;

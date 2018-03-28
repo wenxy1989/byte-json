@@ -13,15 +13,12 @@
       "javaType": "string",
       "byteType": "string",
       "byteLength": 40,
-      "defaultValue": "wenxy"
+      "defaultValue": "wenxy123"
     },
     {
       "copy": "loginName",
       "code": "loginId",
-      "javaType": "string",
-      "byteType": "string",
-      "byteLength": 50,
-      "defaultValue": "wenxy"
+      "byteLength": 50
     },
     {
       "name": "密码",

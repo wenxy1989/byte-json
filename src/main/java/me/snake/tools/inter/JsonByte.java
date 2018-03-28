@@ -2,7 +2,6 @@ package me.snake.tools.inter;
 
 import com.alibaba.fastjson.JSONObject;
 import me.snake.tools.config.Command;
-import me.snake.tools.protocol.Attribute;
 import me.snake.tools.protocol.Content;
 
 import java.io.IOException;

@@ -149,48 +149,6 @@
       "index": 16,
       "request": "0307",
       "response": "9001"
-    },
-    {
-      "name":"获取用户告警参数",
-      "index": 16,
-      "request": "0308",
-      "response": "9301"
-    },
-    {
-      "name":"获取血糖信息",
-      "index": 16,
-      "request": "0309",
-      "response": "9302"
-    },
-    {
-      "name":"获取指血信息",
-      "index": 16,
-      "request": "0310",
-      "response": "9303"
-    },
-    {
-      "name":"获取事件信息",
-      "index": 16,
-      "request": "0311",
-      "response": "9304"
-    },
-    {
-      "name":"上传连接状态信息",
-      "index": 16,
-      "request": "0401",
-      "response": "9001"
-    },
-    {
-      "name":"上传佩戴信息",
-      "index": 16,
-      "request": "0402",
-      "response": "9001"
-    },
-    {
-      "name":"获取佩戴信息",
-      "index": 16,
-      "request": "0403",
-      "response": "9308"
     }
   ]
 }

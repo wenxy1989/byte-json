@@ -2,7 +2,6 @@ package me.snake.tools.protocol;
 
 
 import com.alibaba.fastjson.JSONObject;
-import me.snake.tools.config.Command;
 import me.snake.tools.inter.ConfigTools;
 import me.snake.tools.utils.ByteUtil;
 import me.snake.tools.utils.CodeParser;

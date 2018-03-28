@@ -1,0 +1,347 @@
+[
+  {
+    "code": "0301",
+    "name": "上传血糖",
+    "type": "byte",
+    "parameter": [
+      {
+        "copy": "userId"
+      },
+      {
+        "copy": "datetime"
+      },
+      {
+        "copy": "current"
+      },
+      {
+        "copy": "glucose"
+      }
+    ]
+  },
+  {
+    "code": "0315",
+    "name": "上传血糖(包括电压)",
+    "type": "byte",
+    "parameter": [
+      {
+        "copy": "userId"
+      },
+      {
+        "copy": "datetime"
+      },
+      {
+        "code": "voltage",
+        "name": "电压",
+        "javaType": "double",
+        "defaultValue": 0.25
+      },
+      {
+        "copy": "current"
+      },
+      {
+        "copy": "glucose"
+      }
+    ]
+  },
+  {
+    "code": "0302",
+    "name": "上传GPS",
+    "type": "byte",
+    "parameter": [
+      {
+        "copy": "userId"
+      },
+      {
+        "copy": "datetime"
+      },
+      {
+        "name": "东经/西经",
+        "code": "lat",
+        "javaType": "string",
+        "byteType": "string",
+        "byteLength": 1,
+        "defaultValue": "E"
+      },
+      {
+        "name": "经度",
+        "code": "latValue",
+        "javaType": "double",
+        "byteType": "double-word",
+        "byteLength": 4,
+        "defaultValue": 180.3
+      },
+      {
+        "name": "东经/西经",
+        "code": "lon",
+        "javaType": "string",
+        "byteType": "string",
+        "byteLength": 1,
+        "defaultValue": "N"
+      },
+      {
+        "name": "纬度",
+        "code": "lonValue",
+        "javaType": "double",
+        "byteType": "double-word",
+        "byteLength": 4,
+        "defaultValue": 60.3
+      },
+      {
+        "name": "速度",
+        "code": "speed",
+        "javaType": "float",
+        "byteType": "word",
+        "byteLength": 2,
+        "defaultValue": 60.3
+      },
+      {
+        "name": "方向",
+        "code": "direct",
+        "javaType": "int",
+        "byteType": "word",
+        "byteLength": 2,
+        "defaultValue": 60
+      }
+    ]
+  },
+  {
+    "code": "0303",
+    "name": "上传指血",
+    "type": "byte",
+    "parameter": [
+      {
+        "copy": "userId"
+      },
+      {
+        "copy": "datetime"
+      },
+      {
+        "copy": "glucose",
+        "code": "refer",
+        "javaType": "float",
+        "byteLength": 2,
+        "defaultValue":5.7
+      }
+    ]
+  },
+  {
+    "code": "0304",
+    "name": "上传饮食",
+    "type": "byte",
+    "parameter": [
+      {
+        "copy": "userId"
+      },
+      {
+        "copy": "datetime"
+      },
+      {
+        "name": "餐别",
+        "code": "mealType",
+        "javaType": "byte",
+        "byteType": "byte",
+        "byteLength": 1,
+        "defaultValue": 1
+      },
+      {
+        "name": "内容",
+        "code": "content",
+        "javaType": "string",
+        "byteType": "string",
+        "byteLength": 60,
+        "defaultValue": "小米粥 馒头 洋葱炒肉"
+      },
+      {
+        "name": "用餐时长",
+        "code": "mealTime",
+        "javaType": "int",
+        "defaultValue": 10
+      },
+      {
+        "name": "餐后血糖高峰时间",
+        "code": "effectTime",
+        "javaType": "int",
+        "defaultValue": 30
+      }
+    ]
+  },
+  {
+    "code": "0305",
+    "name": "上传胰岛素",
+    "type": "byte",
+    "parameter": [
+      {
+        "copy": "userId"
+      },
+      {
+        "copy": "datetime"
+      },
+      {
+        "name": "胰岛素名称",
+        "code": "insulin",
+        "javaType": "string",
+        "byteType": "string",
+        "byteLength": 40,
+        "defaultValue": "长效胰岛素"
+      },
+      {
+        "name": "单位",
+        "code": "unit",
+        "javaType": "int",
+        "byteLength": 2,
+        "defaultValue": 3
+      },
+      {
+        "name": "影响时长",
+        "code": "effectTime",
+        "javaType": "int",
+        "byteType": "byte",
+        "byteLength": 2,
+        "defaultValue": 30
+      }
+    ]
+  },
+  {
+    "code": "0306",
+    "name": "上传用药",
+    "type": "byte",
+    "parameter": [
+      {
+        "copy": "userId"
+      },
+      {
+        "copy": "datetime"
+      },
+      {
+        "name": "药品名称",
+        "code": "medicine",
+        "javaType": "string",
+        "byteType": "string",
+        "byteLength": 40,
+        "defaultValue": "降糖灵"
+      },
+      {
+        "name": "单位",
+        "code": "unit",
+        "javaType": "int",
+        "byteLength": 2,
+        "defaultValue": 3
+      },
+      {
+        "name": "影响时长",
+        "code": "effectTime",
+        "javaType": "int",
+        "byteType": "byte",
+        "byteLength": 2,
+        "defaultValue": 30
+      }
+    ]
+  },
+  {
+    "code": "0307",
+    "name": "上传锻炼",
+    "type": "byte",
+    "parameter": [
+      {
+        "copy": "userId"
+      },
+      {
+        "copy": "datetime"
+      },
+      {
+        "name": "时长",
+        "code": "exerciseTime",
+        "javaType": "int",
+        "byteLength": 2,
+        "defaultValue": 15
+      },
+      {
+        "name": "内容",
+        "code": "medicine",
+        "javaType": "string",
+        "byteType": "string",
+        "byteLength": 200,
+        "defaultValue": "慢跑"
+      }
+    ]
+  },
+  {
+    "code": "0402",
+    "name": "上传佩戴记录",
+    "type": "byte",
+    "parameter": [
+      {
+        "copy": "userId"
+      },
+      {
+        "copy": "datetime",
+        "code": "startTime",
+        "name": "开始时间",
+        "defaultValue": "170101010101"
+      },
+      {
+        "copy": "datetime",
+        "code": "endTime",
+        "name": "结束时间",
+        "defaultValue": "170103010101"
+      },
+      {
+        "copy": "emitter"
+      },
+      {
+        "copy": "sensor"
+      },
+      {
+        "code": "version",
+        "name": "版本",
+        "javaType": "string",
+        "byteType": "string",
+        "byteLength": 18,
+        "defaultValue": 1
+      },
+      {
+        "code": "count",
+        "name": "血糖数量",
+        "javaType": "int",
+        "defaultValue": 20
+      },
+      {
+        "code": "status",
+        "name": "状态",
+        "javaType": "byte",
+        "defaultValue": 1
+      },
+      {
+        "code": "unit",
+        "name": "血糖单位",
+        "javaType": "byte",
+        "defaultValue": 1
+      }
+    ]
+  },
+  {
+    "code": "0401",
+    "name": "上传发射器状态",
+    "type": "byte",
+    "parameter": [
+      {
+        "copy": "userId"
+      },
+      {
+        "copy": "emitter"
+      },
+      {
+        "copy": "sensor"
+      },
+      {
+        "code": "status",
+        "name": "状态",
+        "javaType": "int",
+        "defaultValue": 1
+      },
+      {
+        "copy": "datetime"
+      }
+    ]
+  }
+]

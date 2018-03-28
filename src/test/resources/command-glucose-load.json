@@ -1,0 +1,92 @@
+[
+  {
+    "code": "0309",
+    "name": "获取血糖",
+    "type": "byte",
+    "parameter": [
+      {
+        "copy": "loginId"
+      },
+      {
+        "copy": "password",
+        "byteType": "md5"
+      },
+      {
+        "copy": "datetime",
+        "code": "startTime",
+        "name": "开始时间",
+        "defaultValue": "170101010101"
+      },
+      {
+        "copy": "datetime",
+        "code": "endTime",
+        "name": "结束时间",
+        "defaultValue": "170103010101"
+      },
+      {
+        "copy": "emitter"
+      },
+      {
+        "copy": "sensor"
+      }
+    ]
+  },
+  {
+    "code": "0310",
+    "name": "获取指血",
+    "type": "byte",
+    "parameter": [
+      {
+        "copy": "loginId"
+      },
+      {
+        "copy": "password",
+        "byteType": "md5"
+      },
+      {
+        "copy": "datetime",
+        "code": "startTime",
+        "name": "开始时间",
+        "defaultValue": "170101010101"
+      },
+      {
+        "copy": "datetime",
+        "code": "endTime",
+        "name": "结束时间",
+        "defaultValue": "170103010101"
+      }
+    ]
+  },
+  {
+    "copy": "0310",
+    "code": "0311",
+    "name": "获取事件信息"
+  },
+  {
+    "code": "0403",
+    "name": "获取佩戴记录",
+    "type": "byte",
+    "parameter": [
+      {
+        "copy": "loginId"
+      },
+      {
+        "copy": "password",
+        "byteType": "md5"
+      }
+    ]
+  },
+  {
+    "code": "0217",
+    "name": "UUID登录",
+    "type": "byte",
+    "parameter": [
+      {
+        "code": "uuid",
+        "javaType": "string",
+        "byteLength": 100,
+        "defaultValue": "sdfklasdfkidjfkalsd"
+      }
+    ]
+  }
+]
