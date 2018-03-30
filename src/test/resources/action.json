@@ -109,6 +109,12 @@
       "response": "9217"
     },
     {
+      "name":"上传佩戴信息",
+      "index": 16,
+      "request": "0402",
+      "response": "9001"
+    },
+    {
       "name":"上传血糖信息",
       "index": 16,
       "request": "0301",
@@ -151,6 +157,12 @@
       "response": "9001"
     },
     {
+      "name":"上传连接状态信息",
+      "index": 16,
+      "request": "0401",
+      "response": "9001"
+    },
+    {
       "name":"获取用户告警参数",
       "index": 16,
       "request": "0308",
@@ -173,18 +185,6 @@
       "index": 16,
       "request": "0311",
       "response": "9304"
-    },
-    {
-      "name":"上传连接状态信息",
-      "index": 16,
-      "request": "0401",
-      "response": "9001"
-    },
-    {
-      "name":"上传佩戴信息",
-      "index": 16,
-      "request": "0402",
-      "response": "9001"
     },
     {
       "name":"获取佩戴信息",
