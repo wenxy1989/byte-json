@@ -1,13 +1,19 @@
 {
   "action": [
     {
-      "name":"最新客户端地址",
-      "index": 0,
-      "request": "0201",
-      "response": "9201"
+      "name":"用户注销",
+      "index": 1,
+      "request": "0240",
+      "response": "9001"
     },
     {
-      "name":"用户注销",
+      "name":"用户注销(手机号)",
+      "index": 1,
+      "request": "0240",
+      "response": "9001"
+    },
+    {
+      "name":"用户注销(邮箱)",
       "index": 1,
       "request": "0240",
       "response": "9001"
@@ -20,15 +26,21 @@
     },
     {
       "name":"手机号注册",
-      "index": -2,
+      "index": 2,
       "request": "0203",
       "response": "9203"
     },
     {
       "name":"邮箱注册",
-      "index": -3,
+      "index": 3,
       "request": "0204",
       "response": "9204"
+    },
+    {
+      "name":"获取用户信息",
+      "index": 14,
+      "request": "0213",
+      "response": "9213"
     },
     {
       "name":"手机验证码（注册/绑定）",
@@ -91,12 +103,6 @@
       "response": "9212"
     },
     {
-      "name":"获取用户信息",
-      "index": 14,
-      "request": "0213",
-      "response": "9213"
-    },
-    {
       "name":"上传用户信息",
       "index": 15,
       "request": "0216",
@@ -107,84 +113,6 @@
       "index": -3,
       "request": "0217",
       "response": "9217"
-    },
-    {
-      "name":"上传血糖信息",
-      "index": 16,
-      "request": "0301",
-      "response": "9001"
-    },
-    {
-      "name":"上传GPS信息",
-      "index": 16,
-      "request": "0302",
-      "response": "9001"
-    },
-    {
-      "name":"上传指血信息",
-      "index": 16,
-      "request": "0303",
-      "response": "9001"
-    },
-    {
-      "name":"上传饮食信息",
-      "index": 16,
-      "request": "0304",
-      "response": "9001"
-    },
-    {
-      "name":"上传胰岛素注射信息",
-      "index": 16,
-      "request": "0305",
-      "response": "9001"
-    },
-    {
-      "name":"上传用药信息",
-      "index": 16,
-      "request": "0306",
-      "response": "9001"
-    },
-    {
-      "name":"上传锻炼信息",
-      "index": 16,
-      "request": "0307",
-      "response": "9001"
-    },
-    {
-      "name":"上传连接状态信息",
-      "index": 16,
-      "request": "0401",
-      "response": "9001"
-    },
-    {
-      "name":"获取用户告警参数",
-      "index": 16,
-      "request": "0308",
-      "response": "9301"
-    },
-    {
-      "name":"获取血糖信息",
-      "index": 16,
-      "request": "0309",
-      "response": "9302"
-    },
-    {
-      "name":"获取指血信息",
-      "index": 16,
-      "request": "0310",
-      "response": "9303"
-    },
-    {
-      "name":"获取事件信息",
-      "index": 16,
-      "request": "0311",
-      "response": "9304"
-    },
-    {
-      "name":"获取佩戴信息",
-      "index": 16,
-      "request": "0403",
-      "response": "9308"
     }
   ]
 }

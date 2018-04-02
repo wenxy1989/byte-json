@@ -1,0 +1,28 @@
+{
+  "action": [
+    {
+      "name": "用户名注册",
+      "index": 1,
+      "request": "1001",
+      "response": "9202"
+    },
+    {
+      "name": "手机号注册",
+      "index": 1,
+      "request": "1002",
+      "response": "9202"
+    },
+    {
+      "name": "邮箱注册",
+      "index": 1,
+      "request": "1003",
+      "response": "9202"
+    },
+    {
+      "name": "用户信息上传",
+      "index": 3,
+      "request": "1004",
+      "response": "9216"
+    }
+  ]
+}

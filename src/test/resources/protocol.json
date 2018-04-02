@@ -1,7 +1,8 @@
 {
   "import": [
     "parameter",
-    "action-test"
+    "action-account",
+    "action-account"
   ],
   "address": "yun.sanmeditech.com",
   "port": 30007,

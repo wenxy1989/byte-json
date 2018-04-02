@@ -57,7 +57,7 @@
     "type": "byte",
     "parameter": [
       {
-        "copy": "mobile"
+        "copy": "register-mobile"
       },
       {
         "copy": "password"
@@ -73,7 +73,7 @@
     "type": "byte",
     "parameter": [
       {
-        "copy": "email"
+        "copy": "register-email"
       },
       {
         "copy": "password"

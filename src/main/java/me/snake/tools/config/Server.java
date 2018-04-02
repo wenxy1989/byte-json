@@ -67,7 +67,11 @@ public class Server {
             Iterator<String> iterator = importJSON.keySet().iterator();
             while (iterator.hasNext()) {
                 String key = iterator.next();
-                source.put(key, importJSON.get(key));
+                if (source.containsKey(key) && null != source.getJSONArray(key) && null != importJSON.getJSONArray(key)) {
+                    source.getJSONArray(key).addAll(importJSON.getJSONArray(key));
+                } else {
+                    source.put(key, importJSON.get(key));
+                }
             }
         }
     }
