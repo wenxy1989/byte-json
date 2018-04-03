@@ -1,0 +1,46 @@
+{
+  "action": [
+    {
+      "name":"用户注销(手机号)",
+      "index": 0,
+      "request": "0240",
+      "response": "9001"
+    },
+    {
+      "name":"手机验证码（注册/绑定）",
+      "index": 1,
+      "request": "0205",
+      "response": "9205"
+    },
+    {
+      "name":"手机号注册",
+      "index": 2,
+      "request": "0203",
+      "response": "9203"
+    },
+    {
+      "name":"用户登录",
+      "index": 3,
+      "request": "0212",
+      "response": "9212"
+    },
+    {
+      "name":"修改密码",
+      "index": 4,
+      "request": "0211",
+      "response": "9211"
+    },
+    {
+      "name":"获取用户信息",
+      "index": 5,
+      "request": "0213",
+      "response": "9213"
+    },
+    {
+      "name":"上传用户信息",
+      "index": 5,
+      "request": "0216",
+      "response": "9216"
+    }
+  ]
+}

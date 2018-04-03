@@ -231,7 +231,9 @@ public class Server {
         if (null == parameter.getJavaType()) {
             System.out.println(String.format("parameter name:%s code:%s have no javaType", parameter.getName(), parameter.getCode()));
         }
-        parameterMap.put(parameter.getCode(), parameter);
+        if(null == parameterMap.get(parameter.getCode())) {
+            parameterMap.put(parameter.getCode(), parameter);
+        }
         return parameter;
     }
 

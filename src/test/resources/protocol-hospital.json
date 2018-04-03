@@ -1,11 +1,8 @@
 {
   "import": [
     "parameter",
-    "action-account",
-    "action-account-logout",
-    "action-account-mobile",
-    "action-account-email",
     "action-account-hospital",
+    "action-account-logout",
     "action-util",
     "action-glucose"
   ],

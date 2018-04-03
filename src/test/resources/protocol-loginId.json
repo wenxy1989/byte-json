@@ -3,9 +3,6 @@
     "parameter",
     "action-account",
     "action-account-logout",
-    "action-account-mobile",
-    "action-account-email",
-    "action-account-hospital",
     "action-util",
     "action-glucose"
   ],
@@ -14,7 +11,6 @@
   "version": "4.x",
   "command-import": [
     "command-account",
-    "command-account-hospital",
     "command-glucose-upload",
     "command-glucose-load",
     "command-response",

@@ -12,8 +12,8 @@
       {
         "code": "key",
         "key": "机构码",
-        "javaType": "int",
-        "defaultValue": 2893
+        "javaType": "long",
+        "defaultValue": 67
       }
     ]
   },
@@ -22,19 +22,20 @@
     "name": "手机号注册",
     "parameter": [
       {
-        "copy": "mobile"
-      },
-      {
-        "copy": "validCode"
+        "copy": "register-mobile",
+        "code": "mobile"
       },
       {
         "copy": "password"
       },
       {
+        "copy": "validCode"
+      },
+      {
         "code": "key",
         "key": "机构码",
-        "javaType": "int",
-        "defaultValue": 2893
+        "javaType": "long",
+        "defaultValue": 67
       }
     ]
   },
@@ -43,19 +44,20 @@
     "name": "邮箱注册",
     "parameter": [
       {
-        "copy": "email"
-      },
-      {
-        "copy": "validCode"
+        "copy": "register-email",
+        "code": "email"
       },
       {
         "copy": "password"
       },
       {
+        "copy": "validCode"
+      },
+      {
         "code": "key",
         "key": "机构码",
-        "javaType": "int",
-        "defaultValue": 2893
+        "javaType": "long",
+        "defaultValue": 67
       }
     ]
   },
@@ -111,6 +113,22 @@
         "byteType": "string",
         "byteLength": 10,
         "defaultValue": "大专"
+      },
+      {
+        "code": "birthPlace",
+        "name": "出生地",
+        "javaType": "string",
+        "byteType": "string",
+        "byteLength": 100,
+        "defaultValue": "山东省滨州市无棣县小泊头镇伯西村"
+      },
+      {
+        "code": "livePlace",
+        "name": "居住地址",
+        "javaType": "string",
+        "byteType": "string",
+        "byteLength": 100,
+        "defaultValue": "北京市大兴区南海家园"
       },
       {
         "code": "highAlarm",

@@ -5,7 +5,7 @@
     "type": "byte",
     "parameter": [
       {
-        "copy": "loginName"
+        "copy": "loginId"
       },
       {
         "copy": "password"
@@ -18,7 +18,7 @@
     "type": "byte",
     "parameter": [
       {
-        "copy": "loginName"
+        "copy": "loginId"
       },
       {
         "copy": "password"
@@ -31,7 +31,8 @@
     "type": "byte",
     "parameter": [
       {
-        "copy": "mobile"
+        "copy": "register-mobile",
+        "code": "mobile"
       },
       {
         "copy": "validCode"
@@ -44,7 +45,8 @@
     "type": "byte",
     "parameter": [
       {
-        "copy": "email"
+        "copy": "register-email",
+        "code": "email"
       },
       {
         "copy": "validCode"
@@ -57,7 +59,8 @@
     "type": "byte",
     "parameter": [
       {
-        "copy": "register-mobile"
+        "copy": "register-mobile",
+        "code": "mobile"
       },
       {
         "copy": "password"
@@ -73,7 +76,8 @@
     "type": "byte",
     "parameter": [
       {
-        "copy": "register-email"
+        "copy": "register-email",
+        "code": "email"
       },
       {
         "copy": "password"
@@ -175,11 +179,11 @@
   },
   {
     "code": "0212",
-    "name": "用户登录",
+    "name": "用户名登录",
     "type": "byte",
     "parameter": [
       {
-        "copy": "loginId"
+        "copy": "loginName"
       },
       {
         "copy": "password"
@@ -192,7 +196,7 @@
     "type": "byte",
     "parameter": [
       {
-        "copy": "loginId"
+        "copy": "loginName"
       },
       {
         "copy": "password",

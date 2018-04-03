@@ -5,7 +5,7 @@
     "type": "byte",
     "parameter": [
       {
-        "copy": "loginId"
+        "copy": "loginName"
       },
       {
         "copy": "password",
@@ -37,7 +37,7 @@
     "type": "byte",
     "parameter": [
       {
-        "copy": "loginId"
+        "copy": "loginName"
       },
       {
         "copy": "password",
@@ -68,7 +68,7 @@
     "type": "byte",
     "parameter": [
       {
-        "copy": "loginId"
+        "copy": "loginName"
       },
       {
         "copy": "password",

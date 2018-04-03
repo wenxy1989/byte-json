@@ -20,7 +20,7 @@
     },
     {
       "name": "用户信息上传",
-      "index": 3,
+      "index": 2,
       "request": "1004",
       "response": "9216"
     }

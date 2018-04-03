@@ -26,15 +26,12 @@ public class SamCollectorTest {
     private static final String ERROR_CODE_KEY = "errcode";
     private static final String CODE_KEY = "code";
 
-    public static Server config = null;
 
-    private static String userId = "00000000000";
-
-    @BeforeClass
-    public static void setConfig() throws IOException {
-        String fileName = "protocol";
-        config = Server.build(fileName).buildParameters().buildCommands().buildActions();
-    }
+    private static String userId = null;
+    private static String tempLoginId = null;
+    private static String loginId = null;
+    private static String mobile = null;
+    private static String email = null;
 
     private void requestAction(Action action) throws IOException {
 
@@ -42,12 +39,37 @@ public class SamCollectorTest {
         Content content = ConfigTools.buildContent(command);
         if (null != content) {
             System.out.println(String.format("command : code:%s ,name:%s", command.getCode(), command.getName()));
-            JSONObject defaultJson = content.getBody().getDefaultJson();
-
-            defaultJson.put("userId", userId);
-            byte[] bytes = content.encode(defaultJson);
+            JSONObject requestJson = content.getBody().getDefaultJson();
+            if(requestJson.containsKey("loginId") && loginId != null){
+                requestJson.put("loginId",loginId);
+            }
+            if(requestJson.containsKey("loginName") && loginId != null){
+                requestJson.put("loginName",loginId);
+            }
+            if(requestJson.containsKey("userId") && userId != null) {
+                requestJson.put("userId", userId);
+            }
+            if(requestJson.containsKey("mobile") && mobile != null) {
+                requestJson.put("mobile", mobile);
+            }
+            if(requestJson.containsKey("email") && email != null) {
+                requestJson.put("email", email);
+            }
+            if (requestJson.containsKey("mobile")) {
+                tempLoginId = requestJson.getString("mobile");
+            }
+            if (requestJson.containsKey("email")) {
+                tempLoginId = requestJson.getString("email");
+            }
+            if (requestJson.containsKey("loginId")) {
+                tempLoginId = requestJson.getString("loginId");
+            }
+            if (requestJson.containsKey("loginName")) {
+                tempLoginId = requestJson.getString("loginName");
+            }
+            byte[] bytes = content.encode(requestJson);
             byte[] responseBytes = SocketTool.request(bytes);
-            System.out.println("command : request default json : " + defaultJson);
+            System.out.println("command : request json : " + requestJson);
             System.out.println("command : request byte : " + BCDByteUtil.hexString(bytes));
             System.out.println("command : response byte : " + BCDByteUtil.hexString(responseBytes));
 
@@ -62,16 +84,18 @@ public class SamCollectorTest {
                 if (null != responseJson) {
                     System.out.println("command : response json value : " + responseJson);
                     if (null != responseJson.get(ERROR_CODE_KEY)) {
-//                        assert responseJson.getIntValue(ERROR_CODE_KEY) == 0;
+                        assert responseJson.getIntValue(ERROR_CODE_KEY) == 0;
                         System.out.println("command : response result error code : " + responseJson.getIntValue(ERROR_CODE_KEY));
-                        if (null != responseJson.get("uid")) {
+                        if (responseJson.containsKey("uid")) {
                             userId = Utils.formatNumber(responseJson.getLong("uid").toString(), 11);
+                            loginId = tempLoginId;
                         }
                     } else if (null != responseJson.get(CODE_KEY)) {
-//                        assert responseJson.getIntValue(CODE_KEY) == 0;
+                        assert responseJson.getIntValue(CODE_KEY) == 0;
                         System.out.println("command : response result code : " + responseJson.getIntValue(CODE_KEY));
-                        if (null != responseJson.get("uid")) {
+                        if (responseJson.containsKey("uid")) {
                             userId = Utils.formatNumber(responseJson.getLong("uid").toString(), 11);
+                            loginId = tempLoginId;
                         }
                     }
                 } else {
@@ -84,7 +108,9 @@ public class SamCollectorTest {
     }
 
     @Test
-    public void requestActionTest() throws IOException {
+    public void loginIdRequestActionTest() throws IOException {
+        String fileName = "protocol-loginId";
+        Server config = Server.build(fileName).buildParameters().buildCommands().buildActions();
         List<Action> actions = config.getActionList();
         Action[] actionArray = new Action[actions.size()];
         actions.toArray(actionArray);
@@ -97,4 +123,56 @@ public class SamCollectorTest {
             requestAction(action);
         }
     }
+
+    @Test
+    public void mobileRequestActionTest() throws IOException {
+        String fileName = "protocol-mobile";
+        Server config = Server.build(fileName).buildParameters().buildCommands().buildActions();
+        List<Action> actions = config.getActionList();
+        Action[] actionArray = new Action[actions.size()];
+        actions.toArray(actionArray);
+        Arrays.sort(actionArray);
+        for (int i = 0; i < actionArray.length; i++) {
+            if (actionArray[i].getIndex() < 0) {
+                continue;
+            }
+            Action action = actionArray[i];
+            requestAction(action);
+        }
+    }
+
+    @Test
+    public void emailRequestActionTest() throws IOException {
+        String fileName = "protocol-email";
+        Server config = Server.build(fileName).buildParameters().buildCommands().buildActions();
+        List<Action> actions = config.getActionList();
+        Action[] actionArray = new Action[actions.size()];
+        actions.toArray(actionArray);
+        Arrays.sort(actionArray);
+        for (int i = 0; i < actionArray.length; i++) {
+            if (actionArray[i].getIndex() < 0) {
+                continue;
+            }
+            Action action = actionArray[i];
+            requestAction(action);
+        }
+    }
+
+    @Test
+    public void hospitalRequestActionTest() throws IOException {
+        String fileName = "protocol-hospital";
+        Server config = Server.build(fileName).buildParameters().buildCommands().buildActions();
+        List<Action> actions = config.getActionList();
+        Action[] actionArray = new Action[actions.size()];
+        actions.toArray(actionArray);
+        Arrays.sort(actionArray);
+        for (int i = 0; i < actionArray.length; i++) {
+            if (actionArray[i].getIndex() < 0) {
+                continue;
+            }
+            Action action = actionArray[i];
+            requestAction(action);
+        }
+    }
+
 }

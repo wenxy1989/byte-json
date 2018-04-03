@@ -1,18 +1,5 @@
 [
   {
-    "code": "9201",
-    "name": "客户端下载地址",
-    "type": "byte",
-    "parameter": [
-      {
-        "copy": "string",
-        "name": "最新客户端下载地址",
-        "code": "url",
-        "defaultValue": "http://yun.sanmeditech.com/download/cgm.apk"
-      }
-    ]
-  },
-  {
     "code": "9202",
     "type": "json",
     "parameter": [
@@ -51,8 +38,7 @@
         "code": "userName"
       },
       {
-        "copy": "loginId",
-        "code": "loginName"
+        "copy": "loginName"
       },
       {
         "copy": "password",

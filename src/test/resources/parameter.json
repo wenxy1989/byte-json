@@ -8,16 +8,17 @@
       "defaultValue": ""
     },
     {
-      "name": "登录名",
-      "code": "loginName",
+      "name": "登录ID",
+      "code": "loginId",
       "javaType": "string",
       "byteType": "string",
       "byteLength": 40,
       "defaultValue": "wenxy123"
     },
     {
-      "copy": "loginName",
-      "code": "loginId",
+      "name": "登录名",
+      "copy": "loginId",
+      "code": "loginName",
       "byteLength": 50
     },
     {
