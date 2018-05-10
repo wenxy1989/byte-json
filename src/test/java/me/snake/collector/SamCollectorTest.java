@@ -10,6 +10,7 @@ import me.snake.tools.inter.ConfigTools;
 import me.snake.tools.protocol.Content;
 import me.snake.tools.protocol.Head;
 import me.snake.tools.utils.BCDByteUtil;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -33,26 +34,24 @@ public class SamCollectorTest {
     private static String mobile = null;
     private static String email = null;
 
-    private void requestAction(Action action) throws IOException {
-
-        Command command = action.getRequest();
-        Content content = ConfigTools.buildContent(command);
+    private void requestAction(Command request, Command response) throws IOException {
+        Content content = ConfigTools.buildContent(request);
         if (null != content) {
-            System.out.println(String.format("command : code:%s ,name:%s", command.getCode(), command.getName()));
+            System.out.println(String.format("command : code:%s ,name:%s", request.getCode(), request.getName()));
             JSONObject requestJson = content.getBody().getDefaultJson();
-            if(requestJson.containsKey("loginId") && loginId != null){
-                requestJson.put("loginId",loginId);
+            if (requestJson.containsKey("loginId") && loginId != null) {
+                requestJson.put("loginId", loginId);
             }
-            if(requestJson.containsKey("loginName") && loginId != null){
-                requestJson.put("loginName",loginId);
+            if (requestJson.containsKey("loginName") && loginId != null) {
+                requestJson.put("loginName", loginId);
             }
-            if(requestJson.containsKey("userId") && userId != null) {
+            if (requestJson.containsKey("userId") && userId != null) {
                 requestJson.put("userId", userId);
             }
-            if(requestJson.containsKey("mobile") && mobile != null) {
+            if (requestJson.containsKey("mobile") && mobile != null) {
                 requestJson.put("mobile", mobile);
             }
-            if(requestJson.containsKey("email") && email != null) {
+            if (requestJson.containsKey("email") && email != null) {
                 requestJson.put("email", email);
             }
             if (requestJson.containsKey("mobile")) {
@@ -67,6 +66,9 @@ public class SamCollectorTest {
             if (requestJson.containsKey("loginName")) {
                 tempLoginId = requestJson.getString("loginName");
             }
+            if (requestJson.containsKey("glucose")) {
+                requestJson.put("glucose", requestJson.getDoubleValue("glucose") * 10);
+            }
             byte[] bytes = content.encode(requestJson);
             byte[] responseBytes = SocketTool.request(bytes);
             System.out.println("command : request json : " + requestJson);
@@ -77,8 +79,8 @@ public class SamCollectorTest {
             if (null != content.getBody()) {
                 Head head = content.getHead();
                 if (head.decode()) {
-                    System.out.println(String.format("command : request code : %s  response code : %s  current code : %s", action.getRequest().getCode(), action.getResponse().getCode(), ConfigTools.int2Code(head.getCommand())));
-                    assert head.getCommand() == ConfigTools.code2Int(action.getResponse().getCode());
+                    System.out.println(String.format("command : request code : %s  response code : %s  current code : %s", request.getCode(), response.getCode(), ConfigTools.int2Code(head.getCommand())));
+                    assert head.getCommand() == ConfigTools.code2Int(response.getCode());
                 }
                 JSONObject responseJson = content.getBody().getJson();
                 if (null != responseJson) {
@@ -107,6 +109,48 @@ public class SamCollectorTest {
         }
     }
 
+    private void logoutLoginId(String loginId) throws IOException {
+        String fileName = "protocol";
+        Server config = Server.build(fileName).buildParameters().buildCommands().buildActions();
+        Command command = config.getCommandMap().get("0240");
+        Content content = ConfigTools.buildContent(command);
+        JSONObject requestJson = content.getBody().getDefaultJson();
+        requestJson.put("loginId", loginId);
+        byte[] bytes = content.encode(requestJson);
+        SocketTool.request(bytes);
+    }
+
+    private void logoutMobile(String mobile) throws IOException {
+        String fileName = "protocol";
+        Server config = Server.build(fileName).buildParameters().buildCommands().buildActions();
+        Command command = config.getCommandMap().get("0241");//注销手机
+        Content content = ConfigTools.buildContent(command);
+        JSONObject requestJson = content.getBody().getDefaultJson();
+        requestJson.put("mobile", mobile);
+        byte[] bytes = content.encode(requestJson);
+        SocketTool.request(bytes);
+    }
+
+    private void logoutEmail(String email) throws IOException {
+        String fileName = "protocol";
+        Server config = Server.build(fileName).buildParameters().buildCommands().buildActions();
+        Command command = config.getCommandMap().get("0242");//注销邮箱
+        Content content = ConfigTools.buildContent(command);
+        JSONObject requestJson = content.getBody().getDefaultJson();
+        requestJson.put("email", email);
+        byte[] bytes = content.encode(requestJson);
+        SocketTool.request(bytes);
+    }
+
+    @Before
+    public void logout() throws IOException {
+        logoutLoginId("wenxy123");
+        logoutMobile("18911936407");
+        logoutMobile("18311050339");
+        logoutEmail("1029848260@qq.com");
+        logoutEmail("wenxy_1989@163.com");
+    }
+
     @Test
     public void loginIdRequestActionTest() throws IOException {
         String fileName = "protocol-loginId";
@@ -120,7 +164,9 @@ public class SamCollectorTest {
                 continue;
             }
             Action action = actionArray[i];
-            requestAction(action);
+            if (null != action) {
+                requestAction(action.getRequest(), action.getResponse());
+            }
         }
     }
 
@@ -137,7 +183,9 @@ public class SamCollectorTest {
                 continue;
             }
             Action action = actionArray[i];
-            requestAction(action);
+            if (null != action) {
+                requestAction(action.getRequest(), action.getResponse());
+            }
         }
     }
 
@@ -154,7 +202,9 @@ public class SamCollectorTest {
                 continue;
             }
             Action action = actionArray[i];
-            requestAction(action);
+            if (null != action) {
+                requestAction(action.getRequest(), action.getResponse());
+            }
         }
     }
 
@@ -171,7 +221,9 @@ public class SamCollectorTest {
                 continue;
             }
             Action action = actionArray[i];
-            requestAction(action);
+            if (null != action) {
+                requestAction(action.getRequest(), action.getResponse());
+            }
         }
     }
 
