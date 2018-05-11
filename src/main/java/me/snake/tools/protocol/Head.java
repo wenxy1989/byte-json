@@ -1,5 +1,10 @@
 package me.snake.tools.protocol;
 
+import me.snake.tools.utils.BCDByteUtil;
+import me.snake.tools.utils.ByteUtil;
+
+import java.io.UnsupportedEncodingException;
+
 /**
  * Created by wenxy on 2017/12/31.
  */
@@ -15,7 +20,7 @@ public class Head {
 
     byte[] bytes;
 
-    public Head(byte[] bytes){
+    public Head(byte[] bytes) {
         this.bytes = bytes;
     }
 
@@ -59,11 +64,12 @@ public class Head {
     }
 
     public boolean decode() {
+        System.out.println(BCDByteUtil.hexString(bytes));
         if (null != bytes && bytes.length == head_length) {
-            version = (bytes[0] << byte_bit_length) | bytes[1];
-            serial = (bytes[2] << byte_bit_length) | bytes[3];
-            command = (bytes[4] << byte_bit_length) | bytes[5];
-            length = (bytes[6] << byte_bit_length) | bytes[7];
+            version = (bytes[0] << byte_bit_length) | bytes[1] & 0xFF;
+            serial = (bytes[2] << byte_bit_length) | bytes[3] & 0xFF;
+            command = (bytes[4] << byte_bit_length) | bytes[5] & 0xFF;
+            length = (bytes[6] << byte_bit_length) | bytes[7] & 0xFF;
             return true;
         }
         return false;

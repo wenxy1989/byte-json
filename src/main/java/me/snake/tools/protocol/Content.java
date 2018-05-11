@@ -1,6 +1,7 @@
 package me.snake.tools.protocol;
 
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import me.snake.tools.inter.ConfigTools;
 import me.snake.tools.utils.ByteUtil;
@@ -46,6 +47,10 @@ public class Content {
         return encode(head, body, json);
     }
 
+    public byte[] encodeArray(JSONArray array) throws UnsupportedEncodingException {
+        return encode(head, body, array);
+    }
+
     public static byte start() {
         return 0x5b;
     }
@@ -61,6 +66,22 @@ public class Content {
     public static byte[] encode(Head head, Body body, JSONObject json) throws UnsupportedEncodingException {
         if (null != head && null != body) {
             body.setJson(json);
+            byte[] bodyBytes = body.encode();
+            head.setLength(bodyBytes.length);
+            byte[] headBytes = head.encode();
+            byte[] infoBytes = ByteUtil.concat(headBytes, bodyBytes);
+            byte flag = check(infoBytes);
+            byte[] decodeBytes = ByteUtil.concat(infoBytes, flag);
+            byte[] encodeBytes = CodeParser.encode(decodeBytes);
+            return ByteUtil.concat(new byte[]{start()}, encodeBytes, new byte[]{end()});
+        } else {
+            return null;
+        }
+    }
+
+    public static byte[] encode(Head head, Body body, JSONArray array) throws UnsupportedEncodingException {
+        if (null != head && null != body) {
+            body.setJsonArray(array);
             byte[] bodyBytes = body.encode();
             head.setLength(bodyBytes.length);
             byte[] headBytes = head.encode();

@@ -8,6 +8,7 @@ import me.snake.tools.utils.BCDByteUtil;
 import me.snake.tools.utils.ByteUtil;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 
 /**
  * Created by wenxy on 2017/12/31.
@@ -116,8 +117,13 @@ public class Attribute {
             value = value.replaceAll(" ", "");
             bytes = parseByteArray(value, Parameter.byte_type_bcd, byteLength);
         } else if (Parameter.java_type_double.equals(javaType)) {
-            double value = ((Double) this.value).doubleValue();
-            bytes = ByteUtil.long2byte((long) (value * 100));
+            if(this.value instanceof Double){
+                double value = ((Double) this.value).doubleValue();
+                bytes = ByteUtil.long2byte((long) (value * 100));
+            }else if(this.value instanceof BigDecimal){
+                double value = ((BigDecimal) this.value).doubleValue();
+                bytes = ByteUtil.long2byte((long) (value * 100));
+            }
         } else if (Parameter.java_type_float.equals(javaType)) {
             float value = ((Float) this.value).floatValue();
             bytes = ByteUtil.int2byte((int) (value * 10));

@@ -85,7 +85,7 @@
       "javaType": "datetime",
       "byteType": "bcd",
       "byteLength": 6,
-      "defaultValue": "20171225174122"
+      "defaultValue": "2018-01-01 01:41:22"
     },
     {
       "name": "电流",

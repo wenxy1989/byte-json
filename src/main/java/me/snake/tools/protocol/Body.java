@@ -17,11 +17,21 @@ public class Body {
 
     private Attribute[] attributes;
     private String commandType;
+
     private JSONArray jsonArray;
     private JSONObject json;
 
     public JSONArray getJsonArray() {
-        return jsonArray;
+        if (null != jsonArray) {
+            return jsonArray;
+        }
+        JSONArray array = new JSONArray();
+        if (null != json) {
+            array.add(json);
+        } else {
+            array.add(getDefaultJson());
+        }
+        return array;
     }
 
     public void setJsonArray(JSONArray jsonArray) {
@@ -48,15 +58,6 @@ public class Body {
         return null;
     }
 
-    public JSONArray getDefaultJsonArray() {
-        if (null != attributes && attributes.length > 0) {
-            JSONArray array = new JSONArray();
-            array.add(getDefaultJson());
-            return array;
-        }
-        return null;
-    }
-
     public Body(Attribute[] attributes) {
         this(attributes, Command.command_type_byte);
     }
@@ -67,7 +68,17 @@ public class Body {
     }
 
     public byte[] encode() throws UnsupportedEncodingException {
-        return encode(attributes, commandType, json == null ? getDefaultJson() : json);
+        JSONArray data = getJsonArray();
+        if (null != data && data.size() > 0) {
+            byte[] bytes = new byte[0];
+            for (int i = 0; i < data.size(); i++) {
+                JSONObject json = data.getJSONObject(i);
+                byte[] eachBytes = encode(attributes, commandType, json == null ? getDefaultJson() : json);
+                bytes = ByteUtil.concat(bytes, eachBytes);
+            }
+            return bytes;
+        }
+        return null;
     }
 
     public boolean decode(byte[] bytes) throws UnsupportedEncodingException {

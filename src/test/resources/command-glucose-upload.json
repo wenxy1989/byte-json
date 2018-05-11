@@ -277,13 +277,13 @@
         "copy": "datetime",
         "code": "startTime",
         "name": "开始时间",
-        "defaultValue": "170101010101"
+        "defaultValue": "2018-01-01 01:01:01"
       },
       {
         "copy": "datetime",
         "code": "endTime",
         "name": "结束时间",
-        "defaultValue": "170103010101"
+        "defaultValue": "2018-01-02 01:01:01"
       },
       {
         "copy": "emitter"

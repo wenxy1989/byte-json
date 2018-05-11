@@ -1,5 +1,6 @@
 package me.snake.collector;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import me.snake.base.Utils;
 import me.snake.base.SocketTool;
@@ -147,11 +148,34 @@ public class SamCollectorTest {
 
     @Before
     public void logout() throws IOException {
-        logoutLoginId("wenxy123");
+//        logoutLoginId("wenxy123");
 //        logoutMobile("18911936407");
 //        logoutMobile("18311050339");
 //        logoutEmail("1029848260@qq.com");
 //        logoutEmail("wenxy_1989@163.com");
+    }
+
+    @Test
+    public void loadGlucoseListTest() throws IOException {
+        String fileName = "protocol";
+        Server config = Server.build(fileName).buildParameters().buildCommands().buildActions();
+        List<Action> list = config.getActionList();
+        for(Action action : list){
+            if("0309".equals(action.getRequest().getCode())){
+                requestAction(action.getRequest(),action.getResponse());
+            }
+        }
+    }
+
+    @Test
+    public void uploadGlucoseTest() throws IOException {
+        String fileName = "protocol";
+        Server config = Server.build(fileName).buildParameters().buildCommands().buildActions();
+        Command command = config.getCommandMap().get("0301");//注销邮箱
+        Content content = ConfigTools.buildContent(command);
+        JSONObject jsonObject = JSON.parseObject(Server.readFile("test-data-glucose.json"));
+        byte[] bytes = content.encodeArray(jsonObject.getJSONArray("glucoseList"));
+        SocketTool.request(bytes);
     }
 
     @Test
