@@ -2,7 +2,7 @@
   "import": [
     "parameter",
     "action-account-hospital",
-    "action-account-logout",
+    "action-account",
     "action-util",
     "action-glucose"
   ],

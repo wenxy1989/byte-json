@@ -69,6 +69,9 @@ public class SamCollectorTest {
             if (requestJson.containsKey("glucose")) {
                 requestJson.put("glucose", requestJson.getDoubleValue("glucose") * 10);
             }
+            if (requestJson.containsKey("mobile") || requestJson.containsKey("email")) {
+                return;
+            }
             byte[] bytes = content.encode(requestJson);
             byte[] responseBytes = SocketTool.request(bytes);
             System.out.println("command : request json : " + requestJson);
@@ -145,10 +148,10 @@ public class SamCollectorTest {
     @Before
     public void logout() throws IOException {
         logoutLoginId("wenxy123");
-        logoutMobile("18911936407");
-        logoutMobile("18311050339");
-        logoutEmail("1029848260@qq.com");
-        logoutEmail("wenxy_1989@163.com");
+//        logoutMobile("18911936407");
+//        logoutMobile("18311050339");
+//        logoutEmail("1029848260@qq.com");
+//        logoutEmail("wenxy_1989@163.com");
     }
 
     @Test
@@ -166,6 +169,9 @@ public class SamCollectorTest {
             Action action = actionArray[i];
             if (null != action) {
                 requestAction(action.getRequest(), action.getResponse());
+                if ("0301".equals(action.getRequest().getCode()) || "0315".equals(action.getRequest().getCode())) {
+                    requestAction(action.getRequest(), action.getResponse());
+                }
             }
         }
     }

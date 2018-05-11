@@ -14,6 +14,7 @@ import java.util.List;
 public class SocketTool {
 
     public static final String RemoteIP = "127.0.0.1";
+//    public static final String RemoteIP = "yun.sanmeditech.com";
     public static final int Port = 30007;
     public static final int readTimeout = 1000 * 45;
     public static final int connectTimeout = 1000 * 45;
