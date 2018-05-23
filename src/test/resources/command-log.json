@@ -1,0 +1,94 @@
+[
+  {
+    "code": "0500",
+    "name": "手机信息上传",
+    "type": "json",
+    "parameter": [
+      {
+        "copy": "emitter"
+      },
+      {
+        "copy": "sensor"
+      },
+      {
+        "name": "时间",
+        "copy": "string",
+        "code": "time",
+        "defaultValue":"2018-5-22 14:47:52"
+      },
+      {
+        "name": "客户单版本",
+        "copy": "string",
+        "code": "version",
+        "defaultValue":"v3.2"
+      },
+      {
+        "name": "系统版本",
+        "copy": "string",
+        "code": "sys",
+        "defaultValue":"ios11"
+      },
+      {
+        "name": "生产商",
+        "copy": "string",
+        "code": "product",
+        "defaultValue":"苹果"
+      },
+      {
+        "name": "型号",
+        "copy": "string",
+        "code": "model",
+        "defaultValue":"iphone8"
+      },
+      {
+        "name": "IMEI",
+        "copy": "string",
+        "code": "imei",
+        "defaultValue":"ABCDEFGHIJKL"
+      },
+      {
+        "name": "手机其他信息",
+        "copy": "string",
+        "code": "phone",
+        "defaultValue":"abc"
+      }
+    ]
+  },
+  {
+    "code": "0501",
+    "name": "手机客户端日志上传",
+    "type": "json",
+    "parameter": [
+      {
+        "copy": "emitter"
+      },
+      {
+        "copy": "sensor"
+      },
+      {
+        "name": "时间",
+        "copy": "string",
+        "code": "time",
+        "defaultValue":"2018-5-22 14:47:35"
+      },
+      {
+        "name": "日志类型",
+        "javaType": "int",
+        "code": "type",
+        "defaultValue":1
+      },
+      {
+        "name": "日志内容",
+        "copy": "string",
+        "code": "log",
+        "defaultValue":"error at .."
+      },
+      {
+        "name": "日志时间",
+        "copy": "string",
+        "code": "logTime",
+        "defaultValue":"2018-5-22 14:46:50"
+      }
+    ]
+  }
+]

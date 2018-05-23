@@ -7,11 +7,24 @@ import java.util.List;
  */
 public class Command {
 
-    public static final String command_type_json = "json";
-    public static final String command_type_byte = "byte";
+    public enum Type {
+        type_json, type_byte;
+
+        public static Type getType(String type) {
+            if (null == type) {
+                return type_byte;
+            } else if ("json".equals(type.toLowerCase())) {
+                return type_json;
+            } else if ("byte".equals(type)) {
+                return type_byte;
+            }
+            return type_byte;
+        }
+    }
+
     private String code;
     private String name;
-    private String type;
+    private Type type;
     private List<Parameter> parameters;
 
     public void setCode(String code) {
@@ -27,9 +40,11 @@ public class Command {
     }
 
     public void setType(String type) {
-        if (null != type && type.trim().length() > 0) {
-            this.type = type;
-        }
+        this.type = Type.getType(type);
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public void setParameters(List<Parameter> parameters) {
@@ -46,7 +61,7 @@ public class Command {
         return name;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 

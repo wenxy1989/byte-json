@@ -38,9 +38,9 @@ public class IoBufferUtil {
         return map;
     }
 
-    public static Object decode(IoBuffer io, String javaType, String byteType, Integer byteLength) throws CharacterCodingException {
+    public static Object decode(IoBuffer io, Parameter.JavaType javaType, Parameter.ByteType byteType, Integer byteLength) throws CharacterCodingException {
         Object value = null;
-        if (Parameter.java_type_string.equals(javaType)) {
+        if (Parameter.JavaType.type_string.equals(javaType)) {
             if (Parameter.byte_type_bcd.equals(byteType) && byteLength > 0) {
                 value = parseBCD(io, byteLength);
             } else if (Parameter.byte_type_string.equals(byteType)) {
@@ -50,25 +50,25 @@ public class IoBufferUtil {
                     value = io.getString(byteLength, Constants.CHARTSET_GBK_DECODER);
                 }
             }
-        } else if (Parameter.java_type_long.equals(javaType)) {
+        } else if (Parameter.JavaType.type_long.equals(javaType)) {
             if(Parameter.byte_type_bcd.equals(byteType)){
                 value = Long.parseLong(parseBCD(io, byteLength));
             }else{
                 value = io.getUnsignedInt();
             }
-        } else if (Parameter.java_type_integer.equals(javaType)) {
+        } else if (Parameter.JavaType.type_integer.equals(javaType)) {
             if(Parameter.byte_type_bcd.equals(byteType)){
                 value = Integer.parseInt(parseBCD(io, byteLength));
             }else{
                 value = io.getInt();
             }
-        } else if (Parameter.java_type_short.equals(javaType)) {
+        } else if (Parameter.JavaType.type_short.equals(javaType)) {
             if(Parameter.byte_type_bcd.equals(byteType)){
                 value = Short.parseShort(parseBCD(io, byteLength));
             }else{
                 value = io.get();
             }
-        } else if (Parameter.java_type_boolean.equals(javaType)) {
+        } else if (Parameter.JavaType.type_boolean.equals(javaType)) {
             value = io.get() == 1 ? true : false;
         }
         return value;

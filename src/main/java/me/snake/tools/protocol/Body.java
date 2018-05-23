@@ -16,7 +16,7 @@ import java.io.UnsupportedEncodingException;
 public class Body {
 
     private Attribute[] attributes;
-    private String commandType;
+    private Command.Type commandType;
 
     private JSONArray jsonArray;
     private JSONObject json;
@@ -59,10 +59,10 @@ public class Body {
     }
 
     public Body(Attribute[] attributes) {
-        this(attributes, Command.command_type_byte);
+        this(attributes, Command.Type.type_byte);
     }
 
-    public Body(Attribute[] attributes, String commandType) {
+    public Body(Attribute[] attributes, Command.Type commandType) {
         this.attributes = attributes;
         this.commandType = commandType;
     }
@@ -85,10 +85,10 @@ public class Body {
         return null != (jsonArray = decode(attributes, commandType, bytes));
     }
 
-    public static byte[] encode(Attribute[] attributes, String commandType, JSONObject json) throws UnsupportedEncodingException {
+    public static byte[] encode(Attribute[] attributes, Command.Type commandType, JSONObject json) throws UnsupportedEncodingException {
         if (null != attributes && attributes.length > 0) {
-            if (Command.command_type_json.equals(commandType)) {
-                return Attribute.parseByteArray(json.toJSONString(), Parameter.byte_type_string, 0);
+            if (Command.Type.type_json.equals(commandType)) {
+                return Attribute.parseByteArray(json.toJSONString(), Parameter.ByteType.type_string, 0);
             } else {
                 byte[] bytes = new byte[0];
                 for (int i = 0; i < attributes.length; i++) {
@@ -102,9 +102,9 @@ public class Body {
         return null;
     }
 
-    public static JSONArray decode(Attribute[] attributes, String commandType, byte[] bytes) throws UnsupportedEncodingException {
+    public static JSONArray decode(Attribute[] attributes, Command.Type commandType, byte[] bytes) throws UnsupportedEncodingException {
         if (null != bytes && bytes.length > 0) {
-            if (Command.command_type_json.equals(commandType)) {
+            if (Command.Type.type_json.equals(commandType)) {
                 String jsonString = ByteUtil.byte2string(bytes);
                 if (jsonString.startsWith("[") && jsonString.endsWith("]")) {
                     return JSONArray.parseArray(jsonString);

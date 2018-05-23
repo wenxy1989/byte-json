@@ -6,7 +6,7 @@ import me.snake.base.Utils;
 import me.snake.tools.config.Action;
 import me.snake.tools.config.Command;
 import me.snake.tools.config.Server;
-import me.snake.tools.inter.ConfigTools;
+import me.snake.tools.adapter.ConfigTools;
 import me.snake.tools.protocol.Content;
 import me.snake.tools.utils.BCDByteUtil;
 import org.junit.BeforeClass;

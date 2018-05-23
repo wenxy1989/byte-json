@@ -1,4 +1,4 @@
-package me.snake.tools.inter;
+package me.snake.tools.adapter;
 
 import me.snake.tools.config.Command;
 import me.snake.tools.config.Parameter;

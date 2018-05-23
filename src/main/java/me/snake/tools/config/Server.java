@@ -2,6 +2,7 @@ package me.snake.tools.config;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import me.snake.tools.utils.FileStringUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,23 +24,8 @@ public class Server {
 
     private JSONObject jsonConfig;
 
-    public static String readFile(String fileName) throws IOException {
-        String classpath = System.class.getResource("/").getPath();
-        File file = new File(classpath, fileName);
-        List<String> list = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
-        return String.join("", list);
-    }
-
-    public static JSONObject buildJSONObject(String jsonName) throws IOException {
-        return JSONObject.parseObject(readFile(jsonName + ".json"));
-    }
-
-    public static JSONArray buildJSONArray(String jsonName) throws IOException {
-        return JSONArray.parseArray(readFile(jsonName + ".json"));
-    }
-
     private Server(String jsonName) throws IOException {
-        jsonConfig = buildJSONObject(jsonName);
+        jsonConfig = FileStringUtils.readClassPathJSONObject(jsonName);
         if (!jsonConfig.isEmpty()) {
             address = jsonConfig.getString("address");
             port = jsonConfig.getInteger("port");
@@ -62,7 +48,7 @@ public class Server {
     }
 
     public static void buildJSONObjectImport(JSONObject source, String jsonName) throws IOException {
-        JSONObject importJSON = buildJSONObject(jsonName);
+        JSONObject importJSON = FileStringUtils.readClassPathJSONObject(jsonName);
         if (!importJSON.isEmpty()) {
             Iterator<String> iterator = importJSON.keySet().iterator();
             while (iterator.hasNext()) {
@@ -86,7 +72,7 @@ public class Server {
     }
 
     public static void buildJSONArrayImport(JSONArray source, String jsonName) throws IOException {
-        source.addAll(buildJSONArray(jsonName));
+        source.addAll(FileStringUtils.readClassPathJSONArray(jsonName));
     }
 
     public static Server build(String jsonName) throws IOException {
@@ -202,28 +188,28 @@ public class Server {
         parameter.setJavaType(json.getString("javaType"));
         parameter.setByteType(json.getString("byteType"));
         parameter.setByteLength(json.getInteger("byteLength"));
-        String javaType = parameter.getJavaType();
-        if (Parameter.java_type_string.equals(javaType)) {
+        Parameter.JavaType javaType = parameter.getJavaType();
+        if (Parameter.JavaType.type_string.equals(javaType)) {
             parameter.setDefaultValue(json.getString("defaultValue"));
-        } else if (Parameter.java_type_date.equals(javaType)) {
+        } else if (Parameter.JavaType.type_date.equals(javaType)) {
             parameter.setDefaultValue(json.getString("defaultValue"));
-        } else if (Parameter.java_type_datetime.equals(javaType)) {
+        } else if (Parameter.JavaType.type_datetime.equals(javaType)) {
             parameter.setDefaultValue(json.getString("defaultValue"));
-        } else if (Parameter.java_type_long.equals(javaType)) {
+        } else if (Parameter.JavaType.type_long.equals(javaType)) {
             parameter.setDefaultValue(json.getLong("defaultValue"));
-        } else if (Parameter.java_type_integer.equals(javaType)) {
+        } else if (Parameter.JavaType.type_integer.equals(javaType)) {
             parameter.setDefaultValue(json.getInteger("defaultValue"));
-        } else if (Parameter.java_type_short.equals(javaType)) {
+        } else if (Parameter.JavaType.type_short.equals(javaType)) {
             parameter.setDefaultValue(json.getShort("defaultValue"));
-        } else if (Parameter.java_type_byte.equals(javaType)) {
+        } else if (Parameter.JavaType.type_byte.equals(javaType)) {
             parameter.setDefaultValue(json.getByte("defaultValue"));
-        } else if (Parameter.java_type_double.equals(javaType)) {
+        } else if (Parameter.JavaType.type_double.equals(javaType)) {
             parameter.setDefaultValue(json.getDouble("defaultValue"));
-        } else if (Parameter.java_type_float.equals(javaType)) {
+        } else if (Parameter.JavaType.type_float.equals(javaType)) {
             parameter.setDefaultValue(json.getFloat("defaultValue"));
-        } else if (Parameter.java_type_char.equals(javaType)) {
+        } else if (Parameter.JavaType.type_char.equals(javaType)) {
             parameter.setDefaultValue(json.getString("defaultValue"));
-        } else if (Parameter.java_type_boolean.equals(javaType)) {
+        } else if (Parameter.JavaType.type_boolean.equals(javaType)) {
             parameter.setDefaultValue(json.getBoolean("defaultValue"));
         } else {
             System.out.println(String.format("javaType : %s not define", parameter.getJavaType()));

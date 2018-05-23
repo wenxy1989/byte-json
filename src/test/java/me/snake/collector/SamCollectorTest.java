@@ -1,22 +1,21 @@
 package me.snake.collector;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import me.snake.base.Utils;
 import me.snake.base.SocketTool;
 import me.snake.tools.config.Action;
 import me.snake.tools.config.Command;
 import me.snake.tools.config.Server;
-import me.snake.tools.inter.ConfigTools;
+import me.snake.tools.adapter.ConfigTools;
 import me.snake.tools.protocol.Content;
 import me.snake.tools.protocol.Head;
 import me.snake.tools.utils.BCDByteUtil;
+import me.snake.tools.utils.FileStringUtils;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -160,9 +159,9 @@ public class SamCollectorTest {
         String fileName = "protocol";
         Server config = Server.build(fileName).buildParameters().buildCommands().buildActions();
         List<Action> list = config.getActionList();
-        for(Action action : list){
-            if("0309".equals(action.getRequest().getCode())){
-                requestAction(action.getRequest(),action.getResponse());
+        for (Action action : list) {
+            if ("0309".equals(action.getRequest().getCode())) {
+                requestAction(action.getRequest(), action.getResponse());
             }
         }
     }
@@ -173,9 +172,21 @@ public class SamCollectorTest {
         Server config = Server.build(fileName).buildParameters().buildCommands().buildActions();
         Command command = config.getCommandMap().get("0301");//注销邮箱
         Content content = ConfigTools.buildContent(command);
-        JSONObject jsonObject = JSON.parseObject(Server.readFile("test-data-glucose.json"));
-        byte[] bytes = content.encodeArray(jsonObject.getJSONArray("glucoseList"));
-        SocketTool.request(bytes);
+        JSONObject jsonObject = FileStringUtils.readClassPathJSONObject("test-data-glucose");
+        JSONArray glucoseArray = jsonObject.getJSONArray("glucoseList");
+        if (null != glucoseArray && glucoseArray.size() > 0) {
+            for (int i = 0; i < glucoseArray.size(); i++) {
+                JSONObject glucose = glucoseArray.getJSONObject(i);
+                System.out.println("encode and send message " + glucose);
+                byte[] bytes = content.encode(glucose);
+                SocketTool.request(bytes);
+                try {
+                    Thread.sleep(1000 * 60 * 3);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @Test
