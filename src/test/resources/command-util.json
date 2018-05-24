@@ -33,37 +33,37 @@
       {
         "code": "sys",
         "name": "系统信息",
-        "javaType": "string",
+        "type": "string",
         "defaultValue": "ios 10.02"
       },
       {
         "code": "mobile",
         "name": "手机型号",
-        "javaType": "string",
+        "type": "string",
         "defaultValue": "iphone6s"
       },
       {
         "code": "version",
         "name": "客户端版本",
-        "javaType": "string",
+        "type": "string",
         "defaultValue": "2.0.1.20180104"
       },
       {
         "code": "time",
         "name": "时间",
-        "javaType": "string",
+        "type": "string",
         "defaultValue": "2018-1-4 17:10:11"
       },
       {
         "code": "content",
         "name": "内容",
-        "javaType": "string",
+        "type": "string",
         "defaultValue": "error at ...."
       },
       {
         "code": "user",
         "name": "登录名",
-        "javaType": "string",
+        "type": "string",
         "defaultValue": "wenxy"
       }
     ]

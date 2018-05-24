@@ -9,7 +9,7 @@
       },
       {
         "copy": "password",
-        "byteType": "md5"
+        "code": "password-md5"
       },
       {
         "copy": "datetime",
@@ -41,7 +41,7 @@
       },
       {
         "copy": "password",
-        "byteType": "md5"
+        "code": "password-md5"
       },
       {
         "copy": "datetime",
@@ -72,7 +72,7 @@
       },
       {
         "copy": "password",
-        "byteType": "md5"
+        "code": "password-md5"
       }
     ]
   },
@@ -83,7 +83,7 @@
     "parameter": [
       {
         "code": "uuid",
-        "javaType": "string",
+        "type": "string",
         "byteLength": 100,
         "defaultValue": "sdfklasdfkidjfkalsd"
       }

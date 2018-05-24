@@ -39,15 +39,12 @@ public class Content {
         this.body = body;
     }
 
-    public byte[] encode() throws UnsupportedEncodingException {
-        return encode(null);
-    }
 
     public byte[] encode(JSONObject json) throws UnsupportedEncodingException {
         return encode(head, body, json);
     }
 
-    public byte[] encodeArray(JSONArray array) throws UnsupportedEncodingException {
+    public byte[] encode(JSONArray array) throws UnsupportedEncodingException {
         return encode(head, body, array);
     }
 
@@ -65,8 +62,7 @@ public class Content {
 
     public static byte[] encode(Head head, Body body, JSONObject json) throws UnsupportedEncodingException {
         if (null != head && null != body) {
-            body.setJson(json);
-            byte[] bodyBytes = body.encode();
+            byte[] bodyBytes = body.encode(json);
             head.setLength(bodyBytes.length);
             byte[] headBytes = head.encode();
             byte[] infoBytes = ByteUtil.concat(headBytes, bodyBytes);
@@ -79,10 +75,9 @@ public class Content {
         }
     }
 
-    public static byte[] encode(Head head, Body body, JSONArray array) throws UnsupportedEncodingException {
+    public static byte[] encode(Head head, Body body, JSONArray array){
         if (null != head && null != body) {
-            body.setJsonArray(array);
-            byte[] bodyBytes = body.encode();
+            byte[] bodyBytes = body.encode(array);
             head.setLength(bodyBytes.length);
             byte[] headBytes = head.encode();
             byte[] infoBytes = ByteUtil.concat(headBytes, bodyBytes);

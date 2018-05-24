@@ -2,16 +2,14 @@
   "parameter": [
     {
       "code": "string",
-      "javaType": "string",
-      "byteType": "string",
+      "type": "string",
       "byteLength": 0,
       "defaultValue": ""
     },
     {
       "name": "登录ID",
       "code": "loginId",
-      "javaType": "string",
-      "byteType": "string",
+      "type": "string",
       "byteLength": 40,
       "defaultValue": "wenxy123"
     },
@@ -24,46 +22,41 @@
     {
       "name": "密码",
       "code": "password",
-      "javaType": "string",
-      "byteType": "string",
+      "type": "string",
       "byteLength": 32,
       "defaultValue": "123456"
     },
     {
       "name": "Long类型id",
       "code": "id",
-      "javaType": "string",
-      "byteType": "byte",
-      "byteLength": 11,
-      "defaultValue": "00000123456"
+      "type": "userId",
+      "defaultValue": 123456
     },
     {
       "copy": "id",
       "name": "用户ID",
       "code": "userId",
-      "defaultValue": "00000123456"
+      "type": "userId",
+      "defaultValue": 123456
     },
     {
       "name": "验证码",
       "code": "validCode",
-      "javaType": "string",
-      "byteType": "byte",
+      "type": "bcd",
       "byteLength": 6,
-      "defaultValue": "985632"
+      "defaultValue": 985632
     },
     {
       "name": "绑定手机号",
       "code": "mobile",
-      "javaType": "string",
-      "byteType": "bcd",
+      "type": "bcd",
       "byteLength": 6,
-      "defaultValue": "18911936407"
+      "defaultValue": 18911936407
     },
     {
       "name": "绑定邮箱",
       "code": "email",
-      "javaType": "string",
-      "byteType": "string",
+      "type": "string",
       "byteLength": 50,
       "defaultValue": "1029848260@qq.com"
     },
@@ -82,38 +75,35 @@
     {
       "name": "时间",
       "code": "datetime",
-      "javaType": "datetime",
-      "byteType": "bcd",
+      "type": "datetime",
       "byteLength": 6,
       "defaultValue": "2018-01-01 01:41:22"
     },
     {
       "name": "电流",
       "code": "current",
-      "javaType": "double",
-      "byteType": "byte",
-      "byteLength": 4,
+      "type": "float",
+      "decimal": 2,
       "defaultValue": 56.8
     },
     {
       "name": "血糖",
       "code": "glucose",
-      "javaType": "double",
-      "byteType": "byte",
-      "byteLength": 4,
+      "type": "float",
+      "decimal": 2,
       "defaultValue": 15.6
     },
     {
       "name": "发射器",
       "code": "emitter",
-      "javaType": "string",
+      "type": "string",
       "byteLength": 20,
       "defaultValue": "TC-20180104"
     },
     {
       "name": "传感器",
       "code": "sensor",
-      "javaType": "string",
+      "type": "string",
       "byteLength": 20,
       "defaultValue": "C-20180104"
     }

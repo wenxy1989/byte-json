@@ -22,7 +22,7 @@ public class ContentTests {
         byte[] bytes = BCDByteUtil.hexString2byte(data);
         Content content = Content.decode(bytes);
         if (null != content) {
-            System.out.println(content.getBody().getJson());
+            System.out.println(content.getBody().getJsonArray());
         }
     }
 

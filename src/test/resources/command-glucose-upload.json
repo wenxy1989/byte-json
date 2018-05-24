@@ -32,7 +32,8 @@
       {
         "code": "voltage",
         "name": "电压",
-        "javaType": "double",
+        "type": "float",
+        "decimal": 2,
         "defaultValue": 0.25
       },
       {
@@ -57,49 +58,43 @@
       {
         "name": "东经/西经",
         "code": "lat",
-        "javaType": "string",
-        "byteType": "string",
-        "byteLength": 1,
+        "type": "char",
         "defaultValue": "E"
       },
       {
         "name": "经度",
         "code": "latValue",
-        "javaType": "double",
-        "byteType": "double-word",
-        "byteLength": 4,
+        "type": "float",
+        "decimal": 2,
         "defaultValue": 180.3
       },
       {
-        "name": "东经/西经",
+        "name": "南北纬",
         "code": "lon",
-        "javaType": "string",
-        "byteType": "string",
-        "byteLength": 1,
+        "type": "char",
         "defaultValue": "N"
       },
       {
         "name": "纬度",
         "code": "lonValue",
-        "javaType": "double",
-        "byteType": "double-word",
-        "byteLength": 4,
+        "type": "float",
+        "decimal": 2,
         "defaultValue": 60.3
       },
       {
         "name": "速度",
         "code": "speed",
-        "javaType": "float",
-        "byteType": "word",
-        "byteLength": 2,
+        "type": "float",
+        "type": "float",
+        "decimal": 2,
         "defaultValue": 60.3
       },
       {
         "name": "方向",
         "code": "direct",
-        "javaType": "int",
-        "byteType": "word",
-        "byteLength": 2,
+        "type": "int",
+        "type": "float",
+        "decimal": 2,
         "defaultValue": 60
       }
     ]
@@ -118,7 +113,7 @@
       {
         "copy": "glucose",
         "code": "refer",
-        "javaType": "float",
+        "type": "float",
         "byteLength": 2,
         "defaultValue":5.7
       }
@@ -138,29 +133,26 @@
       {
         "name": "餐别",
         "code": "mealType",
-        "javaType": "byte",
-        "byteType": "byte",
-        "byteLength": 1,
+        "type": "byte",
         "defaultValue": 1
       },
       {
         "name": "内容",
         "code": "content",
-        "javaType": "string",
-        "byteType": "string",
+        "type": "string",
         "byteLength": 60,
         "defaultValue": "小米粥 馒头 洋葱炒肉"
       },
       {
         "name": "用餐时长",
         "code": "mealTime",
-        "javaType": "int",
+        "type": "int",
         "defaultValue": 10
       },
       {
         "name": "餐后血糖高峰时间",
         "code": "effectTime",
-        "javaType": "int",
+        "type": "int",
         "defaultValue": 30
       }
     ]
@@ -179,24 +171,21 @@
       {
         "name": "胰岛素名称",
         "code": "insulin",
-        "javaType": "string",
-        "byteType": "string",
+        "type": "string",
         "byteLength": 40,
         "defaultValue": "长效胰岛素"
       },
       {
         "name": "单位",
         "code": "unit",
-        "javaType": "int",
+        "type": "int",
         "byteLength": 2,
         "defaultValue": 3
       },
       {
         "name": "影响时长",
         "code": "effectTime",
-        "javaType": "int",
-        "byteType": "byte",
-        "byteLength": 2,
+        "type": "short",
         "defaultValue": 30
       }
     ]
@@ -215,24 +204,20 @@
       {
         "name": "药品名称",
         "code": "medicine",
-        "javaType": "string",
-        "byteType": "string",
+        "type": "string",
         "byteLength": 40,
         "defaultValue": "降糖灵"
       },
       {
         "name": "单位",
         "code": "unit",
-        "javaType": "int",
-        "byteLength": 2,
+        "type": "short",
         "defaultValue": 3
       },
       {
         "name": "影响时长",
         "code": "effectTime",
-        "javaType": "int",
-        "byteType": "byte",
-        "byteLength": 2,
+        "type": "short",
         "defaultValue": 30
       }
     ]
@@ -251,15 +236,14 @@
       {
         "name": "时长",
         "code": "exerciseTime",
-        "javaType": "int",
+        "type": "int",
         "byteLength": 2,
         "defaultValue": 15
       },
       {
         "name": "内容",
         "code": "medicine",
-        "javaType": "string",
-        "byteType": "string",
+        "type": "string",
         "byteLength": 200,
         "defaultValue": "慢跑"
       }
@@ -294,27 +278,26 @@
       {
         "code": "version",
         "name": "版本",
-        "javaType": "string",
-        "byteType": "string",
+        "type": "string",
         "byteLength": 18,
         "defaultValue": 1
       },
       {
         "code": "count",
         "name": "血糖数量",
-        "javaType": "int",
+        "type": "int",
         "defaultValue": 20
       },
       {
         "code": "status",
         "name": "状态",
-        "javaType": "byte",
+        "type": "byte",
         "defaultValue": 1
       },
       {
         "code": "unit",
         "name": "血糖单位",
-        "javaType": "byte",
+        "type": "byte",
         "defaultValue": 1
       }
     ]
@@ -336,7 +319,7 @@
       {
         "code": "status",
         "name": "状态",
-        "javaType": "int",
+        "type": "int",
         "defaultValue": 1
       },
       {

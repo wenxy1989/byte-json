@@ -1,5 +1,6 @@
 package me.snake.tools;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import me.snake.base.SocketTool;
 import me.snake.base.Utils;
@@ -49,17 +50,16 @@ public class Json2ConfigTests {
         while (iterator.hasNext()) {
             String code = iterator.next();
             Command command = config.getCommandMap().get(code);
+            JSONObject jsonObject = command.getDefaultJson();
             Content content = ConfigTools.buildContent(command);
             if (null != content) {
                 System.out.println(String.format("code:%s ,name:%s", command.getCode(), command.getName()));
 //            JSONObject json = new JSONObject();
 //            json.put("version","0.2v20180105");
-                System.out.println("default json : " + content.getBody().getDefaultJson());
-                byte[] bytes = content.encode();
+                System.out.println("default json : " + jsonObject);
+                byte[] bytes = content.encode(jsonObject);
                 System.out.println(BCDByteUtil.hexString(bytes));
-                if (null != (content = Content.decode(bytes))) {
-                    System.out.println("json value : " + content.getBody().getJson());
-                }
+                System.out.println("json value : " + Content.decode(bytes));
             }
         }
     }
@@ -73,18 +73,18 @@ public class Json2ConfigTests {
         Action[] actionArray = new Action[actions.size()];
         actions.toArray(actionArray);
         Arrays.sort(actionArray);
-        String userId = "00000000000";
+        Long userId = 0l;
         for (int i = 0; i < actionArray.length; i++) {
             if (actionArray[i].getIndex() < 0) {
                 continue;
             }
             Command command = actionArray[i].getRequest();
+            JSONObject defaultJson = command.getDefaultJson();
             Content content = ConfigTools.buildContent(command);
             if (null != content) {
                 System.out.println(String.format("code:%s ,name:%s", command.getCode(), command.getName()));
 //            JSONObject json = new JSONObject();
 //            json.put("version","0.2v20180105");
-                JSONObject defaultJson = content.getBody().getDefaultJson();
                 System.out.println("request default json : " + defaultJson);
                 defaultJson.put("userId", userId);
                 byte[] bytes = content.encode(defaultJson);
@@ -93,16 +93,17 @@ public class Json2ConfigTests {
                 System.out.println("response byte : " + BCDByteUtil.hexString(responseBytes));
                 assert null != (content = Content.decode(responseBytes));
                 if (null != content.getBody()) {
-                    JSONObject json = content.getBody().getJson();
-                    if (null != json) {
-                        System.out.println("response json value : " + json);
-                        if (null != json.get(ERROR_CODE_KEY)) {
-                            assert json.getIntValue(ERROR_CODE_KEY) == 0;
-                        } else if (null != json.get(CODE_KEY)) {
-                            assert json.getIntValue(CODE_KEY) == 0;
-                            if (null != json.get("uid")) {
-                                userId = Utils.formatNumber(json.getLong("uid").toString(), 11);
-                            }
+                    JSONArray array = content.getBody().getJsonArray();
+                    assert null != array;
+                    JSONObject json = array.getJSONObject(0);
+                    assert (null != json);
+                    System.out.println("response json value : " + json);
+                    if (null != json.get(ERROR_CODE_KEY)) {
+                        assert json.getIntValue(ERROR_CODE_KEY) == 0;
+                    } else if (null != json.get(CODE_KEY)) {
+                        assert json.getIntValue(CODE_KEY) == 0;
+                        if (null != json.get("uid")) {
+                            userId = json.getLong("uid");
                         }
                     } else {
                         System.out.println("no data return !!!");

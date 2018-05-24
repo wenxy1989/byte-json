@@ -12,7 +12,7 @@ public class BCDByteUtil {
         return (byte) ((high << 4) | low);
     }
 
-    public static byte[] number2bcd(long number, byte length) {
+    public static byte[] number2bcd(long number, int length) {
         assert length > 0 && length <= 20;
         byte[] bytes = new byte[length];
         long factor = number;

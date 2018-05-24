@@ -12,7 +12,7 @@
       {
         "code": "key",
         "key": "机构码",
-        "javaType": "long",
+        "type": "long",
         "defaultValue": 67
       }
     ]
@@ -34,7 +34,7 @@
       {
         "code": "key",
         "key": "机构码",
-        "javaType": "long",
+        "type": "long",
         "defaultValue": 67
       }
     ]
@@ -56,7 +56,7 @@
       {
         "code": "key",
         "key": "机构码",
-        "javaType": "long",
+        "type": "long",
         "defaultValue": 67
       }
     ]
@@ -71,79 +71,70 @@
       {
         "code": "name",
         "name": "name",
-        "javaType": "string",
-        "byteType": "string",
+        "type": "string",
         "byteLength": 20,
         "defaultValue": "张三"
       },
       {
         "code": "idcard",
         "name": "身份证号",
-        "javaType": "string",
-        "byteType": "string",
+        "type": "string",
         "byteLength": 25,
         "defaultValue": "132930198901174716"
       },
       {
         "code": "birth",
         "name": "出生日期",
-        "javaType": "string",
-        "byteType": "bcd",
+        "type": "bcd",
         "byteLength": 4,
         "defaultValue": "19890117"
       },
       {
         "code": "gender",
         "name": "性别",
-        "javaType": "byte",
+        "type": "byte",
         "defaultValue": 1
       },
       {
         "code": "nation",
         "name": "民族",
-        "javaType": "string",
-        "byteType": "string",
+        "type": "string",
         "byteLength": 20,
         "defaultValue": "汉族"
       },
       {
         "code": "culture",
         "name": "学历",
-        "javaType": "string",
-        "byteType": "string",
+        "type": "string",
         "byteLength": 10,
         "defaultValue": "大专"
       },
       {
         "code": "birthPlace",
         "name": "出生地",
-        "javaType": "string",
-        "byteType": "string",
+        "type": "string",
         "byteLength": 100,
         "defaultValue": "山东省滨州市无棣县小泊头镇伯西村"
       },
       {
         "code": "livePlace",
         "name": "居住地址",
-        "javaType": "string",
-        "byteType": "string",
+        "type": "string",
         "byteLength": 100,
         "defaultValue": "北京市大兴区南海家园"
       },
       {
         "code": "highAlarm",
         "name": "高血糖告警值",
-        "javaType": "double",
-        "byteType": "double",
-        "byteLength": 4,
+        "type": "float",
+        "decimal": 2,
         "defaultValue": 7.8
       },
       {
         "code": "lowAlarm",
         "name": "高血糖告警值",
-        "javaType": "double",
-        "byteType": "double",
-        "byteLength": 4,
+        "type": "float",
+        "decimal": 2,
         "defaultValue": 3.9
       }
     ]

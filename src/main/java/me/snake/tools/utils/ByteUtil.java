@@ -38,6 +38,17 @@ public class ByteUtil {
         return byteArray;
     }
 
+    public static byte[] string2byte(String value, int length) {
+        byte[] data = value.getBytes(Constants.CHARTSET_GBK);
+        if (length > 0) {
+            byte[] bytes = new byte[length];
+            System.arraycopy(data, 0, bytes, 0, data.length > length ? length : data.length);
+            return bytes;
+        } else {
+            return data;
+        }
+    }
+
     public static byte[] short2byte(short value) {
         assert (value >= Short.MIN_VALUE & value <= Short.MAX_VALUE);
         return new byte[]{(byte) ((value >> 8) & 0xFF), (byte) (0x00ff & value)};
@@ -63,10 +74,10 @@ public class ByteUtil {
         return bytes;
     }
 
-    public static int byte2short(byte[] b) {
-        int intValue = b[0] << 8;
-        intValue += b[1];
-        return intValue;
+    public static short byte2short(byte[] b) {
+        short value = (short) (b[0] << 8);
+        value += b[1];
+        return value;
     }
 
     public static int byte2int(byte[] b) {
@@ -83,14 +94,18 @@ public class ByteUtil {
         return intValue;
     }
 
-    public static String byte2string(byte[] bytes) throws UnsupportedEncodingException {
+    public static String byte2string(byte[] bytes) {
         if (null != bytes && bytes.length > 0) {
-            return new String(bytes, Constants.CHARTSET_CODE_GBK);
+            try {
+                return new String(bytes, Constants.CHARTSET_CODE_GBK);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }
 
-    public static String fixedByte2string(byte[] bytes) throws UnsupportedEncodingException {
+    public static String fixedByte2string(byte[] bytes) {
         if (null != bytes && bytes.length > 0) {
             int length = 0;
             for (; length < bytes.length; length++) {

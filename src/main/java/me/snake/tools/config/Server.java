@@ -38,6 +38,11 @@ public class Server {
         }
     }
 
+    @Override
+    public String toString() {
+        return JSONObject.toJSONString(actionList);
+    }
+
     public static void buildJSONObjectImports(JSONObject json, JSONArray jsonList) throws IOException {
         if (jsonList != null && jsonList.size() > 0) {
             for (int i = 0; i < jsonList.size(); i++) {
@@ -185,39 +190,14 @@ public class Server {
         }
         parameter.setCode(json.getString("code"));
         parameter.setName(json.getString("name"));
-        parameter.setJavaType(json.getString("javaType"));
-        parameter.setByteType(json.getString("byteType"));
-        parameter.setByteLength(json.getInteger("byteLength"));
-        Parameter.JavaType javaType = parameter.getJavaType();
-        if (Parameter.JavaType.type_string.equals(javaType)) {
-            parameter.setDefaultValue(json.getString("defaultValue"));
-        } else if (Parameter.JavaType.type_date.equals(javaType)) {
-            parameter.setDefaultValue(json.getString("defaultValue"));
-        } else if (Parameter.JavaType.type_datetime.equals(javaType)) {
-            parameter.setDefaultValue(json.getString("defaultValue"));
-        } else if (Parameter.JavaType.type_long.equals(javaType)) {
-            parameter.setDefaultValue(json.getLong("defaultValue"));
-        } else if (Parameter.JavaType.type_integer.equals(javaType)) {
-            parameter.setDefaultValue(json.getInteger("defaultValue"));
-        } else if (Parameter.JavaType.type_short.equals(javaType)) {
-            parameter.setDefaultValue(json.getShort("defaultValue"));
-        } else if (Parameter.JavaType.type_byte.equals(javaType)) {
-            parameter.setDefaultValue(json.getByte("defaultValue"));
-        } else if (Parameter.JavaType.type_double.equals(javaType)) {
-            parameter.setDefaultValue(json.getDouble("defaultValue"));
-        } else if (Parameter.JavaType.type_float.equals(javaType)) {
-            parameter.setDefaultValue(json.getFloat("defaultValue"));
-        } else if (Parameter.JavaType.type_char.equals(javaType)) {
-            parameter.setDefaultValue(json.getString("defaultValue"));
-        } else if (Parameter.JavaType.type_boolean.equals(javaType)) {
-            parameter.setDefaultValue(json.getBoolean("defaultValue"));
-        } else {
-            System.out.println(String.format("javaType : %s not define", parameter.getJavaType()));
-        }
-        if (null == parameter.getJavaType()) {
+        parameter.setType(json.getString("type"));
+        parameter.setLength(json.getInteger("byteLength"));
+        parameter.setDecimal(json.getInteger("decimal"));
+        parameter.setDefaultValue(json.get("defaultValue"));
+        if (null == parameter.getType()) {
             System.out.println(String.format("parameter name:%s code:%s have no javaType", parameter.getName(), parameter.getCode()));
         }
-        if(null == parameterMap.get(parameter.getCode())) {
+        if (null == parameterMap.get(parameter.getCode())) {
             parameterMap.put(parameter.getCode(), parameter);
         }
         return parameter;

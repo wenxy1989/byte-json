@@ -46,7 +46,7 @@ public class ConfigTools {
             Attribute[] attributes = new Attribute[parameters.size()];
             for (int i = 0; i < attributes.length; i++) {
                 Parameter parameter = parameters.get(i);
-                attributes[i] = new Attribute(parameter.getCode(), parameter.getJavaType(), parameter.getByteType(), parameter.getByteLength(), parameter.getDefaultValue());
+                attributes[i] = new Attribute(parameter.getCode(), parameter.getType(), parameter.getLength(), parameter.getDecimal());
             }
             return attributes;
         }

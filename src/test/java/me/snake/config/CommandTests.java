@@ -41,9 +41,9 @@ public class CommandTests {
         List<Command> commands = Server.buildCommands(jsonArray, commandMap, parameterMap);
         for(Command command : commands) {
             Content content = ConfigTools.buildContent(command);
-            byte[] bytes = content.encode();
+            byte[] bytes = content.encode(command.getDefaultJson());
             SocketTool.request(bytes);
-            System.out.println(content.getBody().getDefaultJson());
+            System.out.println(content.getBody().getJsonArray());
             System.out.println(bytes);
         }
     }

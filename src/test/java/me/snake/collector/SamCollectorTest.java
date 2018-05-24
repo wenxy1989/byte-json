@@ -38,7 +38,7 @@ public class SamCollectorTest {
         Content content = ConfigTools.buildContent(request);
         if (null != content) {
             System.out.println(String.format("command : code:%s ,name:%s", request.getCode(), request.getName()));
-            JSONObject requestJson = content.getBody().getDefaultJson();
+            JSONObject requestJson = request.getDefaultJson();
             if (requestJson.containsKey("loginId") && loginId != null) {
                 requestJson.put("loginId", loginId);
             }
@@ -72,9 +72,9 @@ public class SamCollectorTest {
             if (requestJson.containsKey("mobile") || requestJson.containsKey("email")) {
                 return;
             }
+            System.out.println("command : request json : " + requestJson);
             byte[] bytes = content.encode(requestJson);
             byte[] responseBytes = SocketTool.request(bytes);
-            System.out.println("command : request json : " + requestJson);
             System.out.println("command : request byte : " + BCDByteUtil.hexString(bytes));
             System.out.println("command : response byte : " + BCDByteUtil.hexString(responseBytes));
 
@@ -85,7 +85,9 @@ public class SamCollectorTest {
                     System.out.println(String.format("command : request code : %s  response code : %s  current code : %s", request.getCode(), response.getCode(), ConfigTools.int2Code(head.getCommand())));
                     assert head.getCommand() == ConfigTools.code2Int(response.getCode());
                 }
-                JSONObject responseJson = content.getBody().getJson();
+                JSONArray array = content.getBody().getJsonArray();
+                assert null != array;
+                JSONObject responseJson = array.getJSONObject(0);
                 if (null != responseJson) {
                     System.out.println("command : response json value : " + responseJson);
                     if (null != responseJson.get(ERROR_CODE_KEY)) {
@@ -117,7 +119,7 @@ public class SamCollectorTest {
         Server config = Server.build(fileName).buildParameters().buildCommands().buildActions();
         Command command = config.getCommandMap().get("0240");
         Content content = ConfigTools.buildContent(command);
-        JSONObject requestJson = content.getBody().getDefaultJson();
+        JSONObject requestJson = command.getDefaultJson();
         requestJson.put("loginId", loginId);
         byte[] bytes = content.encode(requestJson);
         SocketTool.request(bytes);
@@ -128,7 +130,7 @@ public class SamCollectorTest {
         Server config = Server.build(fileName).buildParameters().buildCommands().buildActions();
         Command command = config.getCommandMap().get("0241");//注销手机
         Content content = ConfigTools.buildContent(command);
-        JSONObject requestJson = content.getBody().getDefaultJson();
+        JSONObject requestJson = command.getDefaultJson();
         requestJson.put("mobile", mobile);
         byte[] bytes = content.encode(requestJson);
         SocketTool.request(bytes);
@@ -139,7 +141,7 @@ public class SamCollectorTest {
         Server config = Server.build(fileName).buildParameters().buildCommands().buildActions();
         Command command = config.getCommandMap().get("0242");//注销邮箱
         Content content = ConfigTools.buildContent(command);
-        JSONObject requestJson = content.getBody().getDefaultJson();
+        JSONObject requestJson = command.getDefaultJson();
         requestJson.put("email", email);
         byte[] bytes = content.encode(requestJson);
         SocketTool.request(bytes);
@@ -193,6 +195,7 @@ public class SamCollectorTest {
     public void loginIdRequestActionTest() throws IOException {
         String fileName = "protocol-loginId";
         Server config = Server.build(fileName).buildParameters().buildCommands().buildActions();
+        System.out.println(config);
         List<Action> actions = config.getActionList();
         Action[] actionArray = new Action[actions.size()];
         actions.toArray(actionArray);

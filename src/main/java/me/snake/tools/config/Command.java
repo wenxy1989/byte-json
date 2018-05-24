@@ -1,5 +1,7 @@
 package me.snake.tools.config;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.util.List;
 
 /**
@@ -26,6 +28,27 @@ public class Command {
     private String name;
     private Type type;
     private List<Parameter> parameters;
+
+    private JSONObject defaultJson;
+
+    private JSONObject buildJsonValue(List<Parameter> parameters) {
+        if (null != parameters && parameters.size() > 0) {
+            JSONObject json = new JSONObject();
+            for (int i = 0; i < parameters.size(); i++) {
+                Parameter parameter = parameters.get(i);
+                json.put(parameter.getCode(), parameter.getDefaultValue());
+            }
+            return json;
+        }
+        return null;
+    }
+
+    public JSONObject getDefaultJson() {
+        if (null == defaultJson) {
+            defaultJson = buildJsonValue(this.parameters);
+        }
+        return defaultJson;
+    }
 
     public void setCode(String code) {
         if (null != code && code.trim().length() > 0) {

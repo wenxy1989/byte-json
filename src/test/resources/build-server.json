@@ -1,0 +1,1347 @@
+[
+  {
+    "index": 0,
+    "request": {
+      "code": "0240",
+      "defaultJson": {"loginId": "wenxy123"},
+      "name": "用户注销(登录名)",
+      "parameters": [
+        {
+          "code": "loginId",
+          "defaultValue": "wenxy123",
+          "length": 40,
+          "name": "登录ID",
+          "type": "string"
+        },
+        {
+          "code": "password",
+          "defaultValue": "123456",
+          "length": 32,
+          "name": "密码",
+          "type": "string"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {
+      "code": "9001",
+      "defaultJson": {"code": 0},
+      "parameters": [
+        {
+          "code": "code",
+          "defaultValue": 0,
+          "length": 1,
+          "name": "结果代码",
+          "type": "byte"
+        }
+      ],
+      "type": "type_byte"
+    }
+  },
+  {
+    "index": 1,
+    "request": {
+      "code": "0202",
+      "defaultJson": {"loginId": "wenxy123"},
+      "name": "用户登录名注册",
+      "parameters": [
+        {
+          "code": "loginId",
+          "defaultValue": "wenxy123",
+          "length": 40,
+          "name": "登录ID",
+          "type": "string"
+        },
+        {
+          "code": "password",
+          "defaultValue": "123456",
+          "length": 32,
+          "name": "密码",
+          "type": "string"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {
+      "code": "9202",
+      "defaultJson": {"errcode": 0},
+      "parameters": [
+        {
+          "code": "errcode",
+          "defaultValue": 0,
+          "name": "结果代码",
+          "type": "int"
+        },
+        {
+          "code": "uid",
+          "defaultValue": 123456,
+          "name": "用户ID",
+          "type": "long"
+        }
+      ],
+      "type": "type_json"
+    }
+  },
+  {
+    "index": 2,
+    "request": {
+      "code": "0205",
+      "defaultJson": {"mobile": 18911936407},
+      "name": "获取(手机注册/手机绑定)验证码",
+      "parameters": [
+        {
+          "code": "mobile",
+          "defaultValue": 18911936407,
+          "length": 6,
+          "name": "绑定手机号",
+          "type": "bcd"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {
+      "code": "9205",
+      "defaultJson": {"code": 0},
+      "parameters": [{"$ref": "$[0].response.parameters[0]"}],
+      "type": "type_byte"
+    }
+  },
+  {
+    "index": 2,
+    "request": {
+      "code": "0206",
+      "defaultJson": {"email": "1029848260@qq.com"},
+      "name": "获取(邮箱注册/邮箱绑定)验证码",
+      "parameters": [
+        {
+          "code": "email",
+          "defaultValue": "1029848260@qq.com",
+          "length": 50,
+          "name": "绑定邮箱",
+          "type": "string"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {
+      "code": "9206",
+      "defaultJson": {"code": 0},
+      "parameters": [{"$ref": "$[0].response.parameters[0]"}],
+      "type": "type_byte"
+    }
+  },
+  {
+    "index": 3,
+    "request": {
+      "code": "0214",
+      "defaultJson": {"userId": 123456},
+      "name": "绑定手机号",
+      "parameters": [
+        {
+          "code": "userId",
+          "defaultValue": 123456,
+          "name": "用户ID",
+          "type": "userId"
+        },
+        {
+          "code": "mobile",
+          "defaultValue": 18911936407,
+          "length": 6,
+          "name": "绑定手机号",
+          "type": "bcd"
+        },
+        {
+          "code": "validCode",
+          "defaultValue": 985632,
+          "length": 6,
+          "name": "验证码",
+          "type": "bcd"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {
+      "code": "9214",
+      "defaultJson": {"code": 0},
+      "parameters": [{"$ref": "$[0].response.parameters[0]"}],
+      "type": "type_byte"
+    }
+  },
+  {
+    "index": 3,
+    "request": {
+      "code": "0215",
+      "defaultJson": {"userId": 123456},
+      "name": "绑定邮箱",
+      "parameters": [
+        {
+          "code": "userId",
+          "defaultValue": 123456,
+          "name": "用户ID",
+          "type": "userId"
+        },
+        {
+          "code": "email",
+          "defaultValue": "1029848260@qq.com",
+          "length": 50,
+          "name": "绑定邮箱",
+          "type": "string"
+        },
+        {
+          "code": "validCode",
+          "defaultValue": 985632,
+          "length": 6,
+          "name": "验证码",
+          "type": "bcd"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {
+      "code": "9215",
+      "defaultJson": {"code": 0},
+      "parameters": [{"$ref": "$[0].response.parameters[0]"}],
+      "type": "type_byte"
+    }
+  },
+  {
+    "index": 4,
+    "request": {
+      "code": "0209",
+      "defaultJson": {"mobile": 18911936407},
+      "name": "获取验证码(手机重置密码)",
+      "parameters": [
+        {
+          "code": "mobile",
+          "defaultValue": 18911936407,
+          "length": 6,
+          "name": "绑定手机号",
+          "type": "bcd"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {
+      "code": "9209",
+      "defaultJson": {"code": 0},
+      "parameters": [{"$ref": "$[0].response.parameters[0]"}],
+      "type": "type_byte"
+    }
+  },
+  {
+    "index": 4,
+    "request": {
+      "code": "0210",
+      "defaultJson": {"email": "1029848260@qq.com"},
+      "name": "获取验证码(邮箱重置密码)",
+      "parameters": [
+        {
+          "code": "email",
+          "defaultValue": "1029848260@qq.com",
+          "length": 50,
+          "name": "绑定邮箱",
+          "type": "string"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {
+      "code": "9210",
+      "defaultJson": {"code": 0},
+      "parameters": [{"$ref": "$[0].response.parameters[0]"}],
+      "type": "type_byte"
+    }
+  },
+  {
+    "index": 5,
+    "request": {
+      "code": "0207",
+      "defaultJson": {"mobile": 18911936407},
+      "name": "重置密码(手机)",
+      "parameters": [
+        {
+          "code": "mobile",
+          "defaultValue": 18911936407,
+          "length": 6,
+          "name": "绑定手机号",
+          "type": "bcd"
+        },
+        {
+          "code": "validCode",
+          "defaultValue": 985632,
+          "length": 6,
+          "name": "验证码",
+          "type": "bcd"
+        },
+        {
+          "code": "password",
+          "defaultValue": "123456",
+          "length": 32,
+          "name": "密码",
+          "type": "string"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {
+      "code": "9207",
+      "defaultJson": {"code": 0},
+      "parameters": [{"$ref": "$[0].response.parameters[0]"}],
+      "type": "type_byte"
+    }
+  },
+  {
+    "index": 5,
+    "request": {
+      "code": "0208",
+      "defaultJson": {"email": "1029848260@qq.com"},
+      "name": "重置密码(邮箱)",
+      "parameters": [
+        {
+          "code": "email",
+          "defaultValue": "1029848260@qq.com",
+          "length": 50,
+          "name": "绑定邮箱",
+          "type": "string"
+        },
+        {
+          "code": "validCode",
+          "defaultValue": 985632,
+          "length": 6,
+          "name": "验证码",
+          "type": "bcd"
+        },
+        {
+          "code": "password",
+          "defaultValue": "123456",
+          "length": 32,
+          "name": "密码",
+          "type": "string"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {
+      "code": "9208",
+      "defaultJson": {"code": 0},
+      "parameters": [{"$ref": "$[0].response.parameters[0]"}],
+      "type": "type_byte"
+    }
+  },
+  {
+    "index": 6,
+    "request": {
+      "code": "0212",
+      "defaultJson": {"loginName": "wenxy123"},
+      "name": "用户名登录",
+      "parameters": [
+        {
+          "code": "loginName",
+          "defaultValue": "wenxy123",
+          "length": 50,
+          "name": "登录名",
+          "type": "string"
+        },
+        {
+          "code": "password",
+          "defaultValue": "123456",
+          "length": 32,
+          "name": "密码",
+          "type": "string"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {
+      "code": "9212",
+      "defaultJson": {"code": 0},
+      "parameters": [{"$ref": "$[0].response.parameters[0]"}],
+      "type": "type_byte"
+    }
+  },
+  {
+    "index": 6,
+    "request": {
+      "code": "0211",
+      "defaultJson": {"userId": 123456},
+      "name": "修改密码",
+      "parameters": [
+        {
+          "code": "userId",
+          "defaultValue": 123456,
+          "name": "用户ID",
+          "type": "userId"
+        },
+        {
+          "code": "oldPwd",
+          "defaultValue": "123456",
+          "length": 32,
+          "name": "密码",
+          "type": "string"
+        },
+        {
+          "code": "newPwd",
+          "defaultValue": "123456",
+          "length": 32,
+          "name": "密码",
+          "type": "string"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {
+      "code": "9211",
+      "defaultJson": {"code": 0},
+      "parameters": [{"$ref": "$[0].response.parameters[0]"}],
+      "type": "type_byte"
+    }
+  },
+  {
+    "index": 7,
+    "request": {
+      "code": "0213",
+      "defaultJson": {"loginName": "wenxy123"},
+      "name": "获取用户信息",
+      "parameters": [
+        {
+          "code": "loginName",
+          "defaultValue": "wenxy123",
+          "length": 50,
+          "name": "登录名",
+          "type": "string"
+        },
+        {
+          "code": "password-md5",
+          "defaultValue": "123456",
+          "length": 32,
+          "name": "密码",
+          "type": "string"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {
+      "code": "9213",
+      "defaultJson": {"code": 0},
+      "parameters": [
+        {
+          "code": "code",
+          "defaultValue": 0,
+          "name": "结果代码",
+          "type": "int"
+        },
+        {
+          "code": "id",
+          "defaultValue": 123456,
+          "name": "用户ID",
+          "type": "long"
+        },
+        {
+          "code": "userName",
+          "defaultValue": "张三",
+          "length": 20,
+          "name": "姓名",
+          "type": "string"
+        },
+        {
+          "code": "loginName",
+          "defaultValue": "wenxy123",
+          "length": 50,
+          "name": "登录名",
+          "type": "string"
+        },
+        {
+          "code": "loginPwd",
+          "defaultValue": "123456",
+          "length": 32,
+          "name": "密码",
+          "type": "string"
+        },
+        {
+          "code": "sex",
+          "defaultValue": 1,
+          "name": "性别",
+          "type": "byte"
+        },
+        {
+          "code": "birth",
+          "defaultValue": 19890117,
+          "length": 4,
+          "name": "出生日期",
+          "type": "bcd"
+        },
+        {
+          "code": "mobile",
+          "defaultValue": 18911936407,
+          "length": 6,
+          "name": "绑定手机号",
+          "type": "bcd"
+        },
+        {
+          "code": "phone",
+          "defaultValue": 18911936407,
+          "length": 6,
+          "name": "绑定手机号",
+          "type": "bcd"
+        },
+        {
+          "code": "email",
+          "defaultValue": "1029848260@qq.com",
+          "length": 50,
+          "name": "绑定邮箱",
+          "type": "string"
+        },
+        {
+          "code": "idCard",
+          "defaultValue": "132930198901174716",
+          "length": 25,
+          "name": "身份证号",
+          "type": "string"
+        },
+        {
+          "code": "status",
+          "defaultValue": 1,
+          "name": "status",
+          "type": "byte"
+        },
+        {
+          "code": "nation",
+          "defaultValue": "汉",
+          "name": "民族",
+          "type": "string"
+        },
+        {
+          "code": "cultureLevel",
+          "defaultValue": "大专",
+          "name": "学历",
+          "type": "string"
+        },
+        {
+          "code": "birthPlace",
+          "defaultValue": "山东省无棣县小泊头镇",
+          "name": "出生地",
+          "type": "string"
+        },
+        {
+          "code": "nowPlace",
+          "defaultValue": "北京市大兴区",
+          "name": "居住地",
+          "type": "string"
+        },
+        {
+          "code": "insuranceId",
+          "defaultValue": "13293019890117",
+          "name": "社保卡号",
+          "type": "string"
+        },
+        {
+          "code": "createdTime",
+          "defaultValue": "2018-01-01 01:41:22",
+          "length": 6,
+          "name": "时间",
+          "type": "datetime"
+        }
+      ],
+      "type": "type_json"
+    }
+  },
+  {
+    "index": 7,
+    "request": {
+      "code": "0216",
+      "defaultJson": {"userId": 123456},
+      "name": "上传用户信息",
+      "parameters": [
+        {
+          "code": "userId",
+          "defaultValue": 123456,
+          "name": "用户ID",
+          "type": "userId"
+        },
+        {
+          "code": "name",
+          "defaultValue": "张三",
+          "length": 20,
+          "name": "姓名",
+          "type": "string"
+        },
+        {
+          "code": "idCard",
+          "defaultValue": "132930198901174716",
+          "length": 25,
+          "name": "身份证号",
+          "type": "string"
+        },
+        {
+          "code": "birth",
+          "defaultValue": 19890117,
+          "length": 4,
+          "name": "出生日期",
+          "type": "bcd"
+        },
+        {
+          "code": "gender",
+          "defaultValue": 1,
+          "name": "性别",
+          "type": "byte"
+        },
+        {
+          "code": "nation",
+          "defaultValue": "汉族",
+          "length": 20,
+          "name": "民族",
+          "type": "string"
+        },
+        {
+          "code": "culture",
+          "defaultValue": "大专",
+          "length": 10,
+          "name": "学历",
+          "type": "string"
+        },
+        {
+          "code": "birthPlace",
+          "defaultValue": "山东省滨州市无棣县小泊头镇伯西村",
+          "length": 100,
+          "name": "出生地",
+          "type": "string"
+        },
+        {
+          "code": "livePlace",
+          "defaultValue": "北京市大兴区南海家园",
+          "length": 100,
+          "name": "居住地址",
+          "type": "string"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {
+      "code": "9216",
+      "defaultJson": {"code": 0},
+      "parameters": [{"$ref": "$[0].response.parameters[0]"}],
+      "type": "type_byte"
+    }
+  },
+  {
+    "index": 0,
+    "request": {"$ref": "$[0].request"},
+    "response": {"$ref": "$[0].response"}
+  },
+  {
+    "index": 0,
+    "request": {
+      "code": "0241",
+      "defaultJson": {"mobile": "18311050339"},
+      "name": "用户注销(手机)",
+      "parameters": [
+        {
+          "code": "mobile",
+          "defaultValue": "18311050339",
+          "length": 6,
+          "name": "注册手机号",
+          "type": "bcd"
+        },
+        {
+          "code": "validCode",
+          "defaultValue": 985632,
+          "length": 6,
+          "name": "验证码",
+          "type": "bcd"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {"$ref": "$[0].response"}
+  },
+  {
+    "index": 0,
+    "request": {
+      "code": "0242",
+      "defaultJson": {"email": "wenxy_1989@163.com"},
+      "name": "用户注销(邮箱)",
+      "parameters": [
+        {
+          "code": "email",
+          "defaultValue": "wenxy_1989@163.com",
+          "length": 50,
+          "name": "注册邮箱",
+          "type": "string"
+        },
+        {
+          "code": "validCode",
+          "defaultValue": 985632,
+          "length": 6,
+          "name": "验证码",
+          "type": "bcd"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {"$ref": "$[0].response"}
+  },
+  {
+    "index": 0,
+    "request": {
+      "code": "0201",
+      "defaultJson": {"version": "3.0v20171225"},
+      "name": "检查客户端版本",
+      "parameters": [
+        {
+          "code": "version",
+          "defaultValue": "3.0v20171225",
+          "length": 0,
+          "name": "客户端版本",
+          "type": "string"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {
+      "code": "9201",
+      "defaultJson": {"url": "http://yun.sanmeditech.com/download/cgm.apk"},
+      "name": "客户端下载地址",
+      "parameters": [
+        {
+          "code": "url",
+          "defaultValue": "http://yun.sanmeditech.com/download/cgm.apk",
+          "length": 0,
+          "name": "最新客户端下载地址",
+          "type": "string"
+        }
+      ],
+      "type": "type_byte"
+    }
+  },
+  {
+    "index": 0,
+    "request": {
+      "code": "0500",
+      "defaultJson": {"sys": "ios 10.02"},
+      "name": "手机日志上传",
+      "parameters": [
+        {
+          "code": "sys",
+          "defaultValue": "ios 10.02",
+          "name": "系统信息",
+          "type": "string"
+        },
+        {
+          "code": "mobile",
+          "defaultValue": "iphone6s",
+          "name": "手机型号",
+          "type": "string"
+        },
+        {
+          "code": "version",
+          "defaultValue": "2.0.1.20180104",
+          "name": "客户端版本",
+          "type": "string"
+        },
+        {
+          "code": "time",
+          "defaultValue": "2018-1-4 17:10:11",
+          "name": "时间",
+          "type": "string"
+        },
+        {
+          "code": "content",
+          "defaultValue": "error at ....",
+          "name": "内容",
+          "type": "string"
+        },
+        {
+          "code": "user",
+          "defaultValue": "wenxy",
+          "name": "登录名",
+          "type": "string"
+        }
+      ],
+      "type": "type_json"
+    },
+    "response": {"$ref": "$[0].response"}
+  },
+  {
+    "index": 16,
+    "request": {
+      "code": "0402",
+      "defaultJson": {"userId": 123456},
+      "name": "上传佩戴记录",
+      "parameters": [
+        {
+          "code": "userId",
+          "defaultValue": 123456,
+          "name": "用户ID",
+          "type": "userId"
+        },
+        {
+          "code": "startTime",
+          "defaultValue": "2018-01-01 01:01:01",
+          "length": 6,
+          "name": "开始时间",
+          "type": "datetime"
+        },
+        {
+          "code": "endTime",
+          "defaultValue": "2018-01-02 01:01:01",
+          "length": 6,
+          "name": "结束时间",
+          "type": "datetime"
+        },
+        {
+          "code": "emitter",
+          "defaultValue": "TC-20180104",
+          "length": 20,
+          "name": "发射器",
+          "type": "string"
+        },
+        {
+          "code": "sensor",
+          "defaultValue": "C-20180104",
+          "length": 20,
+          "name": "传感器",
+          "type": "string"
+        },
+        {
+          "code": "version",
+          "defaultValue": 1,
+          "length": 18,
+          "name": "版本",
+          "type": "string"
+        },
+        {
+          "code": "count",
+          "defaultValue": 20,
+          "name": "血糖数量",
+          "type": "int"
+        },
+        {
+          "code": "status",
+          "defaultValue": 1,
+          "name": "状态",
+          "type": "byte"
+        },
+        {
+          "code": "unit",
+          "defaultValue": 1,
+          "name": "血糖单位",
+          "type": "byte"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {"$ref": "$[0].response"}
+  },
+  {
+    "index": 16,
+    "request": {
+      "code": "0301",
+      "defaultJson": {"userId": 123456},
+      "name": "上传血糖",
+      "parameters": [
+        {
+          "code": "userId",
+          "defaultValue": 123456,
+          "name": "用户ID",
+          "type": "userId"
+        },
+        {
+          "code": "datetime",
+          "defaultValue": "2018-01-01 01:41:22",
+          "length": 6,
+          "name": "时间",
+          "type": "datetime"
+        },
+        {
+          "code": "current",
+          "decimal": 2,
+          "defaultValue": 56.8,
+          "name": "电流",
+          "type": "float"
+        },
+        {
+          "code": "glucose",
+          "decimal": 2,
+          "defaultValue": 15.6,
+          "name": "血糖",
+          "type": "float"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {"$ref": "$[0].response"}
+  },
+  {
+    "index": 16,
+    "request": {
+      "code": "0302",
+      "defaultJson": {"userId": 123456},
+      "name": "上传GPS",
+      "parameters": [
+        {
+          "code": "userId",
+          "defaultValue": 123456,
+          "name": "用户ID",
+          "type": "userId"
+        },
+        {
+          "code": "datetime",
+          "defaultValue": "2018-01-01 01:41:22",
+          "length": 6,
+          "name": "时间",
+          "type": "datetime"
+        },
+        {
+          "code": "lat",
+          "defaultValue": "E",
+          "name": "东经/西经",
+          "type": "char"
+        },
+        {
+          "code": "latValue",
+          "decimal": 2,
+          "defaultValue": 180.3,
+          "name": "经度",
+          "type": "float"
+        },
+        {
+          "code": "lon",
+          "defaultValue": "N",
+          "name": "南北纬",
+          "type": "char"
+        },
+        {
+          "code": "lonValue",
+          "decimal": 2,
+          "defaultValue": 60.3,
+          "name": "纬度",
+          "type": "float"
+        },
+        {
+          "code": "speed",
+          "decimal": 2,
+          "defaultValue": 60.3,
+          "name": "速度",
+          "type": "float"
+        },
+        {
+          "code": "direct",
+          "decimal": 2,
+          "defaultValue": 60,
+          "name": "方向",
+          "type": "float"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {"$ref": "$[0].response"}
+  },
+  {
+    "index": 16,
+    "request": {
+      "code": "0303",
+      "defaultJson": {"userId": 123456},
+      "name": "上传指血",
+      "parameters": [
+        {
+          "code": "userId",
+          "defaultValue": 123456,
+          "name": "用户ID",
+          "type": "userId"
+        },
+        {
+          "code": "datetime",
+          "defaultValue": "2018-01-01 01:41:22",
+          "length": 6,
+          "name": "时间",
+          "type": "datetime"
+        },
+        {
+          "code": "refer",
+          "decimal": 2,
+          "defaultValue": 5.7,
+          "length": 2,
+          "name": "血糖",
+          "type": "float"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {"$ref": "$[0].response"}
+  },
+  {
+    "index": 16,
+    "request": {
+      "code": "0304",
+      "defaultJson": {"userId": 123456},
+      "name": "上传饮食",
+      "parameters": [
+        {
+          "code": "userId",
+          "defaultValue": 123456,
+          "name": "用户ID",
+          "type": "userId"
+        },
+        {
+          "code": "datetime",
+          "defaultValue": "2018-01-01 01:41:22",
+          "length": 6,
+          "name": "时间",
+          "type": "datetime"
+        },
+        {
+          "code": "mealType",
+          "defaultValue": 1,
+          "name": "餐别",
+          "type": "byte"
+        },
+        {
+          "code": "content",
+          "defaultValue": "小米粥 馒头 洋葱炒肉",
+          "length": 60,
+          "name": "内容",
+          "type": "string"
+        },
+        {
+          "code": "mealTime",
+          "defaultValue": 10,
+          "name": "用餐时长",
+          "type": "int"
+        },
+        {
+          "code": "effectTime",
+          "defaultValue": 30,
+          "name": "餐后血糖高峰时间",
+          "type": "int"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {"$ref": "$[0].response"}
+  },
+  {
+    "index": 16,
+    "request": {
+      "code": "0305",
+      "defaultJson": {"userId": 123456},
+      "name": "上传胰岛素",
+      "parameters": [
+        {
+          "code": "userId",
+          "defaultValue": 123456,
+          "name": "用户ID",
+          "type": "userId"
+        },
+        {
+          "code": "datetime",
+          "defaultValue": "2018-01-01 01:41:22",
+          "length": 6,
+          "name": "时间",
+          "type": "datetime"
+        },
+        {
+          "code": "insulin",
+          "defaultValue": "长效胰岛素",
+          "length": 40,
+          "name": "胰岛素名称",
+          "type": "string"
+        },
+        {
+          "code": "unit",
+          "defaultValue": 3,
+          "length": 2,
+          "name": "单位",
+          "type": "int"
+        },
+        {
+          "code": "effectTime",
+          "defaultValue": 30,
+          "name": "影响时长",
+          "type": "short"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {"$ref": "$[0].response"}
+  },
+  {
+    "index": 16,
+    "request": {
+      "code": "0306",
+      "defaultJson": {"userId": 123456},
+      "name": "上传用药",
+      "parameters": [
+        {
+          "code": "userId",
+          "defaultValue": 123456,
+          "name": "用户ID",
+          "type": "userId"
+        },
+        {
+          "code": "datetime",
+          "defaultValue": "2018-01-01 01:41:22",
+          "length": 6,
+          "name": "时间",
+          "type": "datetime"
+        },
+        {
+          "code": "medicine",
+          "defaultValue": "降糖灵",
+          "length": 40,
+          "name": "药品名称",
+          "type": "string"
+        },
+        {
+          "code": "unit",
+          "defaultValue": 3,
+          "name": "单位",
+          "type": "short"
+        },
+        {
+          "code": "effectTime",
+          "defaultValue": 30,
+          "name": "影响时长",
+          "type": "short"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {"$ref": "$[0].response"}
+  },
+  {
+    "index": 16,
+    "request": {
+      "code": "0307",
+      "defaultJson": {"userId": 123456},
+      "name": "上传锻炼",
+      "parameters": [
+        {
+          "code": "userId",
+          "defaultValue": 123456,
+          "name": "用户ID",
+          "type": "userId"
+        },
+        {
+          "code": "datetime",
+          "defaultValue": "2018-01-01 01:41:22",
+          "length": 6,
+          "name": "时间",
+          "type": "datetime"
+        },
+        {
+          "code": "exerciseTime",
+          "defaultValue": 15,
+          "length": 2,
+          "name": "时长",
+          "type": "int"
+        },
+        {
+          "code": "medicine",
+          "defaultValue": "慢跑",
+          "length": 200,
+          "name": "内容",
+          "type": "string"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {"$ref": "$[0].response"}
+  },
+  {
+    "index": 16,
+    "request": {
+      "code": "0401",
+      "defaultJson": {"userId": 123456},
+      "name": "上传发射器状态",
+      "parameters": [
+        {
+          "code": "userId",
+          "defaultValue": 123456,
+          "name": "用户ID",
+          "type": "userId"
+        },
+        {
+          "code": "emitter",
+          "defaultValue": "TC-20180104",
+          "length": 20,
+          "name": "发射器",
+          "type": "string"
+        },
+        {
+          "code": "sensor",
+          "defaultValue": "C-20180104",
+          "length": 20,
+          "name": "传感器",
+          "type": "string"
+        },
+        {
+          "code": "status",
+          "defaultValue": 1,
+          "name": "状态",
+          "type": "int"
+        },
+        {
+          "code": "datetime",
+          "defaultValue": "2018-01-01 01:41:22",
+          "length": 6,
+          "name": "时间",
+          "type": "datetime"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {"$ref": "$[0].response"}
+  },
+  {
+    "index": 16,
+    "request": {
+      "code": "0403",
+      "defaultJson": {"loginName": "wenxy123"},
+      "name": "获取佩戴记录",
+      "parameters": [
+        {
+          "code": "loginName",
+          "defaultValue": "wenxy123",
+          "length": 50,
+          "name": "登录名",
+          "type": "string"
+        },
+        {
+          "code": "password-md5",
+          "defaultValue": "123456",
+          "length": 32,
+          "name": "密码",
+          "type": "string"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {
+      "code": "9308",
+      "name": "佩戴信息",
+      "type": "type_json"
+    }
+  },
+  {
+    "index": 16,
+    "request": {
+      "code": "0309",
+      "defaultJson": {"loginName": "wenxy123"},
+      "name": "获取血糖",
+      "parameters": [
+        {
+          "code": "loginName",
+          "defaultValue": "wenxy123",
+          "length": 50,
+          "name": "登录名",
+          "type": "string"
+        },
+        {
+          "code": "password-md5",
+          "defaultValue": "123456",
+          "length": 32,
+          "name": "密码",
+          "type": "string"
+        },
+        {
+          "code": "startTime",
+          "defaultValue": "170101010101",
+          "length": 6,
+          "name": "开始时间",
+          "type": "datetime"
+        },
+        {
+          "code": "endTime",
+          "defaultValue": "170103010101",
+          "length": 6,
+          "name": "结束时间",
+          "type": "datetime"
+        },
+        {
+          "code": "emitter",
+          "defaultValue": "TC-20180104",
+          "length": 20,
+          "name": "发射器",
+          "type": "string"
+        },
+        {
+          "code": "sensor",
+          "defaultValue": "C-20180104",
+          "length": 20,
+          "name": "传感器",
+          "type": "string"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {
+      "code": "9302",
+      "name": "血糖信息",
+      "type": "type_json"
+    }
+  },
+  {
+    "index": 16,
+    "request": {
+      "code": "0310",
+      "defaultJson": {"loginName": "wenxy123"},
+      "name": "获取指血",
+      "parameters": [
+        {
+          "code": "loginName",
+          "defaultValue": "wenxy123",
+          "length": 50,
+          "name": "登录名",
+          "type": "string"
+        },
+        {
+          "code": "password-md5",
+          "defaultValue": "123456",
+          "length": 32,
+          "name": "密码",
+          "type": "string"
+        },
+        {
+          "code": "startTime",
+          "defaultValue": "170101010101",
+          "length": 6,
+          "name": "开始时间",
+          "type": "datetime"
+        },
+        {
+          "code": "endTime",
+          "defaultValue": "170103010101",
+          "length": 6,
+          "name": "结束时间",
+          "type": "datetime"
+        }
+      ],
+      "type": "type_byte"
+    },
+    "response": {
+      "code": "9303",
+      "name": "指血信息",
+      "type": "type_json"
+    }
+  },
+  {
+    "index": 16,
+    "request": {
+      "code": "0311",
+      "defaultJson": {"loginName": "wenxy123"},
+      "name": "获取事件信息",
+      "parameters": [
+        {"$ref": "$[30].request.parameters[0]"},
+        {"$ref": "$[30].request.parameters[1]"},
+        {"$ref": "$[30].request.parameters[2]"},
+        {"$ref": "$[30].request.parameters[3]"}
+      ],
+      "type": "type_byte"
+    },
+    "response": {
+      "code": "9304",
+      "name": "事件信息",
+      "type": "type_json"
+    }
+  }
+]
