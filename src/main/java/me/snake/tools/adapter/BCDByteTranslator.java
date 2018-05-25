@@ -10,6 +10,11 @@ public class BCDByteTranslator extends AbstractByteTranslator<Long> {
     private int length = 8;
 
     @Override
+    public String getType() {
+        return "bcd";
+    }
+
+    @Override
     public void setLength(int length) {
         this.length = length;
     }
@@ -17,6 +22,9 @@ public class BCDByteTranslator extends AbstractByteTranslator<Long> {
     @Override
     public byte[] encode(Object value) {
         assert null != value;
+        if(value instanceof Integer){
+            return BCDByteUtil.number2bcd((Integer)value, length);
+        }
         return BCDByteUtil.number2bcd((Long)value, length);
     }
 

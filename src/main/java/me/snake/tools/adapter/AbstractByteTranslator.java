@@ -9,6 +9,8 @@ public abstract class AbstractByteTranslator<T> {
 
     public void setDecimal(int decimal){}
 
+    public abstract String getType();
+
     public abstract byte[] encode(Object value);
 
     public abstract T decode(byte[] bytes);

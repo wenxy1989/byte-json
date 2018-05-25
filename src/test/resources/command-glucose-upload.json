@@ -58,34 +58,33 @@
       {
         "name": "东经/西经",
         "code": "lat",
-        "type": "char",
+        "type": "byte",
         "defaultValue": "E"
       },
       {
         "name": "经度",
         "code": "latValue",
         "type": "float",
-        "decimal": 2,
+        "decimal": 6,
         "defaultValue": 180.3
       },
       {
         "name": "南北纬",
         "code": "lon",
-        "type": "char",
+        "type": "byte",
         "defaultValue": "N"
       },
       {
         "name": "纬度",
         "code": "lonValue",
         "type": "float",
-        "decimal": 2,
+        "decimal": 6,
         "defaultValue": 60.3
       },
       {
         "name": "速度",
         "code": "speed",
-        "type": "float",
-        "type": "float",
+        "type": "float-short",
         "decimal": 2,
         "defaultValue": 60.3
       },
@@ -93,7 +92,7 @@
         "name": "方向",
         "code": "direct",
         "type": "int",
-        "type": "float",
+        "type": "short",
         "decimal": 2,
         "defaultValue": 60
       }
@@ -113,7 +112,7 @@
       {
         "copy": "glucose",
         "code": "refer",
-        "type": "float",
+        "type": "float-short",
         "byteLength": 2,
         "defaultValue":5.7
       }
@@ -146,13 +145,13 @@
       {
         "name": "用餐时长",
         "code": "mealTime",
-        "type": "int",
+        "type": "short",
         "defaultValue": 10
       },
       {
         "name": "餐后血糖高峰时间",
         "code": "effectTime",
-        "type": "int",
+        "type": "short",
         "defaultValue": 30
       }
     ]
@@ -178,7 +177,7 @@
       {
         "name": "单位",
         "code": "unit",
-        "type": "int",
+        "type": "short",
         "byteLength": 2,
         "defaultValue": 3
       },
@@ -236,7 +235,7 @@
       {
         "name": "时长",
         "code": "exerciseTime",
-        "type": "int",
+        "type": "short",
         "byteLength": 2,
         "defaultValue": 15
       },
@@ -280,7 +279,7 @@
         "name": "版本",
         "type": "string",
         "byteLength": 18,
-        "defaultValue": 1
+        "defaultValue": "0.2v2018"
       },
       {
         "code": "count",

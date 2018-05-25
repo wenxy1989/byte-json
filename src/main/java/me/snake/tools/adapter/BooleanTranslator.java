@@ -8,6 +8,11 @@ public class BooleanTranslator extends AbstractByteTranslator<Boolean> {
     private static final int length = 1;
 
     @Override
+    public String getType() {
+        return "boolean";
+    }
+
+    @Override
     public byte[] encode(Object value) {
         assert (null != value);
         return new byte[]{(byte) (((Boolean)value).booleanValue() ? 1 : 0)};

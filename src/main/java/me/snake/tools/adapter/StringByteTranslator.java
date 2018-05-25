@@ -10,6 +10,11 @@ public class StringByteTranslator extends AbstractByteTranslator<String> {
     private int length = 0;
 
     @Override
+    public String getType() {
+        return "string";
+    }
+
+    @Override
     public void setLength(int length) {
         this.length = length;
     }

@@ -10,6 +10,11 @@ public class IntegerByteTranslator extends AbstractByteTranslator<Integer> {
     private static final int length = 4;
 
     @Override
+    public String getType() {
+        return "int";
+    }
+
+    @Override
     public byte[] encode(Object value) {
         if (null != value) {
             return ByteUtil.int2byte((Integer)value);

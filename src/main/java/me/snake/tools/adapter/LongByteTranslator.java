@@ -10,6 +10,11 @@ public class LongByteTranslator extends AbstractByteTranslator<Long> {
     private static final int length = 8;
 
     @Override
+    public String getType() {
+        return "long";
+    }
+
+    @Override
     public byte[] encode(Object value) {
         if (null != value) {
             return ByteUtil.long2byte((Long)value);

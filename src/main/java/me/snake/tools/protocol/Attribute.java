@@ -59,7 +59,7 @@ public class Attribute {
 
     public boolean decode() {
         if (null != bytes && bytes.length > 0) {
-            ByteTranslatorManager.decode(bytes, type, length, decimal);
+            this.value = ByteTranslatorManager.decode(bytes, type, length, decimal);
             return true;
         }
         return false;

@@ -80,7 +80,7 @@ public class Body {
     }
 
     public static JSONArray decode(Attribute[] attributes, Command.Type commandType, byte[] bytes) {
-        if (null != bytes && bytes.length > 0 && null != attributes && attributes.length > 0) {
+        if (null != bytes && bytes.length > 0) {
             if (Command.Type.type_json.equals(commandType)) {
                 String jsonString = ByteUtil.byte2string(bytes);
                 if (jsonString.startsWith("[") && jsonString.endsWith("]")) {
@@ -90,7 +90,7 @@ public class Body {
                 JSONArray array = new JSONArray();
                 array.add(json);
                 return array;
-            } else {
+            } else if(null != attributes && attributes.length > 0){
                 int offset = 0;
                 JSONArray array = new JSONArray();
                 {
@@ -104,6 +104,7 @@ public class Body {
                             offset += data.length;
                         } else {
                             attribute.setBytes(bytes);
+                            offset += bytes.length;
                         }
                         attribute.decode();
                         json.put(attribute.getCode(), attribute.getValue());

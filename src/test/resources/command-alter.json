@@ -13,7 +13,7 @@
       {
         "copy": "datetime",
         "name": "最后告警时间",
-        "defaultValue": "170101010101"
+        "defaultValue": "2017-01-01 01:01:01"
       }
     ]
   },
@@ -31,7 +31,7 @@
       {
         "copy": "datetime",
         "name": "最后告警时间",
-        "defaultValue": "170101010101"
+        "defaultValue": "2017-01-01 01:01:01"
       }
     ]
   }

@@ -1,8 +1,9 @@
 package me.snake.tools.adapter;
 
+import me.snake.tools.adapter.sam.ByteBCDTranslator;
 import me.snake.tools.adapter.sam.DateByteTranslator;
 import me.snake.tools.adapter.sam.DateTimeByteTranslator;
-import me.snake.tools.adapter.sam.UserIdTranslator;
+import me.snake.tools.adapter.sam.ShortFloatByteTranslator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,7 +42,8 @@ public class ByteTranslatorManager {
 
             translatorMap.put("date",new DateByteTranslator());
             translatorMap.put("datetime",new DateTimeByteTranslator());
-            translatorMap.put("userId",new UserIdTranslator());
+            translatorMap.put("bcd-byte",new ByteBCDTranslator());
+            translatorMap.put("float-short",new ShortFloatByteTranslator());
         }
         return translatorMap;
     }

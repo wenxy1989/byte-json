@@ -2,6 +2,8 @@ package me.snake.tools.adapter;
 
 import me.snake.tools.utils.ByteUtil;
 
+import java.math.BigDecimal;
+
 /**
  * Created by HP on 2018/5/24.
  */
@@ -12,6 +14,11 @@ public class FloatByteTranslator extends AbstractByteTranslator<Float> {
     private float divisor = 5;
 
     @Override
+    public String getType() {
+        return "float";
+    }
+
+    @Override
     public void setDecimal(int decimal) {
         assert decimal >= 0 && decimal <= 10;
         this.divisor = (float)Math.pow(10, decimal);
@@ -19,10 +26,15 @@ public class FloatByteTranslator extends AbstractByteTranslator<Float> {
 
     @Override
     public byte[] encode(Object value) {
-        if (null != value) {
-            return ByteUtil.long2byte((long) (((Float)value) * divisor));
+        assert value != null;
+        if(value instanceof BigDecimal){
+            return ByteUtil.int2byte((int) (((BigDecimal)value).doubleValue() * divisor));
+        }else if(value instanceof Double){
+            return ByteUtil.int2byte((int) (((Double) value) * divisor));
+        }else if(value instanceof Integer){
+            return ByteUtil.int2byte((int) (((Integer) value) * divisor));
         }
-        return null;
+        return ByteUtil.int2byte((int) (((Float) value) * divisor));
     }
 
     @Override

@@ -5,17 +5,35 @@ import me.snake.tools.adapter.AbstractByteTranslator;
 /**
  * Created by HP on 2018/5/24.
  */
-public class UserIdTranslator extends AbstractByteTranslator<Long> {
+public class ByteBCDTranslator extends AbstractByteTranslator<Long> {
 
-    private int length = 11;
+    protected int length = 6;
+
+    @Override
+    public String getType() {
+        return "bcd-byte";
+    }
+
+    @Override
+    public void setLength(int length) {
+        this.length = length;
+    }
 
     @Override
     public byte[] encode(Object value){
         assert null != value;
-        String userIdString = String.format("%011d",value);
+        String valueString = null;
+        String format = "%(0"+length+"d";
+        if(value instanceof Long){
+            valueString = String.format(format,(Long)value);
+        }else if(value instanceof Integer){
+            valueString = String.format(format,(Integer)value);
+        }else {
+            valueString = (String)value;
+        }
         byte[] bytes = new byte[length];
         for (int i = 0; i < length; i++) {
-            char c = userIdString.charAt(i);
+            char c = valueString.charAt(i);
             bytes[i] = (byte) Integer.parseInt(String.valueOf(c));
         }
         return bytes;

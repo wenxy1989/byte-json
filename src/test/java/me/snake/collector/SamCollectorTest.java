@@ -2,6 +2,7 @@ package me.snake.collector;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.sanmeditech.utils.MD5Util;
 import me.snake.base.Utils;
 import me.snake.base.SocketTool;
 import me.snake.tools.config.Action;
@@ -28,7 +29,7 @@ public class SamCollectorTest {
     private static final String CODE_KEY = "code";
 
 
-    private static String userId = null;
+    private static Long userId = null;
     private static String tempLoginId = null;
     private static String loginId = null;
     private static String mobile = null;
@@ -67,24 +68,26 @@ public class SamCollectorTest {
                 tempLoginId = requestJson.getString("loginName");
             }
             if (requestJson.containsKey("glucose")) {
-                requestJson.put("glucose", requestJson.getDoubleValue("glucose") * 10);
+                requestJson.put("glucose", requestJson.getDoubleValue("glucose") + 10);
             }
-            if (requestJson.containsKey("mobile") || requestJson.containsKey("email")) {
-                return;
+            if (requestJson.containsKey("password-md5")) {
+                requestJson.put("password-md5", MD5Util.encode(requestJson.getString("password-md5")));
             }
+//            if (requestJson.containsKey("mobile") || requestJson.containsKey("email")) {
+//                return;
+//            }
             System.out.println("command : request json : " + requestJson);
             byte[] bytes = content.encode(requestJson);
             byte[] responseBytes = SocketTool.request(bytes);
             System.out.println("command : request byte : " + BCDByteUtil.hexString(bytes));
             System.out.println("command : response byte : " + BCDByteUtil.hexString(responseBytes));
+            System.out.println("command : response code : " + response.getCode());
 
             assert null != (content = Content.decode(responseBytes));
             if (null != content.getBody()) {
                 Head head = content.getHead();
-                if (head.decode()) {
-                    System.out.println(String.format("command : request code : %s  response code : %s  current code : %s", request.getCode(), response.getCode(), ConfigTools.int2Code(head.getCommand())));
-                    assert head.getCommand() == ConfigTools.code2Int(response.getCode());
-                }
+                System.out.println(String.format("command : request code : %s  response code : %s  current code : %s", request.getCode(), response.getCode(), ConfigTools.int2Code(head.getCommand())));
+                assert head.getCommand() == ConfigTools.code2Int(response.getCode());
                 JSONArray array = content.getBody().getJsonArray();
                 assert null != array;
                 JSONObject responseJson = array.getJSONObject(0);
@@ -94,14 +97,14 @@ public class SamCollectorTest {
                         assert responseJson.getIntValue(ERROR_CODE_KEY) == 0;
                         System.out.println("command : response result error code : " + responseJson.getIntValue(ERROR_CODE_KEY));
                         if (responseJson.containsKey("uid")) {
-                            userId = Utils.formatNumber(responseJson.getLong("uid").toString(), 11);
+                            userId = responseJson.getLong("uid");
                             loginId = tempLoginId;
                         }
                     } else if (null != responseJson.get(CODE_KEY)) {
                         assert responseJson.getIntValue(CODE_KEY) == 0;
                         System.out.println("command : response result code : " + responseJson.getIntValue(CODE_KEY));
                         if (responseJson.containsKey("uid")) {
-                            userId = Utils.formatNumber(responseJson.getLong("uid").toString(), 11);
+                            userId = responseJson.getLong("uid");
                             loginId = tempLoginId;
                         }
                     }
@@ -112,6 +115,7 @@ public class SamCollectorTest {
                 System.out.println("command : error happened !!!");
             }
         }
+        System.out.println("command : response end ------------------------------------------------------------");
     }
 
     private void logoutLoginId(String loginId) throws IOException {

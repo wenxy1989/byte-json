@@ -29,20 +29,21 @@
     {
       "name": "Long类型id",
       "code": "id",
-      "type": "userId",
+      "type": "bcd-byte",
+      "byteLength":11,
       "defaultValue": 123456
     },
     {
       "copy": "id",
       "name": "用户ID",
       "code": "userId",
-      "type": "userId",
+      "type": "bcd-byte",
       "defaultValue": 123456
     },
     {
       "name": "验证码",
       "code": "validCode",
-      "type": "bcd",
+      "type": "bcd-byte",
       "byteLength": 6,
       "defaultValue": 985632
     },
@@ -64,7 +65,7 @@
       "name": "注册手机号",
       "copy": "mobile",
       "code": "register-mobile",
-      "defaultValue": "18311050339"
+      "defaultValue": 18311050339
     },
     {
       "name": "注册邮箱",
@@ -90,7 +91,7 @@
       "name": "血糖",
       "code": "glucose",
       "type": "float",
-      "decimal": 2,
+      "decimal": 3,
       "defaultValue": 15.6
     },
     {

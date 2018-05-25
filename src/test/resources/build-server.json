@@ -155,7 +155,7 @@
           "defaultValue": 985632,
           "length": 6,
           "name": "验证码",
-          "type": "bcd"
+          "type": "bcd-byte"
         }
       ],
       "type": "type_byte"
@@ -192,7 +192,7 @@
           "defaultValue": 985632,
           "length": 6,
           "name": "验证码",
-          "type": "bcd"
+          "type": "bcd-byte"
         }
       ],
       "type": "type_byte"
@@ -271,7 +271,7 @@
           "defaultValue": 985632,
           "length": 6,
           "name": "验证码",
-          "type": "bcd"
+          "type": "bcd-byte"
         },
         {
           "code": "password",
@@ -309,7 +309,7 @@
           "defaultValue": 985632,
           "length": 6,
           "name": "验证码",
-          "type": "bcd"
+          "type": "bcd-byte"
         },
         {
           "code": "password",
@@ -647,7 +647,7 @@
           "defaultValue": 985632,
           "length": 6,
           "name": "验证码",
-          "type": "bcd"
+          "type": "bcd-byte"
         }
       ],
       "type": "type_byte"
@@ -673,7 +673,7 @@
           "defaultValue": 985632,
           "length": 6,
           "name": "验证码",
-          "type": "bcd"
+          "type": "bcd-byte"
         }
       ],
       "type": "type_byte"

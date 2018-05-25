@@ -20,7 +20,7 @@ public class ConfigTools {
 
 
     public static String int2Code(int command) {
-        byte[] bytes = ByteUtil.int2byte(command);
+        byte[] bytes = ByteUtil.short2byte((short)command);
         return BCDByteUtil.hexString(bytes);
     }
 

@@ -10,11 +10,17 @@ public class ShortByteTranslator extends AbstractByteTranslator<Short> {
     private static final int length = 2;
 
     @Override
+    public String getType() {
+        return "short";
+    }
+
+    @Override
     public byte[] encode(Object value) {
-        if (null != value) {
-            return ByteUtil.int2byte((Short)value);
+        assert (null != value);
+        if (value instanceof Integer) {
+            return ByteUtil.short2byte(((Integer) value).shortValue());
         }
-        return null;
+        return ByteUtil.short2byte((Short) value);
     }
 
     @Override

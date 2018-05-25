@@ -17,6 +17,11 @@ public class DateByteTranslator extends AbstractByteTranslator<String> {
     private static final int length = 4;
 
     @Override
+    public String getType() {
+        return "date";
+    }
+
+    @Override
     public byte[] encode(Object value) {
         assert null != value;
         try {

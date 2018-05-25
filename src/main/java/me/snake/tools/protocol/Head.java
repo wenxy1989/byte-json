@@ -64,12 +64,11 @@ public class Head {
     }
 
     public boolean decode() {
-        System.out.println(BCDByteUtil.hexString(bytes));
         if (null != bytes && bytes.length == head_length) {
-            version = (bytes[0] << byte_bit_length) | bytes[1] & 0xFF;
-            serial = (bytes[2] << byte_bit_length) | bytes[3] & 0xFF;
-            command = (bytes[4] << byte_bit_length) | bytes[5] & 0xFF;
-            length = (bytes[6] << byte_bit_length) | bytes[7] & 0xFF;
+            version = (bytes[0] << byte_bit_length) | (bytes[1] & 0xFF);
+            serial = (bytes[2] << byte_bit_length) | (bytes[3] & 0xFF);
+            command = (bytes[4] << byte_bit_length) | (bytes[5] & 0xFF);
+            length = (bytes[6] << byte_bit_length) | (bytes[7] & 0xFF);
             return true;
         }
         return false;

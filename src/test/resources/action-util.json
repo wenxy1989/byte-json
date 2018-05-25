@@ -5,12 +5,6 @@
       "index": 0,
       "request": "0201",
       "response": "9201"
-    },
-    {
-      "name":"手机日志上传",
-      "index": 0,
-      "request": "0500",
-      "response": "9001"
     }
   ]
 }
