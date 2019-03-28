@@ -1,0 +1,32 @@
+[
+  {
+    "head":{
+
+    }
+  },
+  {
+    "request":{
+      "name":"获取版本号",
+      "code":"get-version",
+      "type":"json",
+      "data":[
+        {
+          "code":12,
+          "name":"abc-version",
+          "time":"20180330"
+        }
+      ]
+    },
+    "response":{
+      "name":"版本号",
+      "code":"version",
+      "type":"json",
+      "data":[
+        {
+          "version":"protocol-version",
+          "time":"20180330"
+        }
+      ]
+    }
+  }
+]

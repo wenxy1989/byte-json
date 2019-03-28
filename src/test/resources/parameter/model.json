@@ -1,0 +1,7 @@
+{
+  "models": [
+    {
+      "glucose": [ "userId","datetime","current","glucose"]
+    }
+  ]
+}

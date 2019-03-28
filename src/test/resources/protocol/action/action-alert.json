@@ -1,0 +1,46 @@
+{
+  "action": [
+    {
+      "name":"患者告警参数推送",
+      "index": 10,
+      "request": "0308",
+      "response": "9301"
+    },
+    {
+      "name":"佩戴超时告警上传",
+      "index": 11,
+      "request": "0404",
+      "response": "9001"
+    },
+    {
+      "name":"持续高电流告警上传",
+      "index": 12,
+      "request": "0405",
+      "response": "9001"
+    },
+    {
+      "name":"持续低电流告警上传",
+      "index": 13,
+      "request": "0405",
+      "response": "9001"
+    },
+    {
+      "name":"获取关注患者待处理告警推送",
+      "index": 14,
+      "request": "0312",
+      "response": "9305"
+    },
+    {
+      "name":"确认告警已处理",
+      "index": 14,
+      "request": "0313",
+      "response": "9306"
+    },
+    {
+      "name":"通知上级处理",
+      "index": 15,
+      "request": "0314",
+      "response": "9307"
+    }
+  ]
+}

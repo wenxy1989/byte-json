@@ -1,0 +1,88 @@
+{
+  "action": [
+    {
+      "name":"用户注销",
+      "index": 0,
+      "request": "0240",
+      "response": "9001"
+    },
+    {
+      "name":"用户名注册",
+      "index": 1,
+      "request": "0202",
+      "response": "9202"
+    },
+    {
+      "name":"手机验证码（注册/绑定）",
+      "index": 2,
+      "request": "0205",
+      "response": "9205"
+    },
+    {
+      "name":"邮箱验证码（注册/绑定）",
+      "index": 2,
+      "request": "0206",
+      "response": "9206"
+    },
+    {
+      "name":"绑定手机号",
+      "index": 3,
+      "request": "0214",
+      "response": "9214"
+    },
+    {
+      "name":"绑定邮箱",
+      "index": 3,
+      "request": "0215",
+      "response": "9215"
+    },
+    {
+      "name":"重置密码验证码（手机号）",
+      "index": 4,
+      "request": "0209",
+      "response": "9209"
+    },
+    {
+      "name":"重置密码验证码（邮箱）",
+      "index": 4,
+      "request": "0210",
+      "response": "9210"
+    },
+    {
+      "name":"重置密码（手机号）",
+      "index": 5,
+      "request": "0207",
+      "response": "9207"
+    },
+    {
+      "name":"重置密码（邮箱）",
+      "index": 5,
+      "request": "0208",
+      "response": "9208"
+    },
+    {
+      "name":"用户登录",
+      "index": 6,
+      "request": "0212",
+      "response": "9212"
+    },
+    {
+      "name":"修改密码",
+      "index": 6,
+      "request": "0211",
+      "response": "9211"
+    },
+    {
+      "name":"获取用户信息",
+      "index": 7,
+      "request": "0213",
+      "response": "9213"
+    },
+    {
+      "name":"上传用户信息",
+      "index": 7,
+      "request": "0216",
+      "response": "9216"
+    }
+  ]
+}

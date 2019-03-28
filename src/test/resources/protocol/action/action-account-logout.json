@@ -1,0 +1,22 @@
+{
+  "action": [
+    {
+      "name":"用户注销",
+      "index": 0,
+      "request": "0240",
+      "response": "9001"
+    },
+    {
+      "name":"用户注销(邮箱)",
+      "index": 0,
+      "request": "0241",
+      "response": "9001"
+    },
+    {
+      "name":"用户注销(手机号)",
+      "index": 0,
+      "request": "0242",
+      "response": "9001"
+    }
+  ]
+}

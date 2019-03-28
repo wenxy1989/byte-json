@@ -1,0 +1,31 @@
+{
+  "command":[
+    {
+      "code": "0312",
+      "name": "获取关注告警（待处理）",
+      "type": "byte",
+      "parameter": ["loginId","password","datetime",{
+        "scope": "index",
+        "code": "name"
+      } ]
+    },
+    {
+      "code": "0313",
+      "name": "关注告警（待处理）",
+      "type": "byte",
+      "parameter": [
+        {
+          "copy": "loginId"
+        },
+        {
+          "copy": "password"
+        },
+        {
+          "copy": "datetime",
+          "name": "最后告警时间",
+          "defaultValue": "170101010101"
+        }
+      ]
+    }
+  ]
+}

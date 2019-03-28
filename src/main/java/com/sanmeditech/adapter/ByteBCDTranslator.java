@@ -1,6 +1,6 @@
 package com.sanmeditech.adapter;
 
-import snake.tools.adapter.AbstractByteTranslator;
+import snake.tools.mina.adapter.AbstractByteTranslator;
 
 /**
  * Created by HP on 2018/5/24.

@@ -1,6 +1,6 @@
 package com.sanmeditech.adapter;
 
-import snake.tools.adapter.AbstractByteTranslator;
+import snake.tools.mina.adapter.AbstractByteTranslator;
 import snake.tools.utils.BCDByteUtil;
 
 import java.text.ParseException;

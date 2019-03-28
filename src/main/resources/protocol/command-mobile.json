@@ -1,0 +1,45 @@
+[
+  {
+    "code": "0500",
+    "name": "手机日志上传",
+    "type": "json",
+    "parameter": [
+      {
+        "code": "sys",
+        "name": "系统信息",
+        "javaType": "string",
+        "defaultValue": "ios 10.02"
+      },
+      {
+        "code": "mobile",
+        "name": "手机型号",
+        "javaType": "string",
+        "defaultValue": "iphone6s"
+      },
+      {
+        "code": "version",
+        "name": "客户端版本",
+        "javaType": "string",
+        "defaultValue": "2.0.1.20180104"
+      },
+      {
+        "code": "time",
+        "name": "时间",
+        "javaType": "string",
+        "defaultValue": "2018-1-4 17:10:11"
+      },
+      {
+        "code": "content",
+        "name": "内容",
+        "javaType": "string",
+        "defaultValue": "error at ...."
+      },
+      {
+        "code": "user",
+        "name": "登录名",
+        "javaType": "string",
+        "defaultValue": ""
+      }
+    ]
+  }
+]
