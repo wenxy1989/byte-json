@@ -3,12 +3,12 @@ package me.snake.config;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import me.snake.base.SocketTool;
-import me.snake.tools.config.Command;
-import me.snake.tools.config.Parameter;
-import me.snake.tools.config.Server;
-import me.snake.tools.adapter.ConfigTools;
-import me.snake.tools.protocol.Content;
-import me.snake.tools.utils.FileStringUtils;
+import snake.tools.config.Command;
+import snake.tools.config.Parameter;
+import snake.tools.config.Server;
+import snake.tools.protocol.ConfigTools;
+import snake.tools.protocol.Content;
+import snake.tools.utils.FileStringUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
