@@ -1,7 +1,7 @@
 package com.sanmeditech.adapter;
 
-import snake.tools.mina.adapter.AbstractByteTranslator;
-import snake.tools.utils.ByteUtil;
+import com.snake.tools.mina.adapter.AbstractByteTranslator;
+import com.snake.tools.utils.ByteUtil;
 
 import java.math.BigDecimal;
 

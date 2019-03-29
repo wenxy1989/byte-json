@@ -1,7 +1,7 @@
 package com.snake.tools.test;
 
-import snake.tools.mina.protocol.Content;
-import snake.tools.utils.BCDByteUtil;
+import com.snake.tools.mina.protocol.Content;
+import com.snake.tools.utils.BCDByteUtil;
 import org.junit.Test;
 
 import java.io.IOException;

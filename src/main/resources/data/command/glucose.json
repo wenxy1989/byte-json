@@ -1,0 +1,20 @@
+{
+  "name":"血糖信息",
+  "code":2333,
+  "data":{
+    "userId":35,
+    "sensor":"01939",
+    "emitter":"TH-0001",
+    "glucose":[
+      {"value":6.5,"current":353.3,"collectedTime":"2019-03-28 12:35:23"},
+      {"value":6.5,"current":353.3,"collectedTime":"2019-03-28 12:38:23"},
+      {"value":6.5,"current":353.3,"collectedTime":"2019-03-28 12:41:23"},
+      {"value":6.5,"current":353.3,"collectedTime":"2019-03-28 12:44:23"},
+      {"value":6.5,"current":353.3,"collectedTime":"2019-03-28 12:47:23"},
+      {"value":6.5,"current":353.3,"collectedTime":"2019-03-28 12:50:23"},
+      {"value":6.5,"current":353.3,"collectedTime":"2019-03-28 12:53:23"},
+      {"value":6.5,"current":353.3,"collectedTime":"2019-03-28 12:56:23"},
+      {"value":6.5,"current":353.3,"collectedTime":"2019-03-28 12:59:23"}
+    ]
+  }
+}

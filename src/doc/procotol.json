@@ -1,0 +1,44 @@
+[{
+  "name":"server",
+  "code":"server",
+  "description":"",
+  "children":[
+    {
+      "name":"type",
+      "description":"数据类型，可选值：int,char,long,short,float,double,string,date"
+    }
+  ]
+},
+  {
+    "name":"信息头部标识",
+    "code":"start",
+    "description":"信息头部标识"
+  },
+  {
+    "name":"消息体",
+    "code":"body",
+    "description":"包含消息所有信息的部分",
+    "children":[
+      {
+        "name":"信息头",
+        "code":"head",
+        "description":"数据类型，可选值：int,char,long,short,float,double,string,date"
+      },
+      {
+        "name":"数据信息",
+        "code":"data",
+        "description":"数据类型，可选值：int,char,long,short,float,double,string,date"
+      },
+      {
+        "name":"校验信息",
+        "code":"check",
+        "description":"数据类型，可选值：int,char,long,short,float,double,string,date"
+      }
+    ]
+  },
+  {
+    "name":"信息尾部标识",
+    "code":"end",
+    "description":"信息尾部标识"
+  }
+]

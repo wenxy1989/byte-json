@@ -1,6 +1,6 @@
 package com.snake.tools.test;
 
-import snake.tools.utils.BCDByteUtil;
+import com.snake.tools.utils.BCDByteUtil;
 import org.junit.Test;
 
 /**
