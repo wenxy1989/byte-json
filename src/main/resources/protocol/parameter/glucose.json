@@ -1,5 +1,29 @@
 {
   "parameter":[
-
+    {
+      "name": "时间",
+      "code": "datetime",
+      "type": "datetime"
+    },
+    {
+      "name": "电流",
+      "code": "current",
+      "javaType": "double"
+    },
+    {
+      "name": "血糖",
+      "code": "glucose",
+      "javaType": "double"
+    },
+    {
+      "name": "发射器",
+      "code": "emitter",
+      "type": "blankString"
+    },
+    {
+      "name": "传感器",
+      "code": "sensor",
+      "type": "blankString"
+    }
   ]
 }

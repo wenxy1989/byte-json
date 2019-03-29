@@ -3,7 +3,7 @@
     {
       "name":"版本号",
       "code":"version",
-      "jsType":"string",
+      "jsonType":"string",
       "jsLength":1,
       "translateType":"int16-byte",
       "javaType":"byte",
@@ -12,7 +12,7 @@
     {
       "name":"流水号",
       "code":"start",
-      "jsType":"number",
+      "jsonType":"number",
       "jsLength":1,
       "translateType":"int16-byte",
       "javaType":"int",
@@ -21,7 +21,7 @@
     {
       "name":"命令字",
       "code":"code",
-      "jsType":"string",
+      "jsonType":"string",
       "jsLength":1,
       "translateType":"int16-byte",
       "javaType":"int",
@@ -30,7 +30,7 @@
     {
       "name":"消息体长度",
       "code":"body",
-      "jsType":"number",
+      "jsonType":"number",
       "jsLength":1,
       "translateType":"int16-byte",
       "javaType":"int",

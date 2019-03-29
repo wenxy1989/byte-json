@@ -3,7 +3,7 @@
     {
       "name":"开始标识",
       "code":"start",
-      "jsType":"string",
+      "jsonType":"string",
       "jsLength":1,
       "translateType":"int16-byte",
       "javaType":"byte",
@@ -17,7 +17,7 @@
     {
       "name":"校验标识",
       "code":"end",
-      "jsType":"string",
+      "jsonType":"string",
       "jsLength":1,
       "javaType":"byte",
       "javaByteLength":1
@@ -25,7 +25,7 @@
     {
       "name":"结束标识",
       "code":"end",
-      "jsType":"byteString",
+      "jsonType":"byteString",
       "jsLength":1,
       "javaType":"byte",
       "javaByteLength":1

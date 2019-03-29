@@ -2,58 +2,58 @@
   "type":[
     {
       "code":"bool",
-      "jsType":"number",
-      "translate":"number-byte",
+      "jsonType":"number",
+      "translate":["int-byte","byte-int"],
       "javaType":"byte",
       "byteLength":1,
       "values":[0,1]
     },
     {
       "code":"byte",
-      "jsType":"number",
-      "translate":"number-byte",
+      "jsonType":"number",
+      "translate":["int-byte","byte-int"],
       "javaType":"byte",
       "byteLength":1
     },
     {
       "code":"char",
-      "jsType":"string",
-      "translate":"string-char",
+      "jsonType":"string",
+      "translate":["string-char","char-byte","byte-char"],
       "javaType":"char",
       "byteLength":2
     },
     {
       "code":"short",
-      "jsType":"number",
-      "translate":"number-short",
-      "javaType":"intger",
+      "jsonType":"number",
+      "translate":["short-byte","byte-short"],
+      "javaType":"integer",
       "byteLength":2
     },
     {
       "code":"int",
-      "jsType":"number",
-      "translate":"number-integer",
-      "javaType":"intger",
+      "jsonType":"number",
+      "translate":["int-byte","byte-int"],
+      "javaType":"integer",
       "byteLength":4
     },
     {
       "code":"float",
-      "jsType":"number",
-      "translate":"number-float",
+      "jsonType":"number",
+      "translate":["float-decimal-int","int-byte","byte-int","int-decimal-float"],
       "javaType":"float",
       "byteLength":4
     },
     {
       "code":"double",
-      "jsType":"number",
-      "translate":"number-double",
+      "jsonType":"number",
+      "translate":["double-decimal-long","long-byte","byte-long","long-decimal-double"],
       "javaType":"double",
       "byteLength":8
     },
     {
       "code":"long",
-      "jsType":"number",
-      "translate":"number-long",
+      "jsonType":"number",
+      "translate":["long-byte","byte-long"],
       "javaType":"long",
       "byteLength":8
     }

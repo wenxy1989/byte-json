@@ -1,0 +1,42 @@
+{
+  "type": [
+    {
+      "code":"id",
+      "jsonType":"string",
+      "translate":"string-long",
+      "javaType":"long",
+      "byteLength":11
+    },
+    {
+      "code":"blankString",
+      "jsonType":"string",
+      "translate":"string-byte-blank-string",
+      "javaType":"string",
+      "translate": ["string-byte","byte-fill-blank","byte-string","string-trim"],
+      "byteLength":-1
+    },
+    {
+      "code":"datetime",
+      "jsonType":"string",
+      "translate":"datetime-string-bcd-string-datetime",
+      "javaType":"string",
+      "byteLength":6
+    },
+    {
+      "code":"glucose",
+      "jsonType":"double",
+      "decimal": 2,
+      "translate":"double-integer-double",
+      "javaType":"double",
+      "byteLength":4
+    },
+    {
+      "code":"current",
+      "jsonType":"double",
+      "decimal": 2,
+      "translate":"double-integer-double",
+      "javaType":"double",
+      "byteLength":4
+    }
+  ]
+}

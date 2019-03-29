@@ -1,0 +1,11 @@
+{
+  "type":[
+    {
+      "code": "string",
+      "jsonType":"string",
+      "translate":["string-byte","byte-head-length","byte-length-string"],
+      "javaType":"string",
+      "byteLength":-1
+    }
+  ]
+}
