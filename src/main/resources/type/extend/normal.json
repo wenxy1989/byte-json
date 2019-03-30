@@ -6,6 +6,12 @@
       "translate":["string-byte","byte-head-length","byte-length-string"],
       "javaType":"string",
       "byteLength":-1
+    },{
+      "code": "byte16",
+      "translate":["string-byte"],
+      "jsonType":"string",
+      "javaType":"byte",
+      "javaByteLength":1
     }
   ]
 }

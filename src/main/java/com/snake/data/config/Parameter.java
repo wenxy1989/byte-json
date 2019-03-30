@@ -5,11 +5,14 @@ public class Parameter {
     private String name;
     private String code;
     private String type;
-    private String[] children;
 
     private Type parameterType;
+    private Parameter[] modelContent;
+    private Object valueProvider;
 
-    private Parameter[] parameterChildren;
+    public boolean isModel(){
+        return this.modelContent != null && this.modelContent.length > 0;
+    }
 
     public String getName() {
         return name;
@@ -35,14 +38,6 @@ public class Parameter {
         this.type = type;
     }
 
-    public String[] getChildren() {
-        return children;
-    }
-
-    public void setChildren(String[] children) {
-        this.children = children;
-    }
-
     public Type getParameterType() {
         return parameterType;
     }
@@ -51,11 +46,19 @@ public class Parameter {
         this.parameterType = parameterType;
     }
 
-    public Parameter[] getParameterChildren() {
-        return parameterChildren;
+    public Parameter[] getModelContent() {
+        return modelContent;
     }
 
-    public void setParameterChildren(Parameter[] parameterChildren) {
-        this.parameterChildren = parameterChildren;
+    public void setModelContent(Parameter[] modelContent) {
+        this.modelContent = modelContent;
+    }
+
+    public Object getValueProvider() {
+        return valueProvider;
+    }
+
+    public void setValueProvider(Object valueProvider) {
+        this.valueProvider = valueProvider;
     }
 }

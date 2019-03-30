@@ -14,31 +14,33 @@ public class TranslatorManager {
     }
 
     public boolean addTranslator(Translator translator){
-        this.translatorMap.put(translator.getCode(),translator);
-        return true;//todo
+        if(null == this.translatorMap.get(translator.getCode())) {
+            this.translatorMap.put(translator.getCode(), translator);
+            return true;
+        }
+        return false;
     }
 
     public Translator getTranslator(String code){
         return this.translatorMap.get(code);
     }
 
-    public TranslateChain getTranslateChain(Type type,boolean debug) throws Exception {
-        TranslateChain chain = new TranslateChain(type,debug);
-        Translator[] translators = new Translator[type.getTranslatorChain().length];
-        for(int i=0;i<type.getTranslatorChain().length;i++){
-            translators[i] = this.getTranslator(type.getTranslatorChain()[i]);
+    public TranslateChain getTranslateChain(Config config,String... translateChain) throws Exception {
+        if(null == config){
+            throw new Exception("config can not been null");
+        }
+        TranslateChain chain = new TranslateChain(config,translateChain);
+        Translator[] translators = new Translator[translateChain.length];
+        for(int i=0;i<translateChain.length;i++){
+            translators[i] = this.getTranslator(translateChain[i]);
             if(translators[i] != null) {
-                translators[i].setConfig(type);//todo
-                translators[i].debug(debug);
+                translators[i].setConfig(config);
             }else{
-                throw new Exception("not found translate for code : "+ type.getTranslatorChain()[i]); //todo
+                throw new Exception("not found translate for code : "+ translateChain[i]);
             }
         }
         chain.setTranslators(translators);
         return chain;
     }
 
-    public TranslateChain getTranslateChain(Type type) throws Exception {
-        return this.getTranslateChain(type,false);
-    }
 }

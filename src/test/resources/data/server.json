@@ -1,0 +1,28 @@
+{
+  "sanmeditech": {
+    "start": "0x5B",
+    "content":{
+      "head":{
+        "version": "0401",
+        "index": "111",
+        "code":"0301",
+        "length":1111
+      },
+      "body":{
+        "userId":35,
+        "emitter":"TH-01XX",
+        "sensor":"CB01XX",
+        "glucose":[
+          {"value":3.5,"current":356.3,"time":"2019-01-12 12:35:23"},
+          {"value":3.6,"current":356.3,"time":"2019-01-12 12:38:23"},
+          {"value":3.22,"current":356.3,"time":"2019-01-12 12:41:23"},
+          {"value":3.23,"current":356.3,"time":"2019-01-12 12:44:23"},
+          {"value":3.5,"current":356.3,"time":"2019-01-12 12:47:23"},
+          {"value":3.6,"current":356.3,"time":"2019-01-12 12:50:23"}
+        ]
+      }
+    },
+    "check":"0x34",
+    "end":"0x5D"
+  }
+}

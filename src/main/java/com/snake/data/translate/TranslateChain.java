@@ -11,14 +11,9 @@ public class TranslateChain extends AbstractTranslator implements Translator {
     private Object output;
     private Translator[] translators;
 
-    public TranslateChain(Type type) {
-        super(type);
-        this.code = Arrays.toString(type.getTranslatorChain());
-    }
-
-    public TranslateChain(Type type,boolean debug) {
-        this(type);
-        this.debug(debug);
+    public TranslateChain(Config config,String... translateChain) {
+        super(config);
+        this.code = Arrays.toString(translateChain);
     }
 
     public Translator[] getTranslators() {

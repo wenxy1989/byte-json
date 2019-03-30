@@ -28,8 +28,8 @@ public class CommandTests {
     @BeforeClass
     public static void init() throws IOException {
         parameterMap = new HashMap<String, Parameter>();
-        JSONObject sourceJson = FileStringUtils.readClassPathJSONObject("protocol/parameter");
-        JSONArray parameterJsonArray = sourceJson.getJSONArray("protocol/parameter");
+        JSONObject sourceJson = FileStringUtils.readClassPathJSONObject("parameter");
+        JSONArray parameterJsonArray = sourceJson.getJSONArray("parameter");
         Server.buildParameters(parameterJsonArray,parameterMap);
     }
 

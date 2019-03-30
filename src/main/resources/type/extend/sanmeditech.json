@@ -12,7 +12,7 @@
       "jsonType":"string",
       "translate":"string-byte-blank-string",
       "javaType":"string",
-      "translate": ["string-byte","byte-fill-blank","byte-string","string-trim"],
+      "translate": ["string-byte","byte-full-length","byte-string","string-trim"],
       "byteLength":-1
     },
     {

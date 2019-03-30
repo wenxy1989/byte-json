@@ -1,0 +1,16 @@
+{
+  "code":"content",
+  "type":"model",
+  "children":[{
+    "name":"消息头",
+    "code":"head",
+    "type":"model",
+    "reference":"head"
+  },{
+    "name":"消息体",
+    "code":"body",
+    "type":"model",
+    "reference":"body"
+  }]
+
+}

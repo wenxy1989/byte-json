@@ -3,13 +3,13 @@ package com.snake.data.translate.function;
 import com.snake.data.translate.AbstractTranslator;
 import com.snake.data.translate.Translator;
 
-public class FIllBlankTranslator extends AbstractTranslator implements Translator {
+public class ByteFullLengthTranslator extends AbstractTranslator implements Translator {
 
     private byte[] input;
     private byte[] output;
 
-    public FIllBlankTranslator() {
-        this.code = "byte-fill-blank";
+    public ByteFullLengthTranslator() {
+        this.code = "byte-full-length";
     }
 
     @Override
@@ -20,8 +20,8 @@ public class FIllBlankTranslator extends AbstractTranslator implements Translato
 
     @Override
     public void doTranslate() throws Exception {
-        this.output = new byte[this.config.getByteLength()];
-        System.arraycopy(this.input, 0, this.output, this.config.getByteLength() - this.input.length, this.input.length);
+        this.output = new byte[this.config.getType().getByteLength()];
+        System.arraycopy(this.input, 0, this.output, this.config.getType().getByteLength() - this.input.length, this.input.length);
     }
 
     @Override

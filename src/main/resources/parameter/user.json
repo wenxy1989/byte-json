@@ -1,11 +1,11 @@
 {
-  "parameter": [
+  "code":"user",
+  "children":[
     {
-      "code": "string",
-      "javaType": "string",
-      "byteType": "string",
-      "byteLength": 0,
-      "defaultValue": ""
+      "name": "Long类型id",
+      "code": "id",
+      "type": "blankString",
+      "byteLength": 11
     },
     {
       "name": "登录名",
@@ -18,17 +18,6 @@
       "code": "password",
       "type": "blankString",
       "byteLength": 32
-    },
-    {
-      "name": "Long类型id",
-      "code": "id",
-      "type": "blankString",
-      "byteLength": 11
-    },
-    {
-      "copy": "id",
-      "name": "用户ID",
-      "code": "userId"
     },
     {
       "name": "验证码",

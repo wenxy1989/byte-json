@@ -1,0 +1,9 @@
+{
+  "code":"glucose",
+  "children":[
+    "userId","emitter","sensor",{
+      "array":true,
+      "children":["value","current","time"]
+    }
+  ]
+}

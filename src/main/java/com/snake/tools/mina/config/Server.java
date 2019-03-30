@@ -85,7 +85,7 @@ public class Server {
     }
 
     public Server buildParameters() throws IOException {
-        JSONArray parameterArray = jsonConfig.getJSONArray("protocol/parameter");
+        JSONArray parameterArray = jsonConfig.getJSONArray("parameter");
         buildJSONArrayImports(parameterArray, jsonConfig.getJSONArray("parameter-import"));
         List<Parameter> list = buildParameters(parameterArray, this.parameterMap);
         /*if (null != list && list.size() > 0) {
@@ -212,7 +212,7 @@ public class Server {
         command.setCode(json.getString("code"));
         command.setName(json.getString("name"));
         command.setType(json.getString("type"));
-        List<Parameter> parameters = buildParameters(json.getJSONArray("protocol/parameter"), parameterMap);
+        List<Parameter> parameters = buildParameters(json.getJSONArray("parameter"), parameterMap);
         command.setParameters(parameters);
         commandMap.put(command.getCode(), command);
         return command;

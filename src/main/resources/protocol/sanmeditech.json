@@ -1,0 +1,20 @@
+{
+  "code":"command",
+  "scope":"request",
+  "children":[
+    "start",
+    {
+      "code":"content",
+      "children":[
+        {
+          "code":"head",
+          "scope":"head",
+          "children":["version","number","command","length"]
+        },
+        "body"
+      ]
+    },
+    "check",
+    "end"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "code":"head",
+  "type":"model",
+  "children":[
+    {
+      "name":"版本号",
+      "code":"version",
+      "type":"bcd4"
+    },
+    {
+      "name":"流水号",
+      "code":"number",
+      "type":"short"
+    },
+    {
+      "name":"命令字",
+      "code":"code",
+      "type":"bcd4"
+    },
+    {
+      "name":"消息体长度",
+      "code":"length",
+      "type":"short"
+    }
+  ]
+}

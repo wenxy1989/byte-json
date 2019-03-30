@@ -6,28 +6,23 @@ import java.util.Arrays;
 
 public abstract class AbstractTranslator implements Translator {
 
-    private boolean debug = false;
     protected String code;
-    protected Type config;
+    protected Config config;
 
     public AbstractTranslator(){}
 
-    public AbstractTranslator(Type config){
+    public AbstractTranslator(Config config){
         this.config = config;
     }
 
     @Override
-    public void setConfig(Type config) {
+    public void setConfig(Config config) {
         this.config = config;
     }
 
     @Override
     public String getCode() {
         return this.code;
-    }
-
-    public void debug(boolean debug) {
-        this.debug = debug;
     }
 
     public void prepareTranslate(){
@@ -44,7 +39,7 @@ public abstract class AbstractTranslator implements Translator {
     public abstract void doTranslate() throws Exception;
 
     public void afterTranslate(){
-        if(this.debug) {
+        if(this.config.isDebug()) {
             this.printOutput();
         }
     }

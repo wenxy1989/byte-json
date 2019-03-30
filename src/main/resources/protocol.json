@@ -1,762 +1,220 @@
 {
-  "import": ["parameter"],
-  "address": "yun.sanmeditech.com",
-  "port": 30007,
-  "command-import": [
-    "command-hospital",
-    "command-mobile"
-  ],
-  "command": [
+  "parameter":[
     {
-      "code": "0201",
-      "name": "检查客户端版本",
-      "type": "byte",
-      "parameter": [
+      "name":"开始标识",
+      "code":"start",
+      "type":"byte",
+      "translateToByte":[],
+      "translateToType":[],
+      "byteLength":1,
+      "jsonType":"hex",
+      "javaType":"byte",
+      "jsonValue":"0x5b",
+      "javaValue":115
+    },
+    {
+      "name":"传输信息",
+      "code":"info",
+      "type":"translate",
+      "translateToByte":["encode"],
+      "translateToType":["decode"],
+      "content":[
         {
-          "copy": "string",
-          "name": "客户端版本",
-          "code": "version",
-          "defaultValue": "3.0v20171225"
+          "name":"消息内容",
+          "code":"content",
+          "type":"object",
+          "jsonType":"object",
+          "javaType":"jsonObject",
+          "byteLength":{
+            "provider":""
+          },
+          "jsonValue":{
+            "provider":""
+          },
+          "javaValue":{
+            "provider":""
+          },
+          "content":[
+            {
+              "name":"消息头",
+              "code":"head",
+              "jsonType":"object",
+              "javaType":"jsonObject",
+              "byteLength":{
+                "provider":""
+              },
+              "jsonValue":{
+                "provider":""
+              },
+              "javaValue":{
+                "provider":""
+              },
+              "content":[
+                {
+                  "name":"版本信息",
+                  "code":"version",
+                  "type":"short",
+                  "translateToByte":[],
+                  "translateToType":[],
+                  "jsonType":"int",
+                  "javaType":"integer",
+                  "byteLength":2,
+                  "jsonValue":{
+                    "provider":""
+                  },
+                  "javaValue":{
+                    "provider":""
+                  }
+                },
+                {
+                  "name":"消息流水号",
+                  "code":"number",
+                  "type":"short",
+                  "jsonType":"int",
+                  "javaType":"integer",
+                  "byteLength":2,
+                  "jsonValue":{
+                    "provider":""
+                  },
+                  "javaValue":{
+                    "provider":""
+                  }
+                },
+                {
+                  "name":"消息命令",
+                  "code":"command",
+                  "type":"short",
+                  "jsonType":"int",
+                  "javaType":"integer",
+                  "byteLength":2,
+                  "jsonValue":{
+                    "provider":""
+                  },
+                  "javaValue":{
+                    "provider":""
+                  }
+                },
+                {
+                  "name":"消息体长度",
+                  "code":"length",
+                  "type":"short",
+                  "jsonType":"int",
+                  "javaType":"integer",
+                  "byteLength":2,
+                  "jsonValue":{
+                    "provider":"body-length"
+                  }
+                }
+              ]
+            },
+            {
+              "name":"消息体",
+              "code":"content",
+              "jsonType":"object",
+              "javaType":"jsonObject",
+              "byteLength":{
+                "provider":""
+              },
+              "jsonValue":{
+                "provider":""
+              },
+              "javaValue":{
+                "provider":""
+              },
+              "content":[
+                {
+                  "name":"用户登陆名",
+                  "code":"loginId",
+                  "type":"string",
+                  "translateToByte":["string-byte","byte-add-length"],
+                  "translateToType":["byte-length-byte","byte-string"],
+                  "jsonType":"string",
+                  "javaType":"string",
+                  "byteLength":{
+                    "provider":""
+                  },
+                  "jsonValue":{
+                    "provider":""
+                  },
+                  "javaValue":{
+                    "provider":""
+                  }
+                },
+                {
+                  "name":"用户登陆密码",
+                  "code":"password",
+                  "type":"string",
+                  "translateToByte":["string-byte","byte-full-length"],
+                  "translateToType":["byte-string","string-trim"],
+                  "jsonType":"string",
+                  "javaType":"string",
+                  "byteLength":40,
+                  "jsonValue":{
+                    "provider":""
+                  }
+                },
+                {
+                  "name":"血糖值",
+                  "code":"glucose",
+                  "type":"float",
+                  "translateToByte":["float-decimal-int","int-byte"],
+                  "translateToType":["byte-int","int-decimal-float"],
+                  "decimal":3,
+                  "jsonType":"double",
+                  "javaType":"string",
+                  "byteLength":{
+                    "provider":""
+                  },
+                  "value":{
+                    "provider":""
+                  },
+                  "javaValue":{
+                    "provider":""
+                  }
+                },
+                {
+                  "name":"采集时间",
+                  "code":"time",
+                  "type":"string",
+                  "translateToByte":["sam-datetime-number","number-bcd"],
+                  "translateToType":["bcd-number","number-sam-datetime"],
+                  "jsonType":"string",
+                  "javaType":"string",
+                  "byteLength":{
+                    "provider":""
+                  },
+                  "jsonValue":{
+                    "provider":""
+                  },
+                  "javaValue":{
+                    "provider":""
+                  }
+                }
+              ]
+            },
+            {
+              "name":"校验标识",
+              "code":"check",
+              "jsonType":"string-hex",
+              "javaType":"byte",
+              "byteLength":1,
+              "byteValue":{
+                "source":"content",
+                "provider":"byte-check"
+              }
+            }
+          ]
         }
       ]
     },
     {
-      "code": "0202",
-      "name": "用户登录名注册",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "loginId"
-        },
-        {
-          "copy": "password"
-        }
-      ]
-    },
-    {
-      "code": "0203",
-      "name": "手机号注册",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "mobile"
-        },
-        {
-          "copy": "password"
-        },
-        {
-          "copy": "validCode"
-        }
-      ]
-    },
-    {
-      "code": "0204",
-      "name": "邮箱注册",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "email"
-        },
-        {
-          "copy": "password"
-        },
-        {
-          "copy": "validCode"
-        }
-      ]
-    },
-    {
-      "code": "0205",
-      "name": "获取(手机注册/手机绑定)验证码",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "mobile"
-        }
-      ]
-    },
-    {
-      "code": "0206",
-      "name": "获取(邮箱注册/邮箱绑定)验证码",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "email"
-        }
-      ]
-    },
-    {
-      "code": "0207",
-      "name": "重置密码(手机)",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "mobile"
-        },
-        {
-          "copy": "validCode"
-        },
-        {
-          "copy": "password"
-        }
-      ]
-    },
-    {
-      "code": "0208",
-      "name": "重置密码(邮箱)",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "mobile"
-        },
-        {
-          "copy": "validCode"
-        },
-        {
-          "copy": "password"
-        }
-      ]
-    },
-    {
-      "code": "0209",
-      "name": "获取验证码(手机重置密码)",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "mobile"
-        }
-      ]
-    },
-    {
-      "code": "0210",
-      "name": "获取验证码(邮箱重置密码)",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "email"
-        }
-      ]
-    },
-    {
-      "code": "0211",
-      "name": "修改密码",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "userId"
-        },
-        {
-          "copy": "password",
-          "code": "oldPwd"
-        },
-        {
-          "copy": "password",
-          "code": "newPwd"
-        }
-      ]
-    },
-    {
-      "code": "0212",
-      "name": "用户登录",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "loginId"
-        },
-        {
-          "copy": "password"
-        }
-      ]
-    },
-    {
-      "code": "0213",
-      "name": "获取用户信息",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "loginId"
-        },
-        {
-          "copy": "password"
-        }
-      ]
-    },
-    {
-      "code": "0214",
-      "name": "绑定手机号",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "userId"
-        },
-        {
-          "copy": "mobile"
-        },
-        {
-          "copy": "validCode"
-        }
-      ]
-    },
-    {
-      "code": "0215",
-      "name": "绑定邮箱",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "userId"
-        },
-        {
-          "copy": "email"
-        },
-        {
-          "copy": "validCode"
-        }
-      ]
-    },
-    {
-      "code": "0216",
-      "name": "上传用户信息",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "userId"
-        },
-        {
-          "code": "name",
-          "name": "name",
-          "javaType": "string",
-          "byteType": "string",
-          "byteLength": 20,
-          "defaultValue": "张三"
-        },
-        {
-          "code": "idcard",
-          "name": "身份证号",
-          "javaType": "string",
-          "byteType": "string",
-          "byteLength": 25,
-          "defaultValue": "132930198901174716"
-        },
-        {
-          "code": "birth",
-          "name": "出生日期",
-          "javaType": "string",
-          "byteType": "bcd",
-          "byteLength": 4,
-          "defaultValue": "19890117"
-        },
-        {
-          "code": "gender",
-          "name": "性别",
-          "javaType": "byte",
-          "default": 1
-        },
-        {
-          "code": "nation",
-          "name": "民族",
-          "javaType": "string",
-          "byteType": "string",
-          "byteLength": 20,
-          "defaultValue": "汉族"
-        },
-        {
-          "code": "culture",
-          "name": "学历",
-          "javaType": "string",
-          "byteType": "string",
-          "byteLength": 10,
-          "defaultValue": "大专"
-        },
-        {
-          "code": "birthPlace",
-          "name": "出生地",
-          "javaType": "string",
-          "byteType": "string",
-          "byteLength": 100,
-          "defaultValue": "山东省滨州市无棣县小泊头镇伯西村"
-        },
-        {
-          "code": "livePlace",
-          "name": "居住地址",
-          "javaType": "string",
-          "byteType": "string",
-          "byteLength": 100,
-          "defaultValue": "北京市大兴区南海家园"
-        }
-      ]
-    },
-    {
-      "code": "0301",
-      "name": "上传血糖",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "userId"
-        },
-        {
-          "copy": "datetime"
-        },
-        {
-          "copy": "current"
-        },
-        {
-          "copy": "glucose"
-        }
-      ]
-    },
-    {
-      "code": "0315",
-      "name": "上传血糖(包括电压)",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "userId"
-        },
-        {
-          "copy": "datetime"
-        },
-        {
-          "code": "voltage",
-          "name": "电压",
-          "javaType": "double",
-          "defaultValue": 0.25
-        },
-        {
-          "copy": "current"
-        },
-        {
-          "copy": "glucose"
-        }
-      ]
-    },
-    {
-      "code": "0302",
-      "name": "上传GPS",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "userId"
-        },
-        {
-          "copy": "datetime"
-        },
-        {
-          "name": "东经/西经",
-          "code": "lat",
-          "javaType": "char",
-          "byteType": "byte",
-          "byteLength": 1,
-          "defaultValue": "E"
-        },
-        {
-          "name": "经度",
-          "code": "latValue",
-          "javaType": "double",
-          "byteType": "double-word",
-          "byteLength": 4,
-          "defaultValue": 180.3
-        },
-        {
-          "name": "东经/西经",
-          "code": "lon",
-          "javaType": "char",
-          "byteType": "byte",
-          "byteLength": 1,
-          "defaultValue": "N"
-        },
-        {
-          "name": "纬度",
-          "code": "lonValue",
-          "javaType": "double",
-          "byteType": "double-word",
-          "byteLength": 4,
-          "defaultValue": 60.3
-        },
-        {
-          "name": "速度",
-          "code": "speed",
-          "javaType": "float",
-          "byteType": "word",
-          "byteLength": 2,
-          "defaultValue": 60.3
-        },
-        {
-          "name": "方向",
-          "code": "direct",
-          "javaType": "int",
-          "byteType": "word",
-          "byteLength": 2,
-          "defaultValue": 60
-        }
-      ]
-    },
-    {
-      "code": "0303",
-      "name": "上传指血",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "userId"
-        },
-        {
-          "copy": "datetime"
-        },
-        {
-          "copy": "glucose"
-        }
-      ]
-    },
-    {
-      "code": "0304",
-      "name": "上传饮食",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "userId"
-        },
-        {
-          "copy": "datetime"
-        },
-        {
-          "name": "餐别",
-          "code": "mealType",
-          "javaType": "byte",
-          "byteType": "byte",
-          "byteLength": 1,
-          "defaultValue": 1
-        },
-        {
-          "name": "内容",
-          "code": "content",
-          "javaType": "string",
-          "byteType": "string",
-          "byteLength": 60,
-          "defaultValue": "小米粥 馒头 洋葱炒肉"
-        },
-        {
-          "name": "用餐时长",
-          "code": "mealTime",
-          "javaType": "int",
-          "defaultValue": 10
-        },
-        {
-          "name": "餐后血糖高峰时间",
-          "code": "effectTime",
-          "javaType": "int",
-          "defaultValue": 30
-        }
-      ]
-    },
-    {
-      "code": "0305",
-      "name": "上传胰岛素",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "userId"
-        },
-        {
-          "copy": "datetime"
-        },
-        {
-          "name": "胰岛素名称",
-          "code": "insulin",
-          "javaType": "string",
-          "byteType": "string",
-          "byteLength": 40,
-          "defaultValue": "长效胰岛素"
-        },
-        {
-          "name": "单位",
-          "code": "unit",
-          "javaType": "int",
-          "byteLength": 2,
-          "defaultValue": 3
-        },
-        {
-          "name": "影响时长",
-          "code": "effectTime",
-          "javaType": "int",
-          "byteType": "byte",
-          "byteLength": 2,
-          "defaultValue": 30
-        }
-      ]
-    },
-    {
-      "code": "0306",
-      "name": "上传用药",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "userId"
-        },
-        {
-          "copy": "datetime"
-        },
-        {
-          "name": "药品名称",
-          "code": "medicine",
-          "javaType": "string",
-          "byteType": "string",
-          "byteLength": 40,
-          "defaultValue": "降糖灵"
-        },
-        {
-          "name": "单位",
-          "code": "unit",
-          "javaType": "int",
-          "byteLength": 2,
-          "defaultValue": 3
-        },
-        {
-          "name": "影响时长",
-          "code": "effectTime",
-          "javaType": "int",
-          "byteType": "byte",
-          "byteLength": 2,
-          "defaultValue": 30
-        }
-      ]
-    },
-    {
-      "code": "0307",
-      "name": "上传锻炼",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "userId"
-        },
-        {
-          "copy": "datetime"
-        },
-        {
-          "name": "时长",
-          "code": "exerciseTime",
-          "javaType": "int",
-          "byteLength": 2,
-          "defaultValue": 15
-        },
-        {
-          "name": "内容",
-          "code": "medicine",
-          "javaType": "string",
-          "byteType": "string",
-          "byteLength": 200,
-          "defaultValue": "慢跑"
-        }
-      ]
-    },
-    {
-      "code": "0309",
-      "name": "获取血糖",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "loginId"
-        },
-        {
-          "copy": "password"
-        },
-        {
-          "copy": "datetime",
-          "code": "startTime",
-          "name": "开始时间",
-          "defaultValue": "170101010101"
-        },
-        {
-          "copy": "datetime",
-          "code": "endTime",
-          "name": "结束时间",
-          "defaultValue": "170103010101"
-        },
-        {
-          "copy": "emitter"
-        },
-        {
-          "copy": "sensor"
-        }
-      ]
-    },
-    {
-      "code": "0310",
-      "name": "获取指血",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "loginId"
-        },
-        {
-          "copy": "password"
-        },
-        {
-          "copy": "datetime",
-          "code": "startTime",
-          "name": "开始时间",
-          "defaultValue": "170101010101"
-        },
-        {
-          "copy": "datetime",
-          "code": "endTime",
-          "name": "结束时间",
-          "defaultValue": "170103010101"
-        }
-      ]
-    },
-    {
-      "copy": "0310",
-      "code": "0311",
-      "name": "获取指血"
-    },
-    {
-      "code": "0401",
-      "name": "上传发射器状态",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "loginId"
-        },
-        {
-          "copy": "emitter"
-        },
-        {
-          "copy": "sensor"
-        },
-        {
-          "code": "status",
-          "name": "状态",
-          "javaType": "int",
-          "defaultValue": 1
-        },
-        {
-          "copy": "datetime"
-        }
-      ]
-    },
-    {
-      "code": "0402",
-      "name": "上传佩戴记录",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "loginId"
-        },
-        {
-          "copy": "datetime",
-          "code": "startTime",
-          "name": "开始时间",
-          "defaultValue": "170101010101"
-        },
-        {
-          "copy": "datetime",
-          "code": "endTime",
-          "name": "结束时间",
-          "defaultValue": "170103010101"
-        },
-        {
-          "copy": "emitter"
-        },
-        {
-          "copy": "sensor"
-        },
-        {
-          "code": "version",
-          "name": "版本",
-          "javaType": "string",
-          "byteType": "string",
-          "byteLength": 18,
-          "defaultValue": 1
-        },
-        {
-          "code": "count",
-          "name": "血糖数量",
-          "type": "int",
-          "defaultValue": 20
-        },
-        {
-          "code": "status",
-          "name": "状态",
-          "type": "byte",
-          "defaultValue": 1
-        }
-      ]
-    },
-    {
-      "code": "0403",
-      "name": "获取佩戴记录",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "loginId"
-        },
-        {
-          "copy": "password"
-        }
-      ]
-    },
-    {
-      "code": "0403",
-      "name": "获取佩戴记录",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "loginId"
-        },
-        {
-          "copy": "password"
-        }
-      ]
-    },
-    {
-      "code": "0217",
-      "name": "UUID登录",
-      "type": "byte",
-      "parameter": [
-        {
-          "code": "uuid",
-          "javaType": "string",
-          "byteLength": 100,
-          "defaultValue": "sdfklasdfkidjfkalsd"
-        }
-      ]
-    },
-    {
-      "code": "9201",
-      "name": "客户端下载地址",
-      "type": "byte",
-      "parameter": [
-        {
-          "copy": "string",
-          "name": "最新客户端下载地址",
-          "code": "url",
-          "defaultValue": "http://yun.sanmeditech.com/download/cgm.apk"
-        }
-      ]
-    },
-    {
-      "code": "9202",
-      "type": "json",
-      "parameter": [
-        {
-          "name": "结果代码",
-          "code": "errcode",
-          "javaType": "int",
-          "defaultValue": 0
-        },
-        {
-          "name": "用户ID",
-          "code": "uid",
-          "javaType": "long",
-          "defaultValue": 123456
-        }
-      ]
+      "name":"结束标识",
+      "code":"end",
+      "jsonType":"string-hex",
+      "javaType":"byte",
+      "byteLength":1,
+      "jsonValue":"0x5d",
+      "javaValue":113
     }
-  ],
-  "interface": {
-    "0201": "9201",
-    "0202": "9202",
-    "0203": "9202",
-    "0204": "9202",
-    "0205": "9202"
-  }
+  ]
 }
