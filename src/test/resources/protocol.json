@@ -7,25 +7,32 @@
         "name":"开始标识",
         "code":"start",
         "type":"byte",
-        "translateToByte":[],
+        "translateToByte":["hex-byte"],
         "translateToType":[],
         "byteLength":1,
         "jsonType":"hex",
         "javaType":"byte",
         "jsonValue":"0x5b",
         "javaValue":115
-      },
-      {
-        "name":"传输信息",
-        "code":"info",
-        "type":"translate",
-        "translateToByte":["encode"],
-        "translateToType":["decode"],
+      },{
+        "name":"消息内容",
+        "code":"content",
+        "type":"object",
+        "jsonType":"object",
+        "javaType":"jsonObject",
+        "byteLength":{
+          "provider":""
+        },
+        "jsonValue":{
+          "provider":""
+        },
+        "javaValue":{
+          "provider":""
+        },
         "content":[
           {
-            "name":"消息内容",
-            "code":"content",
-            "type":"object",
+            "name":"消息头",
+            "code":"head",
             "jsonType":"object",
             "javaType":"jsonObject",
             "byteLength":{
@@ -39,10 +46,85 @@
             },
             "content":[
               {
-                "name":"消息头",
-                "code":"head",
-                "jsonType":"object",
-                "javaType":"jsonObject",
+                "name":"版本信息",
+                "code":"version",
+                "type":"short",
+                "translateToByte":[],
+                "translateToType":[],
+                "jsonType":"int",
+                "javaType":"integer",
+                "byteLength":2,
+                "jsonValue":{
+                  "provider":""
+                },
+                "javaValue":{
+                  "provider":""
+                }
+              },
+              {
+                "name":"消息流水号",
+                "code":"number",
+                "type":"short",
+                "jsonType":"int",
+                "javaType":"integer",
+                "byteLength":2,
+                "jsonValue":{
+                  "provider":""
+                },
+                "javaValue":{
+                  "provider":""
+                }
+              },
+              {
+                "name":"消息命令",
+                "code":"command",
+                "type":"short",
+                "jsonType":"int",
+                "javaType":"integer",
+                "byteLength":2,
+                "jsonValue":{
+                  "provider":""
+                },
+                "javaValue":{
+                  "provider":""
+                }
+              },
+              {
+                "name":"消息体长度",
+                "code":"length",
+                "type":"short",
+                "jsonType":"int",
+                "javaType":"integer",
+                "byteLength":2,
+                "jsonValue":{
+                  "provider":"body-length"
+                }
+              }
+            ]
+          },
+          {
+            "name":"消息体",
+            "code":"content",
+            "jsonType":"object",
+            "javaType":"jsonObject",
+            "byteLength":{
+              "provider":""
+            },
+            "jsonValue":{
+              "provider":""
+            },
+            "javaValue":{
+              "provider":""
+            },
+            "content":[
+              {
+                "name":"用户登陆名",
+                "code":"loginId",
+                "type":"string",
+                "translateToByte":["string-byte","byte-add-length"],
+                "translateToType":["byte-length-byte","byte-string"],
+                "jsonType":"string",
+                "javaType":"string",
                 "byteLength":{
                   "provider":""
                 },
@@ -51,70 +133,48 @@
                 },
                 "javaValue":{
                   "provider":""
-                },
-                "content":[
-                  {
-                    "name":"版本信息",
-                    "code":"version",
-                    "type":"short",
-                    "translateToByte":[],
-                    "translateToType":[],
-                    "jsonType":"int",
-                    "javaType":"integer",
-                    "byteLength":2,
-                    "jsonValue":{
-                      "provider":""
-                    },
-                    "javaValue":{
-                      "provider":""
-                    }
-                  },
-                  {
-                    "name":"消息流水号",
-                    "code":"number",
-                    "type":"short",
-                    "jsonType":"int",
-                    "javaType":"integer",
-                    "byteLength":2,
-                    "jsonValue":{
-                      "provider":""
-                    },
-                    "javaValue":{
-                      "provider":""
-                    }
-                  },
-                  {
-                    "name":"消息命令",
-                    "code":"command",
-                    "type":"short",
-                    "jsonType":"int",
-                    "javaType":"integer",
-                    "byteLength":2,
-                    "jsonValue":{
-                      "provider":""
-                    },
-                    "javaValue":{
-                      "provider":""
-                    }
-                  },
-                  {
-                    "name":"消息体长度",
-                    "code":"length",
-                    "type":"short",
-                    "jsonType":"int",
-                    "javaType":"integer",
-                    "byteLength":2,
-                    "jsonValue":{
-                      "provider":"body-length"
-                    }
-                  }
-                ]
+                }
               },
               {
-                "name":"消息体",
-                "code":"content",
-                "jsonType":"object",
-                "javaType":"jsonObject",
+                "name":"用户登陆密码",
+                "code":"password",
+                "type":"string",
+                "translateToByte":["string-byte","byte-full-length"],
+                "translateToType":["byte-string","string-trim"],
+                "jsonType":"string",
+                "javaType":"string",
+                "byteLength":40,
+                "jsonValue":{
+                  "provider":""
+                }
+              },
+              {
+                "name":"血糖值",
+                "code":"glucose",
+                "type":"float",
+                "translateToByte":["float-decimal-int","int-byte"],
+                "translateToType":["byte-int","int-decimal-float"],
+                "decimal":3,
+                "jsonType":"double",
+                "javaType":"string",
+                "byteLength":{
+                  "provider":""
+                },
+                "value":{
+                  "provider":""
+                },
+                "javaValue":{
+                  "provider":""
+                }
+              },
+              {
+                "name":"采集时间",
+                "code":"time",
+                "type":"string",
+                "translateToByte":["sam-datetime-number","number-bcd"],
+                "translateToType":["bcd-number","number-sam-datetime"],
+                "jsonType":"string",
+                "javaType":"string",
                 "byteLength":{
                   "provider":""
                 },
@@ -123,87 +183,6 @@
                 },
                 "javaValue":{
                   "provider":""
-                },
-                "content":[
-                  {
-                    "name":"用户登陆名",
-                    "code":"loginId",
-                    "type":"string",
-                    "translateToByte":["string-byte","byte-add-length"],
-                    "translateToType":["byte-length-byte","byte-string"],
-                    "jsonType":"string",
-                    "javaType":"string",
-                    "byteLength":{
-                      "provider":""
-                    },
-                    "jsonValue":{
-                      "provider":""
-                    },
-                    "javaValue":{
-                      "provider":""
-                    }
-                  },
-                  {
-                    "name":"用户登陆密码",
-                    "code":"password",
-                    "type":"string",
-                    "translateToByte":["string-byte","byte-full-length"],
-                    "translateToType":["byte-string","string-trim"],
-                    "jsonType":"string",
-                    "javaType":"string",
-                    "byteLength":40,
-                    "jsonValue":{
-                      "provider":""
-                    }
-                  },
-                  {
-                    "name":"血糖值",
-                    "code":"glucose",
-                    "type":"float",
-                    "translateToByte":["float-decimal-int","int-byte"],
-                    "translateToType":["byte-int","int-decimal-float"],
-                    "decimal":3,
-                    "jsonType":"double",
-                    "javaType":"string",
-                    "byteLength":{
-                      "provider":""
-                    },
-                    "value":{
-                      "provider":""
-                    },
-                    "javaValue":{
-                      "provider":""
-                    }
-                  },
-                  {
-                    "name":"采集时间",
-                    "code":"time",
-                    "type":"string",
-                    "translateToByte":["sam-datetime-number","number-bcd"],
-                    "translateToType":["bcd-number","number-sam-datetime"],
-                    "jsonType":"string",
-                    "javaType":"string",
-                    "byteLength":{
-                      "provider":""
-                    },
-                    "jsonValue":{
-                      "provider":""
-                    },
-                    "javaValue":{
-                      "provider":""
-                    }
-                  }
-                ]
-              },
-              {
-                "name":"校验标识",
-                "code":"check",
-                "jsonType":"string-hex",
-                "javaType":"byte",
-                "byteLength":1,
-                "byteValue":{
-                  "source":"content",
-                  "provider":"byte-check"
                 }
               }
             ]
@@ -213,6 +192,8 @@
       {
         "name":"结束标识",
         "code":"end",
+        "type":"byte",
+        "translateToByte":["hex-byte"],
         "jsonType":"string-hex",
         "javaType":"byte",
         "byteLength":1,

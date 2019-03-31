@@ -18,10 +18,10 @@ public class ParseTests {
     private TranslatorManager translatorManager;
 
     @Before
-    public void setUp() throws IOException {
+    public void setUp() throws IOException, IllegalAccessException, ClassNotFoundException, InstantiationException {
         this.data = FileStringUtils.readClassPathJSONObject("data/server");
         this.configManager = ConfigManager.build("protocol").readParameter().buildParameterMap();
-        this.translatorManager = new TranslatorManager();
+        this.translatorManager = TranslatorManager.build("translator");
     }
 
     @Test
