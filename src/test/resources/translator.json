@@ -1,13 +1,11 @@
 {
   "translator":[
     {
-      "base":"com.snake.data.translate.function",
+      "base":"com.snake.data.translate.translator",
       "translators":[
-        "ByteFullLengthTranslator",
-        "ByteStringTranslator",
-        "HexByteTranslator",
-        "StringByteTranslator",
-        "StringTrimTranslator"
+        "ByteTranslator",
+        "StringTranslator",
+        "BasicTranslator"
       ]
     }
   ]

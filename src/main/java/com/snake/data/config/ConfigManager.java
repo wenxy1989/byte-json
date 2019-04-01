@@ -12,7 +12,7 @@ import java.util.Map;
 public class ConfigManager {
 
     private Parameter[] parameters;
-    private Map<String, Type> typeMap;
+    private Map<String, ParameterType> typeMap;
     private Map<String, Parameter> parameterMap;
 
     private JSONObject config;
@@ -95,34 +95,34 @@ public class ConfigManager {
         return parameter;
     }
 
-    public Type parseType(JSONObject object) {
-        Type type = new Type();
+    public ParameterType parseType(JSONObject object) {
+        ParameterType parameterType = new ParameterType();
         if (object.containsKey("code")) {
-            type.setCode(object.getString("code"));
+            parameterType.setCode(object.getString("code"));
         }
         if (object.containsKey("byteLength")) {
             if(object.get("byteLength") instanceof Map){
-                type.setLengthProvider(object.get("byteLength"));
+                parameterType.setLengthProvider(object.get("byteLength"));
             }else {
-                type.setByteLength(object.getShortValue("byteLength"));
+                parameterType.setByteLength(object.getShortValue("byteLength"));
             }
         }
         if (object.containsKey("decimal")) {
-            type.setDecimal(object.getShort("decimal"));
+            parameterType.setDecimal(object.getShort("decimal"));
         }
         if (object.containsKey("javaType")) {
-            type.setJavaType(object.getString("javaType"));
+            parameterType.setJavaType(object.getString("javaType"));
         }
         if (object.containsKey("jsonType")) {
-            type.setJsonType(object.getString("jsonType"));
+            parameterType.setJsonType(object.getString("jsonType"));
         }
         if (object.containsKey("translateToByte")) {
-            type.setTranslateToByteChain(castToStringArray(object.getJSONArray("translateToByte")));
+            parameterType.setTranslateToByteChain(castToStringArray(object.getJSONArray("translateToByte")));
         }
         if (object.containsKey("translateToType")) {
-            type.setTranslateByteChain(castToStringArray(object.getJSONArray("translateToType")));
+            parameterType.setTranslateByteChain(castToStringArray(object.getJSONArray("translateToType")));
         }
-        return type;
+        return parameterType;
     }
 
     public String[] castToStringArray(JSONArray array) {

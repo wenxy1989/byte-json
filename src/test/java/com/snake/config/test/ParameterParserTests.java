@@ -3,7 +3,9 @@ package com.snake.config.test;
 import com.alibaba.fastjson.JSONObject;
 import com.snake.data.config.ConfigManager;
 import com.snake.data.config.Parameter;
-import com.snake.data.json.Parse;
+import com.snake.data.json.ParameterParser;
+import com.snake.data.translate.Config;
+import com.snake.data.translate.TranslateManager;
 import com.snake.data.translate.TranslatorManager;
 import com.snake.tools.utils.FileStringUtils;
 import org.junit.Before;
@@ -11,25 +13,26 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-public class ParseTests {
+public class ParameterParserTests {
 
     private JSONObject data;
     private ConfigManager configManager;
-    private TranslatorManager translatorManager;
+    private TranslateManager translateManager;
 
     @Before
     public void setUp() throws IOException, IllegalAccessException, ClassNotFoundException, InstantiationException {
         this.data = FileStringUtils.readClassPathJSONObject("data/server");
         this.configManager = ConfigManager.build("protocol").readParameter().buildParameterMap();
-        this.translatorManager = TranslatorManager.build("translator");
+        this.translateManager = TranslateManager.build("translator");
     }
 
     @Test
     public void parseToByteTest() throws Exception {
 //        JSONObject json = this.data.getJSONObject("command");
+        Config config = new Config();
         Parameter parameter = this.configManager.getParameter("sanmeditech");
-        Parse parse = new Parse(parameter,this.data,this.translatorManager);
-        parse.getBytes();
+        ParameterParser parameterParser = new ParameterParser(parameter,this.data,this.translateManager);
+        parameterParser.getBytes(config);
     }
 
 }

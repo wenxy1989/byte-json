@@ -1,49 +1,71 @@
 package com.snake.data.translate;
 
-import com.snake.data.config.Type;
+import com.snake.data.config.ParameterType;
 
-import java.util.Arrays;
+import java.lang.reflect.Method;
 
+public class TranslateChain {
 
-public class TranslateChain extends AbstractTranslator implements Translator {
+    private Config config;
+    private TranslatorManager translatorManager;
+    private TranslateMethod[] translateChain;
 
-    private Object input;
-    private Object output;
-    private Translator[] translators;
-
-    public TranslateChain(Config config,String... translateChain) {
-        super(config);
-        this.code = Arrays.toString(translateChain);
+    public TranslateChain(TranslateMethod[] translateChain, TranslatorManager translatorManager) {
+        this.translateChain = translateChain;
+        this.translatorManager = translatorManager;
     }
 
-    public Translator[] getTranslators() {
-        return translators;
+    public Config getConfig() {
+        return config;
     }
 
-    public void setTranslators(Translator[] translators) {
-        this.translators = translators;
+    public void setConfig(Config config) {
+        this.config = config;
     }
 
-    @Override
-    public void setInput(Object input) {
-        assert null != input;
-        this.input = input;
+    public TranslatorManager getTranslatorManager() {
+        return translatorManager;
     }
 
-    @Override
-    public void doTranslate() throws Exception{
-        Object temp =this.input;
-        for(Translator translator: this.translators){
-            translator.setInput(temp);
-            translator.translate();
-            temp = translator.getOutput();
+    public void setTranslatorManager(TranslatorManager translatorManager) {
+        this.translatorManager = translatorManager;
+    }
+
+    public TranslateMethod[] getTranslateChain() {
+        return translateChain;
+    }
+
+    public void setTranslateChain(TranslateMethod[] translateChain) {
+        this.translateChain = translateChain;
+    }
+
+    private boolean needType(Method method) {
+        Class[] classes = method.getParameterTypes();
+        for (int i = 0; i < classes.length; i++) {
+            if (classes[i].equals(ParameterType.class)) {
+                return true;
+            }
         }
-        this.output = temp;
+        return false;
     }
 
-    @Override
-    public Object getOutput() {
-        return output;
+    public Object translate(final Object input) throws Exception {
+        Object temp = input;
+        for (TranslateMethod translateMethod : this.translateChain) {
+            Object translator = this.translatorManager.getTranslator(translateMethod.getTranslatorClass());
+            Object[] parameters = null;
+            if (needType(translateMethod.getTranslateMethod())) {
+                parameters = new Object[]{temp, config.getParameterType()};
+            } else {
+                parameters = new Object[]{temp};
+            }
+            try {
+                temp = translateMethod.getTranslateMethod().invoke(translator, parameters);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return temp;
     }
 
 }

@@ -1,6 +1,6 @@
 package com.snake.data.config;
 
-public class Type {
+public class ParameterType {
     private String code;//写作方式
     private String[] translateToByteChain;//处理链
     private String[] translateByteChain;//处理链

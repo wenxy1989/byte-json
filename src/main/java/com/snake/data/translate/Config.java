@@ -1,26 +1,29 @@
 package com.snake.data.translate;
 
-import com.snake.data.config.Type;
+import com.snake.data.config.ParameterType;
 
 public class Config {
 
     private boolean debug;
-    private Type type;
+    private ParameterType parameterType;
 
-    public Config(Type type,boolean debug){
-        this.type = type;
+    public Config(boolean debug){
         this.debug = debug;
     }
 
-    public Config(Type type){
-        this(type,false);
+    public Config(){
+        this(false);
     }
 
     public boolean isDebug() {
         return debug;
     }
 
-    public Type getType() {
-        return type;
+    public ParameterType getParameterType() {
+        return parameterType;
+    }
+
+    public void setParameterType(ParameterType parameterType) {
+        this.parameterType = parameterType;
     }
 }

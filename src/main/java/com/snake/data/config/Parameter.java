@@ -6,7 +6,7 @@ public class Parameter {
     private String code;
     private String type;
 
-    private Type parameterType;
+    private ParameterType parameterType;
     private Parameter[] modelContent;
     private Object valueProvider;
 
@@ -38,11 +38,11 @@ public class Parameter {
         this.type = type;
     }
 
-    public Type getParameterType() {
+    public ParameterType getParameterType() {
         return parameterType;
     }
 
-    public void setParameterType(Type parameterType) {
+    public void setParameterType(ParameterType parameterType) {
         this.parameterType = parameterType;
     }
 
