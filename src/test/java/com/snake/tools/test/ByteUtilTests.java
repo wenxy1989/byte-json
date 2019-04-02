@@ -2,6 +2,7 @@ package com.snake.tools.test;
 
 import com.snake.tools.utils.BCDByteUtil;
 import com.snake.tools.utils.ByteUtil;
+import com.snake.tools.utils.HexByteUtil;
 import org.junit.Test;
 
 /**
@@ -18,7 +19,7 @@ public class ByteUtilTests {
     private void swapNumberAndByte(long number, int length) {
         System.out.println(String.format("number is %d , %x", number, number));
         byte[] bytes = ByteUtil.number2byte(number, length);
-        System.out.println(String.format("byte[] is %s",BCDByteUtil.hexString(bytes)));
+        System.out.println(String.format("byte[] is %s", HexByteUtil.hexString(bytes)));
         long result = ByteUtil.byte2number(bytes);
         System.out.println(String.format("result is %d , %x", result, result));
         assert number == result;

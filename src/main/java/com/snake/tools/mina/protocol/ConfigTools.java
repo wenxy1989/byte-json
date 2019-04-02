@@ -5,6 +5,7 @@ import com.snake.tools.utils.ByteUtil;
 import com.snake.tools.mina.config.Command;
 import com.snake.tools.mina.config.Parameter;
 import com.snake.tools.mina.config.Server;
+import com.snake.tools.utils.HexByteUtil;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,7 +18,7 @@ public class ConfigTools {
 
     public static String int2Code(int command) {
         byte[] bytes = ByteUtil.short2byte((short)command);
-        return BCDByteUtil.hexString(bytes);
+        return HexByteUtil.hexString(bytes);
     }
 
     public static int code2Int(String code) {

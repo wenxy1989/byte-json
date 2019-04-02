@@ -7,6 +7,7 @@ import com.snake.tools.mina.config.Command;
 import com.snake.tools.mina.config.Server;
 import com.snake.tools.mina.protocol.Content;
 import com.snake.tools.utils.BCDByteUtil;
+import com.snake.tools.utils.HexByteUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -35,7 +36,7 @@ public class V4GatewayClientTests {
         Content content = ConfigTools.buildContent(command);
         byte[] bytes = content.encode(command.getDefaultJson());
         byte[] responseBytes = SocketTool.request(bytes);
-        System.out.println(BCDByteUtil.hexString(responseBytes));
+        System.out.println(HexByteUtil.hexString(responseBytes));
     }
 
     public void nameRegisterTest(/**0202**/) {
@@ -65,7 +66,7 @@ public class V4GatewayClientTests {
             e.printStackTrace();
         }
         byte[] responseBytes = SocketTool.request(bytes);
-        System.out.println(BCDByteUtil.hexString(responseBytes));
+        System.out.println(HexByteUtil.hexString(responseBytes));
     }
 
     @Test

@@ -68,36 +68,4 @@ public class BCDByteUtil {
         }
         return number;
     }
-
-    public static String hexString(byte b) {
-        String hex = Integer.toHexString(b & 0xFF);
-        if (hex.length() == 1) {
-            hex = '0' + hex;
-        }
-        return hex;
-    }
-
-    public static String hexString(byte[] b) {
-        StringBuilder sb = new StringBuilder("");
-        for (int i = 0; i < b.length; i++) {
-            sb.append(hexString(b[i]).toUpperCase());
-        }
-        return sb.toString();
-    }
-
-    public static byte[] hexString2byte(String hex) {
-        int len = (hex.length() / 2);
-        byte[] result = new byte[len];
-        char[] chars = hex.toCharArray();
-        for (int i = 0; i < len; i++) {
-            int pos = i * 2;
-            result[i] = (byte) (char2byte(chars[pos]) << 4 | char2byte(chars[pos + 1]));
-        }
-        return result;
-    }
-
-    private static byte char2byte(char c) {
-        byte b = (byte) "0123456789ABCDEF".indexOf(c);
-        return b;
-    }
 }

@@ -4,14 +4,16 @@
     "content":{
       "head":{
         "version": "0401",
-        "index": "111",
-        "code":"0301",
+        "number": 111,
+        "command":"0301",
         "length":1111
       },
       "body":{
         "userId":35,
         "emitter":"TH-01XX",
         "sensor":"CB01XX",
+        "loginId":"CB01XX",
+        "password":"CB01XX",
         "glucose":[
           {"value":3.5,"current":356.3,"time":"2019-01-12 12:35:23"},
           {"value":3.6,"current":356.3,"time":"2019-01-12 12:38:23"},

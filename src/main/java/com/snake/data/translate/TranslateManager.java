@@ -77,21 +77,30 @@ public class TranslateManager {
     }
 
     public TranslateChain buildTranslateChain(String... translate) throws Exception {
-        TranslateMethod[] translateMethods = new TranslateMethod[translate.length];
-        for (int i = 0; i < translate.length; i++) {
-            translateMethods[i] = this.translateMethodMap.get(translate[i]);
-            if(translateMethods[i] == null){
-                throw new Exception(translate[i]+" have no mapped method");
-            }
+        if (translate != null && translate.length > 0) {
+            TranslateMethod[] translateMethods = new TranslateMethod[translate.length];
+            for (int i = 0; i < translate.length; i++) {
+                translateMethods[i] = this.translateMethodMap.get(translate[i]);
+                if (translateMethods[i] == null) {
+                    throw new Exception(translate[i] + " have no mapped method");
+                }
 
+            }
+            return new TranslateChain(translateMethods, this.translatorManager);
+        } else {
+            return null;
         }
-        return new TranslateChain(translateMethods, this.translatorManager);
     }
 
     public TranslateChain getTranslateChain(Config config, String... translate) throws Exception {
         String key = Arrays.toString(translate);//todo
         if (null == this.translateChainMap.get(key)) {
-            this.translateChainMap.put(key, this.buildTranslateChain(translate));
+            TranslateChain chain = this.buildTranslateChain(translate);
+            if(null != chain) {
+                this.translateChainMap.put(key, chain);
+                chain.setConfig(config);
+            }
+            return chain;
         }
         TranslateChain translateChain = this.translateChainMap.get(key);
         translateChain.setConfig(config);

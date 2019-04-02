@@ -2,6 +2,7 @@ package com.snake.tools.test;
 
 import com.snake.tools.mina.protocol.Content;
 import com.snake.tools.utils.BCDByteUtil;
+import com.snake.tools.utils.HexByteUtil;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class ContentTests {
         data = "5B040000009302000D7B22657272636F6465223A307DFC5D";
         data = "5B 04 00 00 00 04 01 00 62 77 65 6E 78 79 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 54 43 2D 32 30 31 38 30 31 30 34 00 00 00 00 00 00 00 00 00 43 2D 32 30 31 38 30 31 30 34 00 00 00 00 00 00 00 00 00 00 00 01 17 12 25 17 41 22 1F 5D";
         data = data.replaceAll(" ", "");
-        byte[] bytes = BCDByteUtil.hexString2byte(data);
+        byte[] bytes = HexByteUtil.hex2byte(data);
         Content content = Content.decode(bytes);
         if (null != content) {
             System.out.println(content.getBody().getJsonArray());

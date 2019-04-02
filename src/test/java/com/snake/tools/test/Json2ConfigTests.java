@@ -9,6 +9,7 @@ import com.snake.tools.mina.config.Server;
 import com.snake.tools.mina.protocol.ConfigTools;
 import com.snake.tools.mina.protocol.Content;
 import com.snake.tools.utils.BCDByteUtil;
+import com.snake.tools.utils.HexByteUtil;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -57,7 +58,7 @@ public class Json2ConfigTests {
 //            json.put("version","0.2v20180105");
                 System.out.println("default json : " + jsonObject);
                 byte[] bytes = content.encode(jsonObject);
-                System.out.println(BCDByteUtil.hexString(bytes));
+                System.out.println(HexByteUtil.hexString(bytes));
                 System.out.println("json value : " + Content.decode(bytes));
             }
         }
@@ -87,9 +88,9 @@ public class Json2ConfigTests {
                 System.out.println("request default json : " + defaultJson);
                 defaultJson.put("userId", userId);
                 byte[] bytes = content.encode(defaultJson);
-                System.out.println("request byte : " + BCDByteUtil.hexString(bytes));
+                System.out.println("request byte : " + HexByteUtil.hexString(bytes));
                 byte[] responseBytes = SocketTool.request(bytes);
-                System.out.println("response byte : " + BCDByteUtil.hexString(responseBytes));
+                System.out.println("response byte : " + HexByteUtil.hexString(responseBytes));
                 assert null != (content = Content.decode(responseBytes));
                 if (null != content.getBody()) {
                     JSONArray array = content.getBody().getJsonArray();

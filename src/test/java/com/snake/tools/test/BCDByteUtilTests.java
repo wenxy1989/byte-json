@@ -1,6 +1,7 @@
 package com.snake.tools.test;
 
 import com.snake.tools.utils.BCDByteUtil;
+import com.snake.tools.utils.HexByteUtil;
 import org.junit.Test;
 
 /**
@@ -16,7 +17,7 @@ public class BCDByteUtilTests {
     public void bcd2shortTest() {
         short source = 1090;
         byte[] bcd = BCDByteUtil.short2bcd(source);
-        String hexString = BCDByteUtil.hexString(bcd);
+        String hexString = HexByteUtil.hexString(bcd);
         show(hexString);
         short target = BCDByteUtil.bcd2short(bcd);
         show(target);

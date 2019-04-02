@@ -3,10 +3,10 @@ package com.snake.config.test;
 import com.alibaba.fastjson.JSONObject;
 import com.snake.data.config.ConfigManager;
 import com.snake.data.config.Parameter;
-import com.snake.data.json.ParameterParser;
+import com.snake.data.json.FastJsonValueProvider;
+import com.snake.data.translate.ParameterParser;
 import com.snake.data.translate.Config;
 import com.snake.data.translate.TranslateManager;
-import com.snake.data.translate.TranslatorManager;
 import com.snake.tools.utils.FileStringUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,8 +31,9 @@ public class ParameterParserTests {
 //        JSONObject json = this.data.getJSONObject("command");
         Config config = new Config();
         Parameter parameter = this.configManager.getParameter("sanmeditech");
-        ParameterParser parameterParser = new ParameterParser(parameter,this.data,this.translateManager);
-        parameterParser.getBytes(config);
+        ParameterParser parameterParser = new ParameterParser(parameter,new FastJsonValueProvider(this.data),this.translateManager);
+        byte[] bytes = parameterParser.getBytes(config);
+        assert bytes.length > 0;
     }
 
 }

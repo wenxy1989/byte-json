@@ -12,6 +12,7 @@ import com.snake.tools.mina.protocol.Content;
 import com.snake.tools.mina.protocol.Head;
 import com.snake.tools.utils.BCDByteUtil;
 import com.snake.tools.utils.FileStringUtils;
+import com.snake.tools.utils.HexByteUtil;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -78,8 +79,8 @@ public class SamCollectorTest {
             System.out.println("command : request json : " + requestJson);
             byte[] bytes = content.encode(requestJson);
             byte[] responseBytes = SocketTool.request(bytes);
-            System.out.println("command : request byte : " + BCDByteUtil.hexString(bytes));
-            System.out.println("command : response byte : " + BCDByteUtil.hexString(responseBytes));
+            System.out.println("command : request byte : " + HexByteUtil.hexString(bytes));
+            System.out.println("command : response byte : " + HexByteUtil.hexString(responseBytes));
             System.out.println("command : response code : " + response.getCode());
 
             assert null != (content = Content.decode(responseBytes));
