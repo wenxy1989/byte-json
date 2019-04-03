@@ -83,7 +83,7 @@ public class BasicTranslator {
 
     @Translate("byte-float")
     public float byte2float(byte[] value, ParameterType type) {
-        return (float) ((float) ByteUtil.byte2int(value) / Math.pow(10, type.getDecimal()));
+        return intDeciaml2float(ByteUtil.byte2int(value), type);
     }
 
     @Translate("byte-long")
@@ -93,7 +93,7 @@ public class BasicTranslator {
 
     @Translate("byte-double")
     public double byte2double(byte[] value, ParameterType type) {
-        return ByteUtil.byte2long(value) / Math.pow(10, type.getDecimal());
+        return longDeciaml2double(ByteUtil.byte2long(value), type);
     }
 
     @Translate("byte-string")
@@ -106,13 +106,28 @@ public class BasicTranslator {
         return BCDByteUtil.short2bcd(value);
     }
 
+    @Translate("byte-bcd-short")
+    public short byteBcd2short(byte[] value) throws Exception {
+        return BCDByteUtil.bcd2short(value);
+    }
+
+    @Translate("long-decimal-float")
+    public double longDeciaml2double(long value, ParameterType type) {
+        return (double) (((double) value) / Math.pow(10, type.getDecimal()));
+    }
+
+    @Translate("int-decimal-float")
+    public float intDeciaml2float(int value, ParameterType type) {
+        return (float) (((double) value) / Math.pow(10, type.getDecimal()));
+    }
+
     @Translate("number-length-bcd-byte")
     public byte[] number2bcdByte(long value, ParameterType type) {
         return BCDByteUtil.number2bcd(value, type.getByteLength());
     }
 
     @Translate("float-decimal-int")
-    public int floatDecimal2int(float value,ParameterType type){
-        return (int) (value*Math.pow(10,type.getDecimal()));
+    public int floatDecimal2int(float value, ParameterType type) {
+        return (int) (value * Math.pow(10, type.getDecimal()));
     }
 }

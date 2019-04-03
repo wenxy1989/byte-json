@@ -5,7 +5,14 @@
       "translators":[
         "ByteTranslator",
         "StringTranslator",
+        "ShortTranslator",
         "BasicTranslator"
+      ]
+    },
+    {
+      "base":"com.sanmeditech.translator",
+      "translators":[
+        "ByteTranslator"
       ]
     }
   ]

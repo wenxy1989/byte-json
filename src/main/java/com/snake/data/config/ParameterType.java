@@ -12,6 +12,10 @@ public class ParameterType {
 
     private Object lengthProvider;
 
+    public boolean isStaticLength(){
+        return this.byteLength > 0;
+    }
+
     public String getCode() {
         return code;
     }

@@ -92,6 +92,9 @@ public class ConfigManager {
         if (object.containsKey("type")) {
             parameter.setType(object.getString("type"));
         }
+        if (object.containsKey("array")) {
+            parameter.setArray(object.getBooleanValue("array"));
+        }
         return parameter;
     }
 

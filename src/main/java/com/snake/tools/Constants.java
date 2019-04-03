@@ -14,6 +14,8 @@ public class Constants {
     public static final Charset CHARSET_GBK = Charset.forName(CHARSET_CODE_GBK);
 //    public static final CharsetDecoder CHARSET_GBK_DECODER = CHARSET_GBK.newDecoder();
 
+    public static final int LENGTH_BYTE_LENGTH = 4;
+
 //    public static final long SECOND_TIME = 1000;
 //    public static final long MINUTE_TIME = SECOND_TIME * 60;
 //    public static final long HOUR_TIME = MINUTE_TIME * 60;

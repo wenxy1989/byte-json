@@ -5,14 +5,14 @@ public class Parameter {
     private String name;
     private String code;
     private String type;
-    private Boolean array;
+    private boolean array = false;
 
     private ParameterType parameterType;
     private Parameter[] modelContent;
     private Object valueProvider;
 
     public boolean isModel(){
-        return "model".equals(this.code) && this.modelContent != null && this.modelContent.length > 0;
+        return "model".equals(this.type) && this.modelContent != null && this.modelContent.length > 0;
     }
 
     public String getName() {
@@ -67,7 +67,11 @@ public class Parameter {
         return this.array;
     }
 
-    public void setArray(Boolean array) {
+    public void setArray(boolean array) {
         this.array = array;
+    }
+
+    public boolean validate() {
+        return this.code != null && this.type != null;
     }
 }

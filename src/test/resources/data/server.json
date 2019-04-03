@@ -1,29 +1,95 @@
 {
   "sanmeditech": {
-    "start": "0x5B",
-    "content":{
-      "head":{
+    "start": "5B",
+    "content": {
+      "head": {
         "version": "0401",
         "number": 111,
-        "command":"0301",
-        "length":1111
+        "command": "0301",
+        "length": 1111
       },
-      "body":{
-        "userId":35,
-        "emitter":"TH-01XX",
-        "sensor":"CB01XX",
-        "loginId":"CB01XX",
-        "password":"CB01XX",
-        "glucose":[
-          {"value":3.5,"current":356.3,"time":"2019-01-12 12:35:23"},
-          {"value":3.6,"current":356.3,"time":"2019-01-12 12:38:23"},
-          {"value":3.22,"current":356.3,"time":"2019-01-12 12:41:23"},
-          {"value":3.23,"current":356.3,"time":"2019-01-12 12:44:23"},
-          {"value":3.5,"current":356.3,"time":"2019-01-12 12:47:23"},
-          {"value":3.6,"current":356.3,"time":"2019-01-12 12:50:23"}
+      "body": {
+        "userId": 35,
+        "emitter": "TH-01XX",
+        "sensor": "CB01XX",
+        "loginId": "loginId-default",
+        "password": "password-default",
+        "glucose": [
+          {
+            "value": 3.5,
+            "current": 356.3,
+            "time": "2019-01-12 12:35:23"
+          },
+          {
+            "value": 3.6,
+            "current": 356.3,
+            "time": "2019-01-12 12:38:23"
+          },
+          {
+            "value": 3.22,
+            "current": 356.3,
+            "time": "2019-01-12 12:41:23"
+          },
+          {
+            "value": 3.23,
+            "current": 356.3,
+            "time": "2019-01-12 12:44:23"
+          },
+          {
+            "value": 3.5,
+            "current": 356.3,
+            "time": "2019-01-12 12:47:23"
+          },
+          {
+            "value": 3.6,
+            "current": 356.3,
+            "time": "2019-01-12 12:50:23"
+          }
         ]
       }
     },
-    "end":"0x5D"
+    "end": "5D"
+  },
+  "decode": {
+    "content": {
+      "body": {
+        "glucose": [
+          {
+            "time": "190112123523",
+            "value": 3.5
+          },
+          {
+            "time": "190112123823",
+            "value": 3.599
+          },
+          {
+            "time": "190112124123",
+            "value": 3.22
+          },
+          {
+            "time": "190112124423",
+            "value": 3.23
+          },
+          {
+            "time": "190112124723",
+            "value": 3.5
+          },
+          {
+            "time": "190112125023",
+            "value": 3.599
+          }
+        ],
+        "loginId": "loginId-default",
+        "password": "password-default"
+      },
+      "head": {
+        "command": "0301",
+        "length": 1111,
+        "number": 111,
+        "version": "0401"
+      }
+    },
+    "end": "]",
+    "start": "["
   }
 }

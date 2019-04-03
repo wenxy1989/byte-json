@@ -51,7 +51,7 @@
                 "code":"version",
                 "type":"string-short",
                 "translateToByte":["string-short","short-bcd-byte"],
-                "translateToType":["byte-bcd-short","short-string"],
+                "translateToType":["byte-bcd-short","short-4-string"],
                 "jsonType":"int",
                 "javaType":"integer",
                 "byteLength":2,
@@ -83,7 +83,7 @@
                 "code":"command",
                 "type":"string",
                 "translateToByte":["string-short","short-bcd-byte"],
-                "translateToType":["byte-bcd-short","short-string"],
+                "translateToType":["byte-bcd-short","short-4-string"],
                 "jsonType":"int",
                 "javaType":"integer",
                 "byteLength":2,
@@ -130,12 +130,10 @@
                 "code":"loginId",
                 "type":"string",
                 "translateToByte":["string-byte","byte-add-length"],
-                "translateToType":["byte-length-byte","byte-string"],
+                "translateToType":["byte-string"],
                 "jsonType":"string",
                 "javaType":"string",
-                "byteLength":{
-                  "provider":""
-                },
+                "byteLength":0,
                 "jsonValue":{
                   "provider":""
                 },
@@ -158,6 +156,7 @@
               },{
                 "code":"glucose",
                 "type": "model",
+                "array":true,
                 "content": [
                   {
                     "name":"血糖值",
@@ -168,9 +167,7 @@
                     "decimal":3,
                     "jsonType":"double",
                     "javaType":"string",
-                    "byteLength":{
-                      "provider":""
-                    },
+                    "byteLength":4,
                     "value":{
                       "provider":""
                     },
@@ -183,7 +180,7 @@
                     "code":"time",
                     "type":"string-datetime",
                     "translateToByte":["string-datetime-number","number-length-bcd-byte"],
-                    "translateToType":["bcd-number","number-datetime-string"],
+                    "translateToType":["byte-bcd-long","long-datetime-string"],
                     "jsonType":"string",
                     "javaType":"string",
                     "byteLength":6,

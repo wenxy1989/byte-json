@@ -2,16 +2,16 @@ package com.snake.tools.utils;
 
 public class HexByteUtil {
 
+    private static final String template = "0123456789ABCDEF";
     // Integer.toHexString(1000);
     private static byte charToByte(char c) {
-        //return (byte) "0123456789ABCDEF".indexOf(c);
-        return (byte) "0123456789abcdef".indexOf(c);
+        return (byte) template.indexOf(c);
     }
 
     public static byte[] hexStringToByte(String hex) {
         int len = (hex.length() / 2);
         byte[] result = new byte[len];
-        char[] achar = hex.toCharArray();
+        char[] achar = hex.toUpperCase().toCharArray();
         for (int i = 0; i < len; i++) {
             int pos = i * 2;
             result[i] = (byte) (charToByte(achar[pos]) << 4 | charToByte(achar[pos + 1]));
@@ -24,7 +24,7 @@ public class HexByteUtil {
         if (byteArray == null) {
             return null;
         }
-        char[] hexArray = "0123456789ABCDEF".toCharArray();
+        char[] hexArray = template.toCharArray();
         char[] hexChars = new char[byteArray.length * 2];
         for (int j = 0; j < byteArray.length; j++) {
             int v = byteArray[j] & 0xFF;
@@ -50,6 +50,15 @@ public class HexByteUtil {
         return sb.toString();
     }
 
+    public static String hexString(byte[] b,String divide) {
+        StringBuilder sb = new StringBuilder(hexString(b[0]).toUpperCase());
+        for (int i = 1; i < b.length; i++) {
+            sb.append(divide);
+            sb.append(hexString(b[i]).toUpperCase());
+        }
+        return sb.toString();
+    }
+
     public static byte[] hex2byte(String hex) {
         int len = (hex.length() / 2);
         byte[] result = new byte[len];
@@ -62,7 +71,7 @@ public class HexByteUtil {
     }
 
     private static byte char2byte(char c) {
-        byte b = (byte) "0123456789ABCDEF".indexOf(c);
+        byte b = (byte) template.indexOf(c);
         return b;
     }
 }

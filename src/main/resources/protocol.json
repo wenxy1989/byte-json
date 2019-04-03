@@ -127,7 +127,7 @@
                   "code":"loginId",
                   "type":"string",
                   "translateToByte":["string-byte","byte-add-length"],
-                  "translateToType":["byte-length-byte","byte-string"],
+                  "translateToType":["byte-string"],
                   "jsonType":"string",
                   "javaType":"string",
                   "byteLength":{
