@@ -1,5 +1,7 @@
 package com.snake.base;
 
+import com.snake.tools.utils.HexByteUtil;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -24,6 +26,7 @@ public class SocketTool {
     }
 
     public static byte[] request(byte[] data) {
+        System.out.println("send data : " + HexByteUtil.hexString(data));
         Socket socket = new Socket();
         InputStream socketIn = null;
         OutputStream socketOut = null;
