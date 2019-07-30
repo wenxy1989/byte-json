@@ -2,11 +2,13 @@ package com.sanmeditech.collector.test;
 
 import com.alibaba.fastjson.JSONObject;
 import com.snake.base.SocketTool;
+import com.snake.tools.mina.protocol.Body;
 import com.snake.tools.mina.protocol.ConfigTools;
 import com.snake.tools.mina.config.Command;
 import com.snake.tools.mina.config.Server;
 import com.snake.tools.mina.protocol.Content;
 import com.snake.tools.utils.BCDByteUtil;
+import com.snake.tools.utils.ByteUtil;
 import com.snake.tools.utils.HexByteUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -24,7 +26,7 @@ public class V4GatewayClientTests {
 
     @BeforeClass
     public static void beforeClass() throws IOException {
-        String fileName = "protocol";
+        String fileName = "protocol/protocol";
         config = Server.build(fileName).buildParameters().buildCommands().buildActions();
     }
 
@@ -152,9 +154,15 @@ public class V4GatewayClientTests {
         String code = ("9001");
     }
 
+    @Test
     public void foodUploadTest(/**0304**/) {// 饮食事件数据上传
         String name = "饮食数据上传";
         String code = ("9001");
+        Content content = ConfigTools.buildContent(config.getCommandMap().get("0304"));
+        String data="0000000000010306060002190726130023B8F1BBAAD6B9000000000000000000000000000000000000000000000000000000000000000000000000000F";
+        byte[] body = HexByteUtil.hexStringToByte(data);
+        byte[] contentByte = Content.encode(content.getHead(),body);
+        SocketTool.request(contentByte);
     }
 
     public void insulinUploadTest(/**0305**/) {// 注射胰岛素事件上传

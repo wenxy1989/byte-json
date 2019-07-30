@@ -40,11 +40,11 @@ public class Content {
 
 
     public byte[] encode(JSONObject json) throws UnsupportedEncodingException {
-        return encode(head, body, json);
+        return encode(head, body.encode( json));
     }
 
     public byte[] encode(JSONArray array) throws UnsupportedEncodingException {
-        return encode(head, body, array);
+        return encode(head, body.encode(array));
     }
 
     public static byte start() {
@@ -59,34 +59,14 @@ public class Content {
         return CodeParser.check(info);
     }
 
-    public static byte[] encode(Head head, Body body, JSONObject json) throws UnsupportedEncodingException {
-        if (null != head && null != body) {
-            byte[] bodyBytes = body.encode(json);
-            head.setLength(bodyBytes.length);
-            byte[] headBytes = head.encode();
-            byte[] infoBytes = ByteUtil.concat(headBytes, bodyBytes);
-            byte flag = check(infoBytes);
-            byte[] decodeBytes = ByteUtil.concat(infoBytes, flag);
-            byte[] encodeBytes = CodeParser.encode(decodeBytes);
-            return ByteUtil.concat(new byte[]{start()}, encodeBytes, new byte[]{end()});
-        } else {
-            return null;
-        }
-    }
-
-    public static byte[] encode(Head head, Body body, JSONArray array){
-        if (null != head && null != body) {
-            byte[] bodyBytes = body.encode(array);
-            head.setLength(bodyBytes.length);
-            byte[] headBytes = head.encode();
-            byte[] infoBytes = ByteUtil.concat(headBytes, bodyBytes);
-            byte flag = check(infoBytes);
-            byte[] decodeBytes = ByteUtil.concat(infoBytes, flag);
-            byte[] encodeBytes = CodeParser.encode(decodeBytes);
-            return ByteUtil.concat(new byte[]{start()}, encodeBytes, new byte[]{end()});
-        } else {
-            return null;
-        }
+    public static byte[] encode(Head head,byte[] bodyBytes){
+        head.setLength(bodyBytes.length);
+        byte[] headBytes = head.encode();
+        byte[] infoBytes = ByteUtil.concat(headBytes, bodyBytes);
+        byte flag = check(infoBytes);
+        byte[] decodeBytes = ByteUtil.concat(infoBytes, flag);
+        byte[] encodeBytes = CodeParser.encode(decodeBytes);
+        return ByteUtil.concat(new byte[]{start()}, encodeBytes, new byte[]{end()});
     }
 
     public static Content decode(byte[] bytes) throws IOException {
